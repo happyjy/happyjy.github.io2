@@ -128,7 +128,8 @@ const Post = (props: postProps) => {
   return (
     <>
       <Helmet>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script data-ad-client="ca-pub-4694803443368514" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> */}
       </Helmet>
 
       <SEO title={title} description={excerpt} keywords={metaKeywords(keywords, tags)} />
