@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://happyjy.github.io/sitemap.xml
+Host: https://happyjy.github.io
