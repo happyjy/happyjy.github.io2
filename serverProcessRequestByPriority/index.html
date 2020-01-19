@@ -504,6 +504,8 @@
 <p><a href="/serverProcessRequestByPriority/#point">POINT</a></p>
 <ul>
 <li><a href="/serverProcessRequestByPriority/#point1">POINT1</a></li>
+<li><a href="/serverProcessRequestByPriority/#point2">POINT2</a></li>
+<li><a href="/serverProcessRequestByPriority/#point3">POINT3</a></li>
 <li><a href="/serverProcessRequestByPriority/#point4">POINT4</a></li>
 </ul>
 </li>
@@ -532,15 +534,16 @@ count processed timstamp</li>
 </blockquote>
 <h2 id="point1" style="position:relative;"><a href="#point1" aria-label="point1 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POINT1</h2>
 <ul>
-<li>
-<p>splice에 의해서 첫번째 outer for문에 돌아갔을 때 배열(filteredTS) 값이 바뀐다. </p>
+<li>splice에 의해서 첫번째 outer for문에 돌아갔을 때 배열(filteredTS) 값이 바뀐다. </li>
+</ul>
 <h2 id="point2" style="position:relative;"><a href="#point2" aria-label="point2 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POINT2</h2>
+<ul>
+<li>아래 console에서 topEl요소별로 processTarget값이 나오는것이 아니라
+topEl요소 배열이 모든 process처리 후의 값이 찍히게 되서 "slice로 shallow clone"을 이용
 </li>
-<li>
-<p>아래 console에서 topEl요소별로 processTarget값이 나오는것이 아니라
-topEl요소 배열이 모든 process처리 후의 값이 찍히게 되서 "slice로 shallow clone"을 이용</p>
+</ul>
 <h2 id="point3" style="position:relative;"><a href="#point3" aria-label="point3 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POINT3</h2>
-</li>
+<ul>
 <li>위단계에서 splice로 삭제 했기 때문에 array 요소가 하나 줄어 들어 줄어든 요소 순서부터 시작하기 위해서 감소 연산자를 사용했다.(for동작에서 j++가 동작하기 때문에 )</li>
 <li>eg) 배열을 순회하는 j가 2번째 요소를 제거하면 배열 2번째 요소 뒤에 있는 요소들이 앞으로 당겨진다. == 3번째 요소가 2번재요소가 된다.<br>
 이렇게 되면 j는 순회를 2번째 요소부터 해줘야 한다.</li>
@@ -627,6 +630,8 @@ topEl요소 배열이 모든 process처리 후의 값이 찍히게 되서 "slice
 <p><a href="/serverProcessRequestByPriority/#point">POINT</a></p>
 <ul>
 <li><a href="/serverProcessRequestByPriority/#point1">POINT1</a></li>
+<li><a href="/serverProcessRequestByPriority/#point2">POINT2</a></li>
+<li><a href="/serverProcessRequestByPriority/#point3">POINT3</a></li>
 <li><a href="/serverProcessRequestByPriority/#point4">POINT4</a></li>
 </ul>
 </li>
