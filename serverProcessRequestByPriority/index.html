@@ -504,6 +504,7 @@
 <p><a href="/serverProcessRequestByPriority/#point">POINT</a></p>
 <ul>
 <li><a href="/serverProcessRequestByPriority/#point1">POINT1</a></li>
+<li><a href="/serverProcessRequestByPriority/#point4">POINT4</a></li>
 </ul>
 </li>
 <li><a href="/serverProcessRequestByPriority/#code">CODE</a></li>
@@ -521,7 +522,7 @@
 <li>STRATEGY 1.1 slice: server can process reqeust number (5)</li>
 <li>STRATEGY 2.0 delete processTarget array elements
 from ARRAY element of STRATEGY 1.1(variable: filteredTS)
-( [!] NOT ACCEPT dulicated delete => POINT3 )</li>
+( [!] NOT ACCEPT dulicated delete => POINT3, 4 )</li>
 <li>STRATEGY 2.1 process during STRATEGY
 count processed timstamp</li>
 </ul>
@@ -543,6 +544,12 @@ topEl요소 배열이 모든 process처리 후의 값이 찍히게 되서 "slice
 <li>위단계에서 splice로 삭제 했기 때문에 array 요소가 하나 줄어 들어 줄어든 요소 순서부터 시작하기 위해서 감소 연산자를 사용했다.(for동작에서 j++가 동작하기 때문에 )</li>
 <li>eg) 배열을 순회하는 j가 2번째 요소를 제거하면 배열 2번째 요소 뒤에 있는 요소들이 앞으로 당겨진다. == 3번째 요소가 2번재요소가 된다.<br>
 이렇게 되면 j는 순회를 2번째 요소부터 해줘야 한다.</li>
+</ul>
+<h2 id="point4" style="position:relative;"><a href="#point4" aria-label="point4 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POINT4</h2>
+<ul>
+<li>checkDupl flag variable<br>
+: filteredTS요소를 processTarget 배열에서 제거할때 같은 요소 값을 지우지 않기 위한 flag성 variable<br>
+: eg) filteredTS 요소 1을 제거할때 processTarget에 1이 1개 이상이더라도 1개만 제거</li>
 </ul>
 <h1 id="code" style="position:relative;"><a href="#code" aria-label="code permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CODE</h1>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">    <span class="token keyword">var</span> processTarget <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -620,6 +627,7 @@ topEl요소 배열이 모든 process처리 후의 값이 찍히게 되서 "slice
 <p><a href="/serverProcessRequestByPriority/#point">POINT</a></p>
 <ul>
 <li><a href="/serverProcessRequestByPriority/#point1">POINT1</a></li>
+<li><a href="/serverProcessRequestByPriority/#point4">POINT4</a></li>
 </ul>
 </li>
 <li><a href="/serverProcessRequestByPriority/#code">CODE</a></li>
