@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #parent {
+      background: blue;
+      width: 150px;
+      height: 120px;
+      position: relative;
+    }
+
+    #child1 {
+      background: yellow;
+      width: 80%;
+      height: 80%;
+      position: absolute;
+      left: 10%;
+      top: 10%;
+    }
+
+    #child2 {
+      background: red;
+      width: 80%;
+      height: 80%;
+      position: absolute;
+      left: 10%;
+      top: 10%;
+    }
+
+    textarea {
+      height: 140px;
+      width: 300px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="parent">
+    <div id="child1">
+      <div id="child2">
+      </div>
+    </div>
+  </div>
+
+  <ul>
+    <li>parent: blue</li>
+    <li>child1: yellow</li>
+    <li>child2: red</li>
+  </ul>
+
+  <textarea id="result"></textarea>
+  
+<script>
+    let parent = document.getElementById("parent");
+    parent.onmouseover = parent.onmouseout = handler;
+    
+    function handler(event) {
+      let type = event.type;
+      log("TYPE: " + type + " /TARGET="+event.target.id)
+      return false;
+    }
+
+    let lastMsgTime = 0;
+    let lastMsg = "";
+    let repeatCounter = 1;
+    let result = document.getElementById("result");
+    function log(msg){
+      if(lastMsgTime == 0) lastMsgTime = new Date();
+
+      let time = new Date();
+
+      if (time - lastMsgTime > 500) {
+        msg = '-------------------------------------\n' + msg;
+      }
+
+      if(msg === lastMsg){
+        repeatCounter++;
+        if(repeatCounter === 2){
+          result.value = result.value.trim()+'x 2 \n';
+        } else {
+          result.value = result.value.slice(0, result.value.lastIndexOf('x')+1) + repeatCounter + "\n";
+        }
+        result.value = msg;
+      } else {
+        repeatCounter = 1;
+        result.value += msg + "\n";
+      }
+
+      result.scrollTop = result.scrollHeight;
+
+      lastMsgTime = time;
+      lastMsg = msg;
+    }
+  </script>
+</body>
+</html>
