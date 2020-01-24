@@ -1,5 +1,5 @@
 ---
-title: How to remove Array Duplicates in js
+title: ES6로 배열을 제거 할 수 있는 3가지 방법
 date: 2020-01-20
 tags:
   - javascript
@@ -13,16 +13,19 @@ keywords:
 ---
 
 
-# ES6로 배열을 제거 할 수 있는 3가지 방법
+# 요약
 
 ```js
 
 const array = [1, 2, 300, 300, 300];
 
+//1
 [...new Set(array)];
 
+//2
 array.filter((item,index) => array.indexOf(item) === index);
 
+//3
 aray.reduce((unique, item) => unique.include(item) ? unique : [...unique, item], []);
 
 ```
@@ -78,18 +81,20 @@ array.filter((val, idx) => {
 var array = [1, 2, 300, 300, 300];
 array.reduce((unique, item) => {
   console.log({ 
-  item,
-   unique,
-   'unique.includes(item)': unique.includes(item),
-   'return unique val': unique.includes(item) ? unique: [...unique, item]})
+    item,
+    unique,
+    'unique.includes(item)': unique.includes(item),
+    'return unique val': unique.includes(item) ? unique: [...unique, item]})
   return unique.includes(item) ? unique: [...unique, item];
 }, []);
 
 
 /*
-  {item: 1, unique: Array(0), unique.includes(item): false, return unique val: Array(1)}
-  {item: 2, unique: Array(1), unique.includes(item): false, return unique val: Array(2)}
-  {item: 300, unique: Array(2), unique.includes(item): false, return unique val: Array(3)}
+  # console.log 
+  => 
+  {item: 1,   unique: Array(0), unique.includes(item): false,    return unique val: Array(1)}
+  {item: 2,   unique: Array(1), unique.includes(item): false,    return unique val: Array(2)}
+  {item: 300, unique: Array(2), unique.includes(item): false,    return unique val: Array(3)}
   {item: 300, unique: Array(3), unique.includes(item): **true**, return unique val: Array(3)}
   {item: 300, unique: Array(3), unique.includes(item): **true**, return unique val: Array(3)}
 
