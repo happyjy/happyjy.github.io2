@@ -2,6 +2,7 @@
 title: 실행 컨텍스트
 date: 2020-01-24
 tags:
+  - javascript Core
   - javascript
   - excute context
 keywords:
