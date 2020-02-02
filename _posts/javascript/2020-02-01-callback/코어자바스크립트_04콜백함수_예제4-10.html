@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+        코어 자바스크립트 
+        04 콜백함수 
+        예제 4-10 "오류"
+            
+        
+        <script >
+        
+            var obj1 = {
+                name: 'obj1',
+                func: function() {
+                    var me = this;              //POINT
+                    return function(p1){
+                        console.log(`${p1}: ${this.name}, ${me.name}`);
+                    };
+                }
+            };
+
+            var obj2 = {
+                name: 'obj2',
+                func: obj1.func
+            };
+
+            var cb1 = obj1.func().bind("", 'cb1');
+            setTimeout(cb1, 1000);
+
+            var cb2 = obj2.func().bind("", 'cb2');
+            setTimeout(cb2, 1500);
+
+            
+
+
+            // #확인1: call return value는 null
+            // var callback3 = obj1.func().call(obj3, "callback3");
+
+            // #확인2: closure때문에 아래 callback3에서 me.name은 closure영역을 사용
+            
+            // #결론 
+            // p105에 실행지점으로 부터 2초 후에는 'obj3'이 출력 된다. 라고 설명 되어 있는데 이대로 동작을 하려면 
+            // 1. obj1.func().call(obj3, "callback3"); -> call을 bind로 변경
+            // 2. obj1에 console.log를 this.name으로 변경
+
+            var obj3 = { name: 'obj3' }
+            var cb3 = obj1.func().bind(obj3, 'cb3');
+            setTimeout(cb3, 2000);
+
+        </script>
+    </body>
+</html>
