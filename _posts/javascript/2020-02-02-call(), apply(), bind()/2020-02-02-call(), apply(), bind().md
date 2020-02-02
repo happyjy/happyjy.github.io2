@@ -2,7 +2,10 @@
 title: call(), apply(), bind()
 date: 2020-02-02
 tags:
-  - javascript  
+  - javascript
+  - call
+  - apply
+  - bind
 keywords:
   - call
   - apply
