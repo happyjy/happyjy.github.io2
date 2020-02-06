@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var colorList = ['red', 'blue', 'white'];
+        var $ul = document.createElement('ul');
+
+        colorList.forEach(function(color){
+            var $li = document.createElement('li');
+            $li.innerText = color;
+            $li.addEventListener('click', function(){
+                console.log(color);
+            });
+            $ul.appendChild($li);
+        });
+        document.body.appendChild($ul);
+
+
+
+
+
+
+
+        // var $ul = document.createElement('ul');
+        // var colorList = ['red', 'blue', 'white'];
+        // var consoleColor = function(color){
+        //     if(this === window){
+        //         console.log('### this is window -> ' + this + "/// callback function param: " + color);
+        //         console.log(this)
+        //         console.log(color)
+        //         console.log('--------------------')
+        //     } else {
+        //         console.log('### this is HTMLElement -> this Value:' + this + "/// callback function param: " + color);
+        //         console.log(this)
+        //         console.log(color)
+        //         console.log('====================')
+        //     }   
+        // }            
+        
+        // colorList.forEach(function(fruit){
+        //     var $li = document.createElement('li');
+        //     $li.innerText = fruit;
+        //     $li.addEventListener('click', consoleColor);
+        //     $li.addEventListener('click', consoleColor.bind(this, fruit));
+        //     $ul.appendChild($li);
+        // });
+        // document.body.appendChild($ul);
+        
+        // consoleColor(colorList[2]);
+
+
+
+    </script>
+    
+</body>
+</html>
