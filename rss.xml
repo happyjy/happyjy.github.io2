@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[DEV.HAPPY JYOON | Feed]]></title><description><![CDATA[Dev.jYoon Blog]]></description><link>https://happyjy.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 08 Feb 2020 07:34:32 GMT</lastBuildDate><item><title><![CDATA[call(), apply(), bind()]]></title><description><![CDATA[call() 정의 주어진 this 값, 전달된 인수 와 함께 함수를 호출 call()을 생성자 연결에 사용 function, method에 속해서 다른 객체를 호출한다. function, method에 this…]]></description><link>https://happyjy.github.io/call(), apply(), bind()/</link><guid isPermaLink="false">https://happyjy.github.io/call(), apply(), bind()/</guid><pubDate>Sun, 02 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;# 목차
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[DEV.HAPPY JYOON | Feed]]></title><description><![CDATA[Dev.jYoon Blog]]></description><link>https://happyjy.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 08 Feb 2020 07:36:06 GMT</lastBuildDate><item><title><![CDATA[call(), apply(), bind()]]></title><description><![CDATA[call() 정의 주어진 this 값, 전달된 인수 와 함께 함수를 호출 call()을 생성자 연결에 사용 function, method에 속해서 다른 객체를 호출한다. function, method에 this…]]></description><link>https://happyjy.github.io/call(), apply(), bind()/</link><guid isPermaLink="false">https://happyjy.github.io/call(), apply(), bind()/</guid><pubDate>Sun, 02 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;# 목차
     * call() 정의
     * call()을 생성자 연결에 사용
     * call()을 익명함수와 함께 쓰기 
@@ -956,7 +956,8 @@ el의 경계선이 가까울 수록 모든 el에 visit 하지 않는다.&lt;/str
 &lt;p&gt;클로저란?&lt;br&gt;
 : 함수형 프로그래밍 언어에서 등장하는 특징&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;어떤 함수 A에서 선언한 변수 a를 참조하는 내부함수 B를 외부로 전달할 경우 A의 &lt;strong&gt;실행 컨텍스트가 종료된 이후에도 변수a가 사라지지 안는 현상&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;어떤 함수 A에서 선언한 변수 a를 참조하는 내부함수 B를 외부로 전달할 경우 A의 &lt;strong&gt;실행 컨텍스트가 종료된 이후에도 변수a가 사라지지 안는 현상&lt;/strong&gt;
+내부함수를 외부로 전달하는 방법: 함수를 return하는 경우, callback으로 전달&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
