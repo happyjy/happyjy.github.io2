@@ -38,7 +38,8 @@ prototype 기반의 언어가 어떻게 oop를 구현 하고 있는지 알아보
 * instance
     - Constructor를 new키워드로 호출로 생성한 객체
 
-* [] 도형 그리기 
+* prototype 도식
+    ![](프로토타입도식.jpg)
     * 왼쪽 꼭짓점: Constructor(생성자 함수)
     * 오른쪽 꼭짓점: Constructor.prorotype 프로퍼티
     * new를 통해 instance 생성
@@ -50,8 +51,8 @@ prototype 기반의 언어가 어떻게 oop를 구현 하고 있는지 알아보
     * 이 프로퍼티는 Constructor의 prototype이라는 프로퍼티를 참조
 
 * prototype 개념의 핵심: prototype 프로퍼티, \_\_proto__라는 프로퍼티
-    * prototype은 객체
-    * 이를 참조하는 \_\_proto__도 객체
+    * **prototype은 객체**
+    * **이를 참조하는 \_\_proto__도 객체**
     * prototype 객체 내부에는 인스턴스가 사용할 메서드를 저장
     * 그러면 인스턴스에서도 숨겨진 프로퍼티인 \_\_proto__를 통해서 이 메서들을 접근할 수 있게 된다.
 
@@ -193,32 +194,32 @@ Object.getPrototypeOf([instance])
 
 * 예제 
     - 아래 메서드 오버라이드 전, 후 캡쳐 참고
-```js
-var Person = function(name){
-    this.name = name;
-}
-Person.prototype.getName = function(){
-    return this.name;
-}
+        ```js
+        var Person = function(name){
+            this.name = name;
+        }
+        Person.prototype.getName = function(){
+            return this.name;
+        }
 
-var boa = new Person('보아');
-boa.getName = function(){
-    return '이 사람은 ' + this.name;
-};
+        var boa = new Person('보아');
+        boa.getName = function(){
+            return '이 사람은 ' + this.name;
+        };
 
-console.log(boa);               // Person {name: "보아", getName: ƒ}
-console.log(boa.getName());     // 이 사람은 보아
+        console.log(boa);               // Person {name: "보아", getName: ƒ}
+        console.log(boa.getName());     // 이 사람은 보아
 
-console.log(boa.__proto__.getNam());    // undefined
-Person.prototype.name = '권보아';
-console.log(boa.__proto__);             // {name: "권보아", getName: ƒ, constructor: ƒ}
-console.log(boa.__proto__.getName());   // 이사람은 권보아
-console.log(boa.__proto__.getName.call(boa));   // this를 명시적으로 선언
-/*
-    메서드가 오버라이드된 경우에는 자신으로부터 가장 가까운 메서드에만 접근
-    그다음으로 가까운 __proto__의 메서드도 우회적인 방법을 통해서 접근 가능
-*/ 
-```
+        console.log(boa.__proto__.getNam());    // undefined
+        Person.prototype.name = '권보아';
+        console.log(boa.__proto__);             // {name: "권보아", getName: ƒ, constructor: ƒ}
+        console.log(boa.__proto__.getName());   // 이사람은 권보아
+        console.log(boa.__proto__.getName.call(boa));   // this를 명시적으로 선언
+        /*
+            메서드가 오버라이드된 경우에는 자신으로부터 가장 가까운 메서드에만 접근
+            그다음으로 가까운 __proto__의 메서드도 우회적인 방법을 통해서 접근 가능
+        */ 
+        ```
 * 결과
     - override 하기 전
     ![](method_override.png)
@@ -269,26 +270,68 @@ arr.toString();                         //1_2_3
 
 
 # 2-3 객체 전용 메서드의 예외사항
-    * 
 
-    
-# 2-4 다중 프로토타입 체인
-
-```js
-var Grade = function(){
-    //arguments: 유사배열
-    var args = Array.prototype.slice.call(arguments);
-    for(var i=0; i<args.length; i++){
-        this[i] = args[i];
+* Object.prototyp에 추가한 메서드의 접근
+    ```js
+    Object.prototype.getEntries = function(){
+        var res = [];
+        for (var prop in this){
+            if(this.hasOwnProperty(prop)){
+                res.push([prop, this[prop]]);
+            }
+        }
+        return res;
     }
-    this.length = args.length;
-}
-var g = new Grade(100, 80);
 
-Grade.prototype = [];
-var g1 = new Grade(10, 20);
-g1.push(1);
-console.log(g1);    //Grade(3) [10, 20, 1]
-g1.shift()
-console.log(g1);    //Grade(3) [20, 1]
-```
+    var data = [
+        ['object', {a: 1, b: 2, c:3}],
+        ['number', 345],
+        ['string', 'abc'], 
+        ['boolean', false],
+        ['func', function(){}],
+        ['array', [1,2,3,4]]
+    ];
+
+    data.forEach(function(d){
+        console.log(d[1].getEntries());
+    })
+
+    ```
+    - 어떤 데이터 타입이건 거의 무조건 프로토타입 체이닝을 통해 getEntries 메서드에 접근 
+
+
+* 스태틱 메서드(객체한정메서드)
+    - 객체만을 대상으로 동작하는 객체 전용메서드들은 부득이 Object.prototype이 아닌 Object에 스태틱 메서드(static method)로 부여할 수 밖에 없다.
+    - 생성자 함수인 Object, 인스턴스 객체 리터럴 사이에는 this를 통한 연결이 불가능
+    - 전용 메서드 처럼 '메서드명 앞의 대상이 곧 this'가 되는 방식대신  
+    this의 사용을 포기하고 대상 **인스턴스를 인자로 직접 주입해야 하는 방식**으로 구현  
+    : 예시 Object.freeze({prop: 42})
+    - Object.prototype.consructor 하위 메서드 & Object.protptype 하위 메서드
+     ![](객체전용메서드&스태틱메서드.jpg)
+
+# 2-4 다중 프로토타입 체인
+* 새롭게 만드는 생성자 함수에 \_\_proto__를 연결해서 체인 관계를 만들수 있다.
+
+* Grade 생성자 함수와 인스턴스
+    ```js
+    var Grade = function(){
+        //arguments: 유사배열
+        var args = Array.prototype.slice.call(arguments);
+        for(var i=0; i<args.length; i++){
+            this[i] = args[i];
+        }
+        this.length = args.length;
+    }
+    var g = new Grade(100, 80);
+
+    Grade.prototype = [];   //POINT
+
+    var g1 = new Grade(10, 20);
+    g1.push(1);
+    console.log(g1);    //Grade(3) [10, 20, 1]
+    g1.shift()
+    console.log(g1);    //Grade(3) [20, 1]
+
+    ```
+    - 도식화 
+    ![](Grade생성자함수에배열proto.jpg)
