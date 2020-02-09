@@ -70,8 +70,8 @@ prototype 기반의 언어가 어떻게 oop를 구현 하고 있는지 알아보
     typeof Person                   // function
     typeof new Person('boa');       // object
     new Person('boa');              // Person {_name: 'boa'}
-    new Person('boa').__proto__     // {getName: f, constructor: f}
-    Person.prototype                // {getName: f, constructor: f}
+    new Person('boa').__proto__     // {getName: f, constructor: f} -> constructor는 위 Person function 입니다.
+    Person.prototype                // {getName: f, constructor: f} -> constructor는 위 Person function 입니다.
     //---
     
     var boa = new Person('boa');
