@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        var Person = function(name) {
+            this._name = name;
+        }
+
+        Person.prototype.getName = function(){
+            debugger;
+            return this._name;
+        }
+
+        //---
+        typeof Person                   // function
+        typeof new Person('boa');       // object
+        new Person('boa');              // Person {_name: 'boa'}
+        new Person('boa').__proto__     // {getName: f, constructor: f}
+        Person.prototype                // {getName: f, constructor: f}
+        //---
+        
+        var boa = new Person('boa');
+        boa.__proto__.getName();    //undefined
+        boa.getName();              //boa
+        /*
+            boa.__proto__에 _name 프로퍼티가 없어 식별자(this._name)를 찾을 수 없다.
+        */
+
+
+        var Constructor = function(name) {
+            this.name = name;
+            console.log(this);
+        }
+
+        Constructor.prototype.method = function(){};
+        Constructor.prototype.prototype1 = 'constructor Prototype property';
+
+        var instance = new Constructor('INSTANCE');
+        console.dir(Constructor);
+        console.dir(instance);
+
+    </script>
+    
+</body>
+</html>
