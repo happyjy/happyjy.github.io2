@@ -1,5 +1,5 @@
 ---
-title: closure
+title: prototype
 date: 2020-01-24
 tags:
   - javascript Core
