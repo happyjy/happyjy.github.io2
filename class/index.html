@@ -508,6 +508,8 @@
 <ul>
 <li><a href="/class/#3-1-%EA%B8%B0%EB%B3%B8-%EA%B5%AC%ED%98%84">3-1 기본 구현</a></li>
 <li><a href="/class/#3-2-%ED%81%B4%EB%9E%98%EC%8A%A4%EA%B0%80-%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%9D%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A7%80%EB%82%98%EC%A7%80-%EC%95%8A%EA%B2%8C-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">3-2 클래스가 구체적인 데이터를 지나지 않게 하는 방법</a></li>
+<li><a href="/class/#3-3-constructor-%EB%B3%B5%EA%B5%AC-%ED%95%98%EA%B8%B0">3-3 constructor 복구 하기</a></li>
+<li><a href="/class/#3-4-%EC%83%81%EC%9C%84-%ED%81%B4%EB%9E%98%EC%8A%A4%EC%97%90-%EC%A0%91%EA%B7%BC-%EC%88%98%EB%8B%A8-%EC%A0%9C%EA%B3%B5">3-4 상위 클래스에 접근 수단 제공</a></li>
 </ul>
 </li>
 <li><a href="/class/#4-es6%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%B0%8F-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%83%81%EC%86%8D">4 ES6의 클래스 및 클래스 상속</a></li>
@@ -554,50 +556,25 @@
 </ul>
 <h1 id="2-자바스크립트의-클래스" style="position:relative;"><a href="#2-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4" aria-label="2 자바스크립트의 클래스 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2 자바스크립트의 클래스</h1>
 <ul>
-<li>생성자 함수 Array를 new연선자와 함께 호출하면 인스턴스 생성</li>
+<li>
+<p>생성자 함수 Array를 new연선자와 함께 호출하면 인스턴스 생성 하는 과정을 통한 설명</p>
+<ul>
 <li>
 <p>Array를 일종의 클래스라고 하면, <strong>Array의 prototype 객체 내부 요소들이 인스턴스에 '상속'</strong>된다고 볼 수 있다. </p>
 <ul>
 <li><strong>엄밀하게 상속이 아닌 프로토타입 체이닝에 의한 참조지만 결과적으로 동일하게 동작</strong></li>
 </ul>
 </li>
-<li><strong>한편 Array 내부 프로퍼티들중 prorotype 프로퍼티를 제외한 나머지 인스턴스에 상속되지 않는다.</strong>(=== static method, static properties)</li>
-<li>인스턴스에 상속되는지(인스턴스가 참조하는지) 여부에 따라 "static member"(상속불가능)와 "instance member"(상속가능)로 나뉜다.</li>
+<li><strong><em>한편 Array 내부 프로퍼티들 중 prorotype 프로퍼티를 제외한 나머지 인스턴스에 상속되지 않는다.</em></strong><br>
+(=== static member: static method, static properties)</li>
 <li>
-<p>이 분류는 다른 언어의 클래스 구성요소에 대한 정의를 차용한것으로 클래스 입장에서 사용대상에 따라 구분한것 </p>
+<p>인스턴스에 상속되는지(인스턴스가 참조하는지) 여부에 따라 <strong>"static member"(상속불가능)</strong>와 <strong>"instance member"(상속가능)</strong>로 나뉜다.</p>
 <ul>
+<li>이 분류는 다른 언어의 클래스 구성요소에 대한 정의를 차용한것으로 클래스 입장에서 사용대상에 따라 구분한것 </li>
 <li>하지만 <strong>자바스크립트는 다른 언어와 달리 인스턴스에서도 직접 메서드를 정의할 수 있다.</strong></li>
-<li>그래서 '인스턴스 메서드'라는 명칭은 프로토타입에 정의한 메서드를 지칭하는 것인지 인스턴스에 정의한 메서드를 지칭하는것인지 혼란이 올 수 있다.</li>
-<li>따라서 <strong>프로토타입에 정의한 메서드를 프로토타입 메서드라고 부른다.</strong></li>
+<li>그래서 '인스턴스 메서드'라는 명칭은 프로토타입에 정의한 메서드를 지칭하는 것인지 인스턴스에 정의한 메서드를 지칭하는것인지 혼란이 올 수 있다.<br>
+따라서 <strong>프로토타입에 정의한 메서드를 프로토타입 메서드라고 부른다.</strong></li>
 </ul>
-</li>
-<li>
-<p>예제</p>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">    <span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> age</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>_name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>_age <span class="token operator">=</span> age<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    Person<span class="token punctuation">.</span><span class="token function-variable function">getInformations</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">inst</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token comment">//Static emthod</span>
-        <span class="token keyword">return</span><span class="token punctuation">{</span>
-            name<span class="token operator">:</span> inst<span class="token punctuation">.</span>_name<span class="token punctuation">,</span>
-            age<span class="token operator">:</span> inst<span class="token punctuation">.</span>_age
-        <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token class-name">Person</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getName</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>      <span class="token comment">//(prototype) method</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token class-name">Person</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getAge</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>       <span class="token comment">//(prototype) method</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_age<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-
-    <span class="token keyword">var</span> yoon <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token string">"happyjy"</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>yoon<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//happyjy</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>yoon<span class="token punctuation">.</span><span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//30</span>
-
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>yoon<span class="token punctuation">.</span><span class="token function">getInformations</span><span class="token punctuation">(</span>yoon<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//에러! yoon.getInformations is not a function</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Person<span class="token punctuation">.</span><span class="token function">getInformations</span><span class="token punctuation">(</span>yoon<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//{name: "happyjy", age: "30"}</span></code></pre></div>
 </li>
 <li>도식화 - Array constructor function
 <span
@@ -666,13 +643,53 @@
   </a>
     </span></li>
 </ul>
-<h1 id="3-클래스-상속" style="position:relative;"><a href="#3-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%83%81%EC%86%8D" aria-label="3 클래스 상속 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3 클래스 상속</h1>
-<h2 id="3-1-기본-구현" style="position:relative;"><a href="#3-1-%EA%B8%B0%EB%B3%B8-%EA%B5%AC%ED%98%84" aria-label="3 1 기본 구현 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3-1 기본 구현</h2>
+</li>
+<li>
+<p>실제 예제</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> age</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name <span class="token operator">||</span> <span class="token string">'홍길동'</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age <span class="token operator">||</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_age <span class="token operator">=</span> age<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
+Person<span class="token punctuation">.</span><span class="token function-variable function">getInformations</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">inst</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token comment">//Static emthod</span>
+    <span class="token keyword">return</span><span class="token punctuation">{</span>
+        name<span class="token operator">:</span> inst<span class="token punctuation">.</span>_name<span class="token punctuation">,</span>
+        age<span class="token operator">:</span> inst<span class="token punctuation">.</span>_age
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token class-name">Person</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getName</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>      <span class="token comment">//(prototype) method</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token class-name">Person</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getAge</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>       <span class="token comment">//(prototype) method</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_age<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">var</span> yoon <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token string">"happyjy"</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>yoon<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//happyjy</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>yoon<span class="token punctuation">.</span><span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//30</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>yoon<span class="token punctuation">.</span><span class="token function">getInformations</span><span class="token punctuation">(</span>yoon<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+<span class="token comment">//에러! yoon.getInformations is not a function</span>
+<span class="token comment">//생성자 함수 property(getInformations)에는 인스턴스가 직접 접근하지 못한다.</span>
+<span class="token comment">//생성자 함수 property는 인스턴스로 상속할 수 있는 프로퍼티로 만들지 않는다.</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Person<span class="token punctuation">.</span><span class="token function">getInformations</span><span class="token punctuation">(</span>yoon<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//{name: "happyjy", age: "30"}</span>
+<span class="token comment">//생성자 함수 property는 생성자 함수로만 접근이 가능하다.</span></code></pre></div>
+</li>
+</ul>
+<h1 id="3-클래스-상속" style="position:relative;"><a href="#3-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%83%81%EC%86%8D" aria-label="3 클래스 상속 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3 클래스 상속</h1>
+<h2 id="3-1-기본-구현" style="position:relative;"><a href="#3-1-%EA%B8%B0%EB%B3%B8-%EA%B5%AC%ED%98%84" aria-label="3 1 기본 구현 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3-1 기본 구현</h2>
+<ul>
+<li>
+<p>구현 point</p>
+<ol>
+<li>프로토타입 설정</li>
+<li>contsructor 복구</li>
+</ol>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> age</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name <span class="token operator">||</span> <span class="token string">'홍길동'</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span class="token class-name">Person</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getName</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -681,52 +698,81 @@
 <span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token function">Employee</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> position</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name <span class="token operator">||</span> <span class="token string">'홍길덩'</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name <span class="token operator">||</span> <span class="token string">'홍길동(setting by Employee function)'</span><span class="token punctuation">;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>position <span class="token operator">=</span> position <span class="token operator">||</span> <span class="token string">'미정'</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
+<span class="token comment">//1.prorotype 설정</span>
 <span class="token class-name">Employee</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 이 코드에 의해서 new Employee에 의해서 생성된 인스턴스.__proto__에 Person 인스턴가 세팅된다.</span>
+<span class="token comment">//2. constructor 복구</span>
 <span class="token class-name">Employee</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructor <span class="token operator">=</span> Employee<span class="token punctuation">;</span>  <span class="token comment">// prototype에서 다뤘던 내용</span>
 <span class="token class-name">Employee</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getPosition</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>position<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">var</span> mac <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Employee</span><span class="token punctuation">(</span><span class="token string">'mac'</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token string">'CTO'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> mac1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Employee</span><span class="token punctuation">(</span><span class="token string">'mac1'</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">/*
-    ### POINT
-    # mac1에 대한 생각
-        * mac1.getPosition()을하면 mac1 instance에 position property가 없다. 
-        * prorotype chain으로 Person's의 instance property를 참고해서 값을 반환한다.
-        * 반환값 
-            : Employee {name: "mac1", age: 30, position: "미정"}
-        * 이문제를 해결하기 위해서 아래 Bridge라는 function을 만든다.
-
-*/</span></code></pre></div>
-<ul>
-<li>결과(var mac = new Employee('mac', 30, 'CTO'))
-<img src="Employee%EC%83%81%EC%86%8D.jpeg"></li>
-</ul>
-<h2 id="3-2-클래스가-구체적인-데이터를-지나지-않게-하는-방법" style="position:relative;"><a href="#3-2-%ED%81%B4%EB%9E%98%EC%8A%A4%EA%B0%80-%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%9D%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A7%80%EB%82%98%EC%A7%80-%EC%95%8A%EA%B2%8C-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95" aria-label="3 2 클래스가 구체적인 데이터를 지나지 않게 하는 방법 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3-2 클래스가 구체적인 데이터를 지나지 않게 하는 방법</h2>
-<ul>
-<li>
-<p>아래 사진(extend Class)에서 1,2 참고 </p>
-<h2 id="3-3-constructor-복구-하기" style="position:relative;"><a href="#3-3-constructor-%EB%B3%B5%EA%B5%AC-%ED%95%98%EA%B8%B0" aria-label="3 3 constructor 복구 하기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3-3 constructor 복구 하기</h2>
+<span class="token keyword">var</span> mac <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Employee</span><span class="token punctuation">(</span><span class="token string">'mac'</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token string">'CTO'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 </li>
 <li>
-<p>아래 사진(extend Class)에서 3번 참고 </p>
-<h2 id="3-4-상위-클래스에-접근-수단-제공" style="position:relative;"><a href="#3-4-%EC%83%81%EC%9C%84-%ED%81%B4%EB%9E%98%EC%8A%A4%EC%97%90-%EC%A0%91%EA%B7%BC-%EC%88%98%EB%8B%A8-%EC%A0%9C%EA%B3%B5" aria-label="3 4 상위 클래스에 접근 수단 제공 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3-4 상위 클래스에 접근 수단 제공</h2>
-</li>
-<li>아래 사진(extend Class)에서 4번 참고 </li>
-<li>
-<p>상속시 Bridge역할(extendClass)하는 function 필요</p>
+<p>mac의 결과 값</p>
 <ul>
-<li>위 POINT내용을 확인해보자</li>
+<li><strong><em>문제: mac.__proto__에 추상적이어야할 클래스 prorotype 담겨 있는 것</em></strong></li>
+<li>만약 delete mac.name이후 mac.getName을 하면 undefined가 return 되어야 하는데 prototype chain에 의해서 홍길동(mac.<strong>proto</strong> property)이 반환된다.</li>
+<li>
+<p>그래서 아래 예제 "prototype"로 상속 구현하기에 extendClass에 의해서 문제를 해결할 수 있다. </p>
+<ul>
+<li>문제 해결 방법 요약: 상속할때 parent, child class 사이에서 extend해주는 개념이 필요하다<br>
+: 아래 3-2, 3-3, 3-4 capter에서 다루도록 하겠다.</li>
 </ul>
 </li>
 </ul>
 <p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 550px;"
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/75c0f2ffc038501b6b77f7a63a5cbfc0/57199/Employee%EC%83%81%EC%86%8D.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.727272727272734%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsSAAALEgHS3X78AAACqUlEQVQ4y02TaXbjNhCEdZS8jIcbuC/gvkuiFlOyZSczzgFy/xt8acnOm/nRD+gGUawuVG/Op5X18oPd6cY4Hdmf30h0yxRE5I6FzjVNU5NnMzprqOpS8vtaE4chg6voo4D19i9RXLCpizPr8EGaVcypJgljniwHJ6xwokbWEss0ML9/w7YsbNt+5Jb5HfNeN01Mqf+/37RRL0ATZTITehpbLkb3Qy/DijoBbXHiHqUXbFktx8dORhx9wklnLFsJuIkloPfYNOWRXXvh1C0s417anjiOW8qmxw1TrLDFCmoMlWDa7oONrTyUFwiYK4zvQL8BtlXKVHb02YCOU177hvUwM42iW+pQpKJjbDE2Ct+zUKLrbvAYaiVgJk9P0rL5CfZo2TQM9tmJodhSJyGzr/Ck9sef3+TjJzq5WGqbQQC7yqEtFUn0CbpMHsfZI/QtDOOT5ca0FLPe06cjTVSQBSWuGxBGKcM4cjl1zFPHehp4u44s24L9rqNttHTRcFx6qjL/xbDKE5ZS9MvOdPIwh/JMkbX4YS5AE8+HkvVYcz3VvJwb5j5jHkreLiU/XhqmPsf3w4eWD8Bh0ry/nvl5u/LxvvJ62cnDpLRjwrxLKLSDpSzRzxTmJlHu4Ty0NIhLn6SPHufm10tvbNGszhuu/Qt/TT8ZiwnXj8XEGW6kiKqIbM5Ipwwv8dH7/JGHZYQK3EfYyv4F6Li26KZZ0jNH/UwsXoyTisATv7kOSReTCePqUpGfCqJWfnDISWWvcl+sI+yM32wT6AAtoraFCC32qYRtV/ckUpvWhePlwHJZuH1c+fufK9u55+N2YS9221YJrrAzjK+JuWvoei55nVOXDX0zUlcyp13F9f3K821lTDMq5fLsRzx7ocx4SCemnl2fg+S+UjgS6iv+A35ZqDHd4DD+AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="Employee  "
+        title="Employee  "
+        src="/static/75c0f2ffc038501b6b77f7a63a5cbfc0/57199/Employee%EC%83%81%EC%86%8D.png"
+        srcset="/static/75c0f2ffc038501b6b77f7a63a5cbfc0/00d96/Employee%EC%83%81%EC%86%8D.png 148w,
+/static/75c0f2ffc038501b6b77f7a63a5cbfc0/0b23c/Employee%EC%83%81%EC%86%8D.png 295w,
+/static/75c0f2ffc038501b6b77f7a63a5cbfc0/57199/Employee%EC%83%81%EC%86%8D.png 550w"
+        sizes="(max-width: 550px) 100vw, 550px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+</li>
+</ul>
+<h2 id="3-2-클래스가-구체적인-데이터를-지나지-않게-하는-방법" style="position:relative;"><a href="#3-2-%ED%81%B4%EB%9E%98%EC%8A%A4%EA%B0%80-%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%9D%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A7%80%EB%82%98%EC%A7%80-%EC%95%8A%EA%B2%8C-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95" aria-label="3 2 클래스가 구체적인 데이터를 지나지 않게 하는 방법 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3-2 클래스가 구체적인 데이터를 지나지 않게 하는 방법</h2>
+<ul>
+<li>아래 도식화(extend Class 구현 개념)에서 빨간색 동그라미 <strong>1,2번</strong> 참고 </li>
+</ul>
+<h2 id="3-3-constructor-복구-하기" style="position:relative;"><a href="#3-3-constructor-%EB%B3%B5%EA%B5%AC-%ED%95%98%EA%B8%B0" aria-label="3 3 constructor 복구 하기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3-3 constructor 복구 하기</h2>
+<ul>
+<li>아래 도식화(extend Class 구현 개념)에서 빨간색 동그라미 <strong>3번</strong> 참고 </li>
+</ul>
+<h2 id="3-4-상위-클래스에-접근-수단-제공" style="position:relative;"><a href="#3-4-%EC%83%81%EC%9C%84-%ED%81%B4%EB%9E%98%EC%8A%A4%EC%97%90-%EC%A0%91%EA%B7%BC-%EC%88%98%EB%8B%A8-%EC%A0%9C%EA%B3%B5" aria-label="3 4 상위 클래스에 접근 수단 제공 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3-4 상위 클래스에 접근 수단 제공</h2>
+<ul>
+<li>아래 도식화(extend Class 구현 개념)에서 빨간색 동그라미 <strong>4번</strong> 참고 </li>
+<li>
+<p>extend Class 구현 개념</p>
+<ul>
+<li>아래 구현 예제 주석 1,2,3,4번 코드 참고
+<span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;"
     >
@@ -757,27 +803,27 @@
         loading="lazy"
       />
   </a>
-    </span></p>
-<ul>
+    </span></li>
+</ul>
+</li>
 <li>
-<p>prototype으로 상속 구현하기</p>
+<p>extendClass구현으로 prototype상속 구현</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">//* es5에서 많이 사용해서 아래와 같이 클래스 상속을 구현 </span>
 <span class="token comment">//* 클로저를 생성해서 'Bridge'를 단한번만 사용할 수 있게 </span>
 <span class="token keyword">var</span> extendClass <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">function</span> <span class="token function">Bridge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">Parent<span class="token punctuation">,</span> Child</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token class-name">Bridge</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> Parent<span class="token punctuation">.</span>prorotype<span class="token punctuation">;</span>
-        <span class="token class-name">Child</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Bridge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Child</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructor <span class="token operator">=</span> Child<span class="token punctuation">;</span>
-        <span class="token class-name">Child</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>superClass <span class="token operator">=</span> Parent<span class="token punctuation">;</span>    <span class="token comment">//POINT2: </span>
+        <span class="token class-name">Bridge</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> Parent<span class="token punctuation">.</span>prorotype<span class="token punctuation">;</span>  <span class="token comment">//1번</span>
+        <span class="token class-name">Child</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Bridge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">//2번</span>
+        <span class="token class-name">Child</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructor <span class="token operator">=</span> Child<span class="token punctuation">;</span>  <span class="token comment">//3번</span>
+        <span class="token class-name">Child</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>superClass <span class="token operator">=</span> Parent<span class="token punctuation">;</span>  <span class="token comment">//4번</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> age</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name <span class="token operator">||</span> <span class="token string">'홍길동'</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age <span class="token operator">||</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-
 <span class="token class-name">Person</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getName</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -786,15 +832,17 @@
 <span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token function">Employee</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> position</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">superClass</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> age<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//POINT2: 하위 클래스에서 이런 호출로 상위 클래스가 설정한 프로퍼티 세팅 가능</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">superClass</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> age<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//4번: 하위 클래스에서 이런 호출로 상위 클래스가 설정한 프로퍼티 세팅 가능</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>position <span class="token operator">=</span> position <span class="token operator">||</span> <span class="token string">'미정'</span>
 <span class="token punctuation">}</span>
 
-<span class="token function">extendClass</span><span class="token punctuation">(</span>Person<span class="token punctuation">,</span> Employee<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+<span class="token function">extendClass</span><span class="token punctuation">(</span>Person<span class="token punctuation">,</span> Employee<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">Employee</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getPosition</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>position<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre></div>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> mac <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Employee</span><span class="token punctuation">(</span><span class="token string">'mac'</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token string">'CTO'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 </li>
 <li>결과
 <span
@@ -827,6 +875,13 @@
       />
   </a>
     </span></li>
+<li>
+<p>짚고 넘어가자! - this.superClass에 대해서 </p>
+<ul>
+<li>this.superClass는 Parent object이기 때문에 Person constructor function에서 name, age설정</li>
+<li>this.name, this.age에 설정 시 this scope은 "Employee instance object"라서 위 결과 처럼 name, age가 Employee instance property에 설정 된다.</li>
+</ul>
+</li>
 </ul>
 <h1 id="4-es6의-클래스-및-클래스-상속" style="position:relative;"><a href="#4-es6%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%B0%8F-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%83%81%EC%86%8D" aria-label="4 es6의 클래스 및 클래스 상속 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4 ES6의 클래스 및 클래스 상속</h1>
 <ul>
@@ -870,6 +925,8 @@
 <ul>
 <li><a href="/class/#3-1-%EA%B8%B0%EB%B3%B8-%EA%B5%AC%ED%98%84">3-1 기본 구현</a></li>
 <li><a href="/class/#3-2-%ED%81%B4%EB%9E%98%EC%8A%A4%EA%B0%80-%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%9D%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A7%80%EB%82%98%EC%A7%80-%EC%95%8A%EA%B2%8C-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">3-2 클래스가 구체적인 데이터를 지나지 않게 하는 방법</a></li>
+<li><a href="/class/#3-3-constructor-%EB%B3%B5%EA%B5%AC-%ED%95%98%EA%B8%B0">3-3 constructor 복구 하기</a></li>
+<li><a href="/class/#3-4-%EC%83%81%EC%9C%84-%ED%81%B4%EB%9E%98%EC%8A%A4%EC%97%90-%EC%A0%91%EA%B7%BC-%EC%88%98%EB%8B%A8-%EC%A0%9C%EA%B3%B5">3-4 상위 클래스에 접근 수단 제공</a></li>
 </ul>
 </li>
 <li><a href="/class/#4-es6%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%B0%8F-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%83%81%EC%86%8D">4 ES6의 클래스 및 클래스 상속</a></li>
