@@ -809,7 +809,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>
 <p>extendClass구현으로 prototype상속 구현</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">//* es5에서 많이 사용해서 아래와 같이 클래스 상속을 구현 </span>
-<span class="token comment">//* 클로저를 생성해서 'Bridge'를 단한번만 사용할 수 있게 </span>
+<span class="token comment">//* 클로저를 생성해서 'Bridge'를 단한번만 사용할 수 있게 함 </span>
 <span class="token keyword">var</span> extendClass <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">function</span> <span class="token function">Bridge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">Parent<span class="token punctuation">,</span> Child</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -879,7 +879,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>짚고 넘어가자! - this.superClass에 대해서 </p>
 <ul>
 <li>this.superClass는 Parent object이기 때문에 Person constructor function에서 name, age설정</li>
-<li>this.name, this.age에 설정 시 this scope은 "Employee instance object"라서 위 결과 처럼 name, age가 Employee instance property에 설정 된다.</li>
+<li>Person constructor function에서 this.name, this.age에 설정 시 this scope은 "Employee instance object"라서 위 결과 처럼 name, age가 Employee instance property에 설정 된다.</li>
 </ul>
 </li>
 </ul>
