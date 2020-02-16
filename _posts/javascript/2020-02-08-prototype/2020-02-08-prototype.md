@@ -1,6 +1,6 @@
 ---
 title: prototype
-date: 2020-01-24
+date: 2020-02-08
 tags:
   - javascript Core
   - javascript
