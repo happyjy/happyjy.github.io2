@@ -4,9 +4,6 @@ date: 2020-01-20
 tags:
   - javascript
   - ES6
-  - set
-  - filter
-  - reduce
 keywords:
   - 배열
   - 중복 제거 

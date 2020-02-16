@@ -1,0 +1,198 @@
+---
+title: promise
+date: 2020-02-16
+tags:
+  - javascript Core
+keywords:
+  - promise
+---
+
+
+* javascript info 팬이 가수의 앨범을 사기위해서 아무런 정보 없이 대기 하기 보다는 가수가 앨범을 다만들면 팬들에게 그 소식을 알려 팬이 가수의 앨범을 살수 있다 라는 설명으로 promise로 설명 하고 있습니다.
+
+```
+목차 
+# excutor: promise
+# 소비자: then, catch, finally
+# 예시: loadScript
+```
+
+# excutor: promise
+
+* 
+    ```js
+    var promise = new Promise(function(resolve, reject) {
+        // executor (제작 코드, "가수")
+    });
+    ```
+    - excutor는 아래 콜백 중 하나를 반드시 호출해야 합니다. 
+        - resolve(value): 성공적으로 끝난 경우 결과를 value param으로 전달하며 resolve 호출
+        - reject(error): 에러 발생시 에러 객체를 error param으로 전달하며 reject 호출
+
+* new Promise(executor)의 callback 'resolve(value)', 'reject(error)'의 state, result 상태 
+* new Promise 생성자가 반환하는 promise 객체는 다음과 같은 내부 프로퍼티를 갖습니다.
+    - state: 처음엔 "pending"(보류)이었다 resolve가 호출되면 "fulfilled", reject가 호출되면 "rejected"로 변합니다.
+    - result: 처음엔 undefined이었다, resolve(value)가 호출되면 value로, reject(error)가 호출되면 error로 변합니다.
+
+
+* 성공일때 예제(resolve) 
+    ```js
+    var promise = new Promise(function(resolve, reject) {
+        // 프라미스가 만들어질 때 executor 함수는 자동으로 실행됩니다.
+
+        // 1초 뒤에 일이 성공적으로 끝났다는 신호와 함께, result가 'done'이 됩니다.
+        setTimeout(() => resolve("done"), 1000);
+    });
+    ```
+
+* 실패일때 예제(reject)
+    ```js
+    var promise = new Promise(function(resolve, reject) {
+        // 1초 뒤에 에러와 함께 실행이 종료되었다는 신호를 보냅니다.
+        setTimeout(() => reject(new Error("에러 발생!")), 1000);
+    });
+
+    ```
+
+* resolve/reject 함수 호출 규칙
+    - excutor에 의해서 끝난일은 resolve, reject중 첫번째로 오는 것만 수행됩니다.
+    - 나머지는 무시
+    ```js
+    var promise = new Promise(function(resolve, reject) {
+    resolve("done");
+
+    reject(new Error("…")); // 무시됨
+    setTimeout(() => resolve("…")); // 무시됨
+    });
+    ```
+
+
+# 소비자: then, catch, finally
+> 프라미스 객체는 executor(‘제작 코드’ 혹은 ‘가수’)와 결과나 에러를 받을 소비 함수(‘팬’)를 이어주는 역할을 합니다. 소비함수는 .then, .catch, .finally 메서드를 사용해 등록(구독)됩니다.
+
+
+## then
+> excutor가 성공, 실패 한경우를 모두 handling 할 수 있다. 
+> then parameter에 두개를 전달해줄 수 있는데 첫번째는 param에 성공 handling function, 두번째는 param에 실패 hanlding function을 전달할 수 있다.
+
+* excutor가 성공적으로 수행한 경우
+    - POINT 주석 참고
+    ```js
+    var promise = new Promise(function(resolve, reject) {
+      setTimeout(() => resolve("done!"), 1000);
+    });
+
+    // POINT: resolve 함수는 .then의 첫 번째 함수(인수)를 실행합니다.
+    promise.then(
+        result => alert(result), // 1초 후 "done!"을 출력      
+        error => alert(error) // 실행되지 않음
+    );
+    ```
+    - 아래 와 같이 성공했을때는 작성 가능하다 
+        - then function에 parameter 한개만 전달해주면 된다.
+        ```js
+        var promise = new Promise(resolve => {
+            setTimeout(() => resolve("done!"), 1000);
+        });
+
+        promise.then(alert); // 1초 뒤 "done!" 출력
+        ```
+
+* excutor가 에러로 필해한 경우
+    - POINT 주석 참고 
+    ```js
+    var promise = new Promise(function(resolve, reject) {
+        setTimeout(() => reject(new Error("에러 발생!")), 1000);
+    });
+
+    // POINT: reject 함수는 .then의 두 번째 함수를 실행합니다.
+    promise.then(
+        result => alert(result), // 실행되지 않음
+        error => alert(error) // 1초 후 "Error: 에러 발생!"를 출력
+    );
+    ```
+
+
+## catch
+> excutor 수행 결과 중 error만 다루고 싶을 때 사용
+
+* 예시
+    - POINT 주석 참고
+    - .catch(f)는 문법이 간결하다는 점만 빼고 .then(null,f)과 완벽하게 동일
+    
+    ```js
+    var promise = new Promise((resolve, reject) => {
+        setTimeout(() => reject(new Error("에러 발생!")), 1000);
+    });
+
+    // POINT
+    // .catch(f)는 promise.then(null, f)과 동일하게 작동합니다
+    promise.catch(alert); // 1초 뒤 "Error: 에러 발생!" 출력
+    ```
+
+## finally
+> try... catch에 finally가 있는 것 처럼 promise에도 finally가 있다.
+
+
+* finally 예1  
+    : finally 이후 then을 통해 resolve 결과를 then으로 전달
+    ```js
+    new Promise((resolve, reject) => {
+        setTimeout(() => resolve("result"), 2000)
+    })
+        // 성공, 실패 여부와 상관없이, 프라미스가 처리되면 실행됨
+        .finally(() => alert("Promise ready"))
+        .then(result => alert(result)); // <-- .then에서 result를 다룸
+    ```
+
+* finally 예2  
+    : finally 이후 cath를 통해 
+    ```js
+    new Promise((resolve, reject) => {
+        throw new Error("에러 발생!");
+        // setTimeout(()=>{ reject(new Error('error'))}, 1000); // excutor 처리 시점만 조금 다르고 같은 결과 
+    })
+        // 성공, 실패 여부와 상관없이, 프라미스가 처리되면 실행됨
+        .finally(() => alert("Promise ready"))
+        .catch(err => alert(err)); // <-- .catch에서 에러 객체를 다룸
+    ```
+
+# 예시: loadScript
+* callback에서 loadScript 설명에서 callback hell을 해결 할 수 있는 방법이 promise라고 했는데 그 방법을 소개하겠다.
+
+* promise로 구현한 loadScript
+    ```js
+    function loadScript(src) {
+        return new Promise(function(resolve, reject) {
+            var script = document.createElement('script');
+            script.src = src;
+
+            script.onload = () => resolve(script);
+            script.onerror = () => reject(new Error(`${src}를 불러오는 도중에 에러가 발생함`));
+
+            document.head.append(script);
+        });
+    }
+    ```
+
+* 사용 방법
+    ```js
+    var promise = loadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
+
+    promise.then(
+        script => alert(`${script.src}을 불러왔습니다!`),
+        error => alert(`Error: ${error.message}`)
+    );
+
+    promise.then(script => alert('또다른 핸들러...'));
+    ```    
+    - 설명
+        - loadScript(script)로 스크립트를 읽고, 결과에 따라 그다음(.then)에 무엇을 할지에 대한 코드를 작성하면 되죠.
+    - 비교 
+        - 콜백으로 구현시에 loadScript(script, callback)를 호출할 때, 함께 호출할 callback 함수가 준비되어 있어야 합니다.  
+          loadScript를 호출하기 이전에 호출 결과로 무엇을 할지 미리 알고 있어야 했다.
+    
+
+# 참고 
+- javascript.info  
+https://javascript.info/promise-basics

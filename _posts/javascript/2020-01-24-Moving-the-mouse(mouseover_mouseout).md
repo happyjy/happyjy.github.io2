@@ -3,7 +3,6 @@ title: mouseover, mouseout일때 element를 건너뛰는 특징
 date: 2020-01-24
 tags:
   - javascript
-  - event
 keywords:
   - mouseover
   - mouseout

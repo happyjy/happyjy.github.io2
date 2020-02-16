@@ -3,8 +3,6 @@ title: prototype
 date: 2020-02-08
 tags:
   - javascript Core
-  - javascript
-  - prototype
 keywords:
   - prototype
 ---

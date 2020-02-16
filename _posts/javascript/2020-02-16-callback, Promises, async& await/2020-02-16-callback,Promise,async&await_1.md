@@ -3,8 +3,6 @@ title: callback
 date: 2020-02-16
 tags:
   - javascript Core
-  - javascript
-  - callback
 keywords:
   - callback
 ---
@@ -15,23 +13,23 @@ keywords:
 (**스크립트 읽기가 지금 당장 시작되더라도 실행은 함수가 종료되고 난 후에야 실행되므로 스크립트는 ‘비동기적으로’ 실행되었다고 할 수 있습니다.**)
 
 이렇게 비동기 적으로 실행되고 있는 문제를 해결하기위해서 callback기반 비동기 프로그램 방법으로 해결 할 수 있습니다.  
-(**무언가를 비동기적으로 처리하는 함수는 함수 내 동작이 모두 처리된 후 실행되어야 하는 함수가 들어갈 콜백을 인수로 반드시 제공** -> scipt load를 보장 하는 loadScipt function capter)
+(**무언가를 비동기적으로 처리하는 함수는 함수 내 동작이 모두 처리된 후 실행되어야 하는 함수가 들어갈 콜백을 인수로 반드시 제공** -> script load를 보장 하는 loadScript function capter)
 
 하지만 callback기반 비동기 프로그램은 callback hell이라는 단점이 있고 이런 문제를 해결 할 수 있는 방법이 'promise, Async, awiat'fksms 개념이 있습니다. -> callback hell capter
 
 
 
 # callback function 
-## scipt load를 보장 할 수 없는 loadScipt function
+## script load를 보장 할 수 없는 loadScript function
 * document객체에 생성한 script객체를 추가해주면 추가한 script 주소를 통해서 원하는 파일을 받을 수 있다.
 * `loadScript` 구현
     ```js
     function loadScript(src) {
-    // creates a <script> tag and append it to the page
-    // this causes the script with given src to start loading and run when complete
-    let script = document.createElement('script');
-    script.src = src;
-    document.head.append(script);
+        // creates a <script> tag and append it to the page
+        // this causes the script with given src to start loading and run when complete
+        var script = document.createElement('script');
+        script.src = src;
+        document.head.append(script);
     }
     ```
 
@@ -43,16 +41,16 @@ keywords:
 * 이유는 브라우저가 script.js 파일을 받기 전에 newFunction을 호출 했기 때문이다.
 * 그래서 **파일을 받고 function을 호출 시키는 보장해주는 코드를 추가 해야한다.**
 
-## scipt load를 보장 하는 loadScipt function
+## script load를 보장 하는 loadScript function
 * 위 load를 보장하지 못하는 코드와 달라진점은 `callback` function 을 parameter로 전달해주고 loadScript는 전달 받은 param을 script onload property에 추가해줬다.
     ```js
     function loadScript(src, callback) {
-    let script = document.createElement('script');
-    script.src = src;
+        var script = document.createElement('script');
+        script.src = src;
 
-    script.onload = () => callback(script);   // 기능 개선한 부분
+        script.onload = () => callback(script);   // 기능 개선한 부분
 
-    document.head.append(script);
+        document.head.append(script);
     }
     ```
 
@@ -60,7 +58,7 @@ keywords:
 * load를 보장하는 기능이 개선 된 `loadScript`
     ```js
     function loadScript(src, callback) {
-        let script = document.createElement('script');
+        var script = document.createElement('script');
         script.src = src;
         script.onload = () => callback(script);       //POINT
         document.head.append(script);
@@ -84,13 +82,13 @@ keywords:
     ```js
     loadScript('/my/script.js', function(script) {
 
-    loadScript('/my/script2.js', function(script) {
+        loadScript('/my/script2.js', function(script) {
 
-        loadScript('/my/script3.js', function(script) {
-        // ...continue after all scripts are loaded
-        });
+            loadScript('/my/script3.js', function(script) {
+            // ...continue after all scripts are loaded
+            });
 
-    })
+        })
 
     });
     ```
@@ -99,13 +97,13 @@ keywords:
 * error 처리를 할 수 있는 기능이 개선된 `loadScript`
     ```js
     function loadScript(src, callback) {
-    let script = document.createElement('script');
-    script.src = src;
+        var script = document.createElement('script');
+        script.src = src;
 
-    script.onload = () => callback(null, script);
-    script.onerror = () => callback(new Error(`Script load error for ${src}`));
+        script.onload = () => callback(null, script);
+        script.onerror = () => callback(new Error(`Script load error for ${src}`));
 
-    document.head.append(script);
+        document.head.append(script);
     }
     ```
 * 에러 처리 기능이 개선된 laodScript 를 사용하는 방법
@@ -114,11 +112,11 @@ keywords:
         - 두번째 parameter: loadScript로 받고 싶은 script src string 객체
     ```js
     loadScript('/my/script.js', function(error, script) {
-        if (error) {
-            // handle error
-        } else {
-            // script loaded successfully
-        }
+                if (error) {
+                    // handle error
+                } else {
+                    // script loaded successfully
+                }
     });
     ```
 
@@ -129,26 +127,26 @@ keywords:
     ```js
     loadScript('1.js', function(error, script) {        // 첫번째 callback
 
-    if (error) {
-        handleError(error);
-    } else {
-        // ...
-        loadScript('2.js', function(error, script) {    // 두번째 callback
         if (error) {
             handleError(error);
         } else {
             // ...
-            loadScript('3.js', function(error, script) {    // 세번째 callback
-            if (error) {
-                handleError(error);
-            } else {
-                // ...continue after all scripts are loaded (*)
-            }
-            });
+            loadScript('2.js', function(error, script) {    // 두번째 callback
+                if (error) {
+                    handleError(error);
+                } else {
+                    // ...
+                    loadScript('3.js', function(error, script) {    // 세번째 callback
+                        if (error) {
+                            handleError(error);
+                        } else {
+                            // ...continue after all scripts are loaded (*)
+                        }
+                    });
 
+                }
+            })
         }
-        })
-    }
     });
     ```
 
@@ -157,29 +155,29 @@ keywords:
     loadScript('1.js', step1);
 
     function step1(error, script) {
-    if (error) {
-        handleError(error);
-    } else {
-        // ...
-        loadScript('2.js', step2);
-    }
+        if (error) {
+            handleError(error);
+        } else {
+            // ...
+            loadScript('2.js', step2);
+        }
     }
 
     function step2(error, script) {
-    if (error) {
-        handleError(error);
-    } else {
-        // ...
-        loadScript('3.js', step3);
-    }
+        if (error) {
+            handleError(error);
+        } else {
+            // ...
+            loadScript('3.js', step3);
+        }
     }
 
     function step3(error, script) {
-    if (error) {
-        handleError(error);
-    } else {
-        // ...continue after all scripts are loaded (*)
-    }
+        if (error) {
+            handleError(error);
+        } else {
+            // ...continue after all scripts are loaded (*)
+        }
     };
     ```
 * 하지만 step1, 2, 3과 같은 function은 연쇄 작용하는 코드 밖에서 사용할 수 없는 단점이 있습니다. 그래서 이런 점과 callback hell을 피할 수 있는 "promise, Asynch/await" 개념을 정리해보겠습니다.
