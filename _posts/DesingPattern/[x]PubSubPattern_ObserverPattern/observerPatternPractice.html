@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    input{
+        display: block;
+    }
+    </style>
+</head>
+<body>
+    <input type="text" class="js-input" placeholder="type something here"/>
+    <button class="js-subscribe-p1">subscribe</button>
+    <button class="js-unsubscribe-p1">unsubscribe</button>
+    <p class="js-p1"></p>
+
+    <button class="js-subscribe-p2">subscribe</button>
+    <button class="js-unsubscribe-p2">unsubscribe</button>
+    <p class="js-p3"></p>
+
+    <button class="js-subscribe-p3">subscribe</button>
+    <button class="js-unsubscribe-p3">unsubscribe</button>
+    <p class="js-p2"></p>
+</body>
+
+<script>
+    /*
+        # reference site 
+            * https://pawelgrzybek.com/the-observer-pattern-in-javascript-explained/
+
+
+        # STUDY POINT1 - Observer pattern 객체 생성과 구독, 구독해제
+        * 보는 방법 
+            - STUDY POINT 라인을 순서대로 읽는다 .
+            - '-' 이 표시 내용은 참고 내용
+        * 
+        STUDY POINT2: element에 event가 일어날때 발생 할 때
+        STUDY POINT3
+        : Observer pattern 객체에 구독, 구독해제 function에 동작할 function을 넘겨 this.observers객체에 push 후
+        DOM에 addEventListener 등록
+        STUDY POINT4: Observer Pattern 객체에 저장소(this.observers)에 관리
+        - 참고: headingsObserver.subscribe(), headingsObserver.unsubscribe()
+        - 클릭시 동작할 function이 들어 있다. 
+
+        
+    */
+    class Observable {
+        constructor(){
+            this.observers = [];    //STUDY POINT4
+        }
+
+        subscribe(f) {
+            this.observers.push(f);
+        }
+
+        unsubscribe(f){
+            debugger;
+            this.observers = this.observers.filter(subscriber => subscriber !== f);
+        }
+
+        notify(data){
+            this.observers.forEach(observer => observer(data));
+        }
+    }
+
+    const input = document.querySelector('.js-input');
+    const p1 = document.querySelector('.js-p1');
+    const p2 = document.querySelector('.js-p2');
+    const p3 = document.querySelector('.js-p3');
+
+    const subscribeP1 = document.querySelector('.js-subscribe-p1');
+    const subscribeP2 = document.querySelector('.js-subscribe-p2');
+    const subscribeP3 = document.querySelector('.js-subscribe-p3');
+
+    const unsubscribeP1 = document.querySelector('.js-unsubscribe-p1');
+    const unsubscribeP2 = document.querySelector('.js-unsubscribe-p2');
+    const unsubscribeP3 = document.querySelector('.js-unsubscribe-p3');
+
+    const updateP1 = text => p1.textContent = text;
+    const updateP2 = text => p2.textContent = text;
+    const updateP3 = text => p3.textContent = text;
+
+    const headingsObserver = new Observable();
+
+    headingsObserver.subscribe(updateP1);
+    headingsObserver.subscribe(updateP2);
+    headingsObserver.subscribe(updateP3);
+
+
+    //STUDY POINT2 - DOM에 addEventListener 등록
+    //STUDY POINT3 - headingsObserver.subscribe(), headingsObserver.unsubscribe()
+    subscribeP1.addEventListener('click', ()=>headingsObserver.subscribe(updateP1));
+    unsubscribeP1.addEventListener('click', ()=>headingsObserver.unsubscribe(updateP1));
+    subscribeP2.addEventListener('click', ()=>headingsObserver.subscribe(updateP2));
+    unsubscribeP2.addEventListener('click', ()=>headingsObserver.unsubscribe(updateP2));
+    subscribeP3.addEventListener('click', ()=>headingsObserver.subscribe(updateP3));
+    unsubscribeP3.addEventListener('click', ()=>headingsObserver.unsubscribe(updateP3));
+
+    input.addEventListener('keyup', e=> {
+        headingsObserver.notify(e.target.value);
+    })
+
+    var a = '';
+    input.addEventListener('mouseover', e=> {
+        console.log("### mouseover: ", a+="1");
+    })
+</script>
+</html>

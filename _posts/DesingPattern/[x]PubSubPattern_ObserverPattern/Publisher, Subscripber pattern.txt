@@ -1,0 +1,46 @@
+﻿### 
+URL 
+: 
+https://adhrinae.github.io/posts/why-every-beginner-front-end-developer-should-know-publish-subscribe-pattern-kr?fbclid=IwAR1BmoJfvTmF_Orba0cTbzqIcnODfpWtnJ-TP1mTlOv2K3v5LmyrTRMoZr8
+# Publisher/Subscriber(Pub-sub) 패턴
+기술, 방법론
+
+# 앱 
+* 선형적인 동작으로 거의 일어나지 않는다
+* 비동동적인 동작에 적절하게 응답
+
+
+
+일급객체
+
+* UI를 업데이트하는 함수를 정의하고 완전히 다른 부분으로 전달한 뒤에 호출되도록 만들 수 있는겁...니다? 
+::: 이게 observer pattern 설명하려고 하는거같은데..
+
+- 수신자(subscripter), 발행자(publisher) => 거의 모든 고급 비동기 처리 방식의 기본개념
+=> pub, sub pattern
+
+* 
+pub, sub pattern
+element.addEventListener(action, callback);
+promise - 특정 관점에서 바라보면 단순히 우리가 미뤄둔 어떠한 액션이 완료되는 것을 구독할 수 있게 하고, 
+데이터가 준비되면 발행하는것 
+
+
+* 어떠한 비동기 처리 방법을 사용하든지, 언제나 같은 패턴의 변종일 뿐!
+무언가는 구독하고, 무언가는 발행을 하는것!
+
+* 발행자ㅗ아 구독자로 모든것을 동기화하도록 노력해보자!!!!!!!!!
+
+
+# 다르지 못한것 
+* 구독해지방법(unsubscribe)
+* 다양한 주제를 구독하는방법(multi-topic)
+  - addEventListener로 다른 이벤트에 구독을 수행하는 것처럼)
+* 확장된 아이디어: 이벤트 버스 등
+* pub-sub 패턴을 구현한 몇가지 자바스크립트 lib 
+- mroderick/PubSubJS
+- sahadar/pubsub.js
+- shystruck/publisch-subcribe-js
+
+
+
