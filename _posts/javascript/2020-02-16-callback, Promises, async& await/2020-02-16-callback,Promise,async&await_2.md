@@ -60,10 +60,10 @@ keywords:
     
     ```js
     var promise = new Promise(function(resolve, reject) {
-    resolve("done");
+      resolve("done");
 
-    reject(new Error("…")); // 무시됨
-    setTimeout(() => resolve("…")); // 무시됨
+      reject(new Error("…")); // 무시됨
+      setTimeout(() => resolve("…")); // 무시됨
     });
     ```
 
