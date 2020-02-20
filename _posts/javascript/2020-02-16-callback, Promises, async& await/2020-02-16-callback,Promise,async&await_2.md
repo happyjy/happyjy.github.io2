@@ -57,6 +57,7 @@ keywords:
 * resolve/reject 함수 호출 규칙
     - excutor에 의해서 끝난일은 resolve, reject중 첫번째로 오는 것만 수행됩니다.
     - 나머지는 무시
+    
     ```js
     var promise = new Promise(function(resolve, reject) {
     resolve("done");
