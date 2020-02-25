@@ -1,0 +1,41 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        //문제 배열의 숫자들을 숫자별로 내림차순으로 정렬한다. 
+        //STEP1: 배열의 숫자형을 문자형으로 변환
+        //STEP2: 문자형변환후 배열 요소를 자리를 바꿔가며 숫자 크기를 비교(문자열x)
+
+        /*
+            map에서 문자열 암시적 변환을 위해서 + ''
+            sort에서 숫자형 암시적 변환을 위해서 *1
+        */
+        var a = [3, 30, 34, 5, 9];
+        var b = [6, 10, 2];
+
+        function solution(numbers) {
+            // var answer = numbers.map(v => v + '')
+            //     .sort((a, b) => {
+            //         // console.log({a,b})
+            //         console.log({a: b+a,b: a+b})
+            //         console.log((b + a)* 1 - (a + b)*1)
+            //         console.log("==========")
+            //         return (b+a)*1 - (a+b)*1
+            //     })
+            //     .join('');
+            var answer = numbers.map(v => v + '')
+                .sort((a, b) => (b + a)* 1 - (a + b)*1)
+                .join('');
+
+            return answer[0] === '0' ? '0' : answer
+        }
+
+        console.log("### solution: ", solution(a));
+        console.log("### solution: ", solution(b));
+    </script>
+</body>
+
+</html>

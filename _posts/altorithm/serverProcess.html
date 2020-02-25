@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      # 문제 조건
+        * 서버는 최대 5개 요청을 처리 할 수 있다. 
+        * topEl: 각 요소의 숫자 이하 중요도를 처리 할 수 있다. 
+        * processTarget: 서버가 처리할 대상
+    */
+
+    /*
+      # STRATEGY
+        * STRATEGY 0. iterator STRATEGY 2, 2.1 till topEl ARRAY
+
+        * STRATEGY 1.0 filter: procesTarget array is filtered by low number of each topEl array element number  
+        * STRATEGY 1.1 slice: server can process reqeust number (5)
+
+        * STRATEGY 2.0 delete processTarget array elements 
+                    from ARRAY element of STRATEGY 1.1(variable: filteredTS)
+                    ( [!] NOT ACCEPT dulicated delete => POINT3 )
+        * STRATEGY 2.1 process during STRATEGY 
+                      count processed timstamp
+    */
+
+    var processTarget = [3,3,4,9,11,15,28,30];
+    // var processTarget = [3,3,3,3,3,3,3,4,9,11,15,28,30]; // 3*7
+    var topEl = [0,5,5,15];
+    
+    
+    var originProcessTargetArray = processTarget.slice(0);
+    //전략 1/ 전략 1.1
+    var filteredTS = [];
+    var processedNumber = 0;
+    topEl.forEach( v => {
+      //filter
+      filteredTS = processTarget.filter( v2 => v2 < v ).sort((a, b) => b-a).slice(0, 5);
+      //count process number
+      processedNumber += filteredTS.length;
+      
+      //### filteredTS요소를 processTarget에서 제거 start ###
+      //delete target processed from processTarget 
+      //processTarget - filteredTS;
+
+      // * 설명 
+      //  1. CODE0 작성 -> issue1 발생
+      //  2. CODE1 작성 -> issue2 발생
+      //  3. CODE2 작성
+      // * todo
+      //  1.배열에서 요소를 제거 하는 방법들을 정리해놓으면 좋을 것 같다.
+      //    - slice, delete vs splice, filter, reduce/ [...arr, item], sort 
+      //      : https://stackoverflow.com/questions/19957348/javascript-arrays-remove-all-elements-contained-in-another-array
+      //      : https://flaviocopes.com/how-to-remove-item-from-array/
+      //      : https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
+      //      : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+      //      : https://www.hostingadvice.com/how-to/javascript-remove-element-array/
+      //      : https://stackoverflow.com/questions/500606/deleting-array-elements-in-javascript-delete-vs-splice
+      //    - if문에서 return의미 3중 for문에서 3rd for문에서 return문이 있으면 첫번째 for문으로 돌아가더라 
+
+      //  2. for문 처리중 처리되는 배열 요소가 달라지면 어떻게 되는가? 
+      //    * 일반 for문에서는 수정된 arr로 동작한다. 
+      //    * forEach에서는 어떻게 되는지 확인해봐야 한다. 아래 코드 참고 
+      /*
+        myArray = myArray.filter( function( el ) {
+          if(toRemove.indexOf (el) > 0){
+              myArray.filter( v => {
+                  //myArray가 두번 쓰이는데 여기서 myArray가 변동되면 밖에 있는 Array 요소도 변동 되는가?
+                  return true
+              })
+              
+          }  
+          return toRemove.indexOf( el ) < 0;
+        });
+      */ 
+
+      // CODE0
+      // processTarget = processTarget.filter( ( el ) => !filteredTS.includes( el ) );
+      //# 중복 문제 해결 x - issue1문제를 해결해야함.
+      //# issue1
+        //* filter로처리하면 같은 중복 숫자 요소 제거됨.
+        // eg) processTarget = [1,1,2,3,4,5], filteredTs = [1,2,3]
+        // filteredTS요소를 processTarget에서 중복 숫자 상관없이 제거하면 [4,5] 
+        // (1하나만 없애야 하는데 모두 없앰)
+
+
+
+      //# CODE2
+      //  * [!]주의해야할 것
+      //      주의1. filteredTS요소 2를 processTarget에서 제거해야 할때 processTarget에 2가 여러개 있어도 1개만 제거 해야 한다.
+      //        => 이것때문에 checkDupl 변수가 탄생
+      var afterDelProcessTargetArray = [];
+      for (var i=0; i < filteredTS.length; i++){
+        var checkDupl = false;
+        for (var j=0; j < processTarget.length; j++){
+          if(!checkDupl && filteredTS[i] === processTarget[j]){
+            processTarget.splice(j,1);
+            afterDelProcessTargetArray = processTarget.slice(0);
+            //# 아래 console에서 topEl요소별로 processTarget값이 나오는것이 아니라 
+            // topEl요소 배열이 모든 process처리 후의 값이 찍히게 되서 
+            // "slice로 shallow clone"을 이용
+            
+            j--;  //# 위단계에서 splice로 삭제 했기 때문에 array 요소가 하나 줄어 들어 줄어든 요소 순서부터 시작하기 위해서 감소 연산자를 사용했다.(for동작에서 j++가 동작하기 때문에 )
+                  //eg) 배열을 순회하는 j가 2번째 요소를 제거하면 배열 2번째 요소 뒤에 있는 요소들이 앞으로 당겨진다. == 3번째 요소가 2번재요소가 된다. 
+                  //    이렇게 되면 j는 순회를 2번째 요소부터 해줘야 한다.
+            checkDupl = !checkDupl; //CODE2가 탄생한 이유! -> 주의1 참고 
+          }
+        }
+      }
+
+      //# CODE1: 
+      // var delCount = 0;
+      // for (var i=0; i < processTarget.length; i++){
+      //   var checkDupl = false;
+      //   if(delCount < 6){ //server가 처리할 수 있는 개수 5개 
+      //     for (var j=0; j < filteredTS.length; j++){
+      //       if(!checkDupl && processTarget[i] === filteredTS[j]){
+      //         processTarget.splice(i,1);
+      //         i--;
+      //         delCount++;
+      //         //timstamp는 1st for문에 해당하는 요소 이기 때문에 변하게 되면 순서를 신경 써야한다.         
+      //         //# for문의 순서도 확인해야한다.
+
+      //         checkDupl = !checkDupl;
+      //         // return true; // 이 코드에 의해서 for문을 종료하고 forEach로 돌아간다.
+      //       }
+      //     }
+      //   }
+      // }
+
+      //# issue2
+      //  * CODE1에서 filterTS, processTarget가 바뀌어 있어서 처리하려고 조건을 추가하기보다는 
+      //    for문 위치를 바꿔 생각해서 CODE2처럼
+      debugger;
+      //### filteredTS요소를 processTarget에서 제거 end ###
+
+      //# [?]processTarget 값이 topEl을 다 처리한후의 값이 계속해서 찍힌다.
+      //  * deep clone과 관련되서 확인해야할 듯 
+      console.log({originProcessTargetArray, afterDelProcessTargetArray, filteredTS, topEl: v, processedNumber});
+
+    });
+
+
+  
+  </script>
+  
+</body>
+</html>

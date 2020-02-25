@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+        ###문제 설명
+            두 개의 단어 begin, target과 단어의 집합 words가 있습니다.
+            아래와 같은 규칙을 이용하여 begin에서 target으로 변환하는 가장 짧은 변환 과정을 찾으려고 합니다.
+            1. 한 번에 한 개의 알파벳만 바꿀 수 있습니다.
+            2. words에 있는 단어로만 변환할 수 있습니다.
+            예를 들어 begin이 hit, target가 cog, words가 [hot,dot,dog,lot,log,cog]라면 hit -> hot -> dot -> dog -> cog와 같이 4단계를 거쳐 변환할 수 있습니다.
+            두 개의 단어 begin, target과 단어의 집합 words가 매개변수로 주어질 때,
+            최소 몇 단계의 과정을 거쳐 begin을 target으로 변환할 수 있는지 return 하도록 solution 함수를 작성해주세요.
+        ###제한사항
+            각 단어는 알파벳 소문자로만 이루어져 있습니다.
+            각 단어의 길이는 3 이상 10 이하이며 모든 단어의 길이는 같습니다.
+            words에는 3개 이상 50개 이하의 단어가 있으며 중복되는 단어는 없습니다.
+            begin과 target은 같지 않습니다.
+            변환할 수 없는 경우에는 0를 return 합니다.
+        ###입출력 예
+            begin	  target	   words	                          return
+            hit	      cog	     [hot, dot, dog, lot, log, cog]	  4
+            hit	      cog	     [hot, dot, dog, lot, log]	      0
+        ###입출력 예 설명
+            예제 #1
+            문제에 나온 예와 같습니다.
+            예제 #2
+            target인 cog는 words 안에 없기 때문에 변환할 수 없습니다.
+    */
+    function solution(begin, target, words) {
+      let answer = Infinity;
+      const visited = [];
+      let count = 0;
+
+      recursive(begin, 0);
+      function recursive(current, count) {
+        if (current === target) {
+          answer = Math.min(count, answer);
+          return;
+        }
+        console.log("recursive---------------")
+        console.log({
+          current,
+          count
+        });
+        words.map((word, index) => {
+          let j = word.length - 1;
+          let diff = 0;
+          while (j !== -1) {
+            if (current[j] !== word[j]) diff++;
+            j--;
+          }
+          console.log({
+            word,
+            index,
+            diff,
+            visited // [분석필요]여기 visited는 아무것도 안찍히는데 아래 visited는 찍힌다. 왜지? 
+          });
+          
+          // currend word, 주어진 words중 하나와 글자를 비교
+          if (diff === 1 && !visited[word]) {
+            debugger;   
+            visited[word] = 1; //true;, *** 이미 if문 조건에 만족해서 사용한 단어 확인하기 위함, visited -> clousre영역
+            console.log(visited)
+            recursive(word, count + 1); //recursive current word 교체
+            visited[word] = 0; //false;
+          }
+        });
+      }
+      return answer === Infinity ? 0 : answer;
+    }
+    console.log("ANSWER: ", solution("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]));
+    
+  </script>
+
+
+<script>
+    //**************
+    //****분석용****
+    //**************
+
+    function solutionAnalysis(begin, target, words) {
+        let answer = Infinity;
+        const visited = [];
+        let count = 0;
+
+        //STEP1 
+        recursive(begin, 0);
+
+        //STEP2 재귀호출 function
+        function recursive(current, count) {
+            
+            //STEP3 current, target word가 같을때 
+            if (current === target) {
+                answer = Math.min(count, answer);   //answer를 clousre 범위에 저장하며 recursive를 순회하면서도 answer vailable은 공유가 됨
+                // 그래서 최소 값을 이 로직으로 구할 수 있다.
+                console.log("--- current === target: ", {current, target, count, answer})
+                return;
+            }
+
+            console.log("---------------recursive---------------");
+            // console.log({current, count});
+
+            //STEP4 words 순회 하며 current 단어와 한글자 다른 word 찾기 
+            words.forEach((word, index) => {
+                let j = word.length - 1;
+                let diff = 0;
+                
+                //STEP5 current, words안에 있는 단어 비교
+                //(다른 단어가 몇개인지 === diff-STEP6에서 사용-)
+                while (j !== -1) {
+                    if (current[j] !== word[j]) diff++;
+                    j--;
+                }
+                // [분석필요]여기 visited는 아무것도 안찍히는데 아래 visited는 찍힌다. 왜지? 
+                // console.log({ word, index, diff, visited });
+                /*
+                  # study!
+                  # visited는 클로저다!(recursive function에서 target, words도 클로저)
+                  그렇기 때문에 이 function의 제일 마지막 stack에서 visited[word] = 0; 이 코드에 의해서 
+                  결국 visited는 0으로 할당이 되어서 console에도 0으로 나오게 된다.
+                  그런데 아래 if문 안에 있는 console은 아래와 같이 표현이 된다. 신기하다 
+                    '''
+                        [hot: 1, dot: 0, dog: 1, log: 1, lot: 1, …]
+                            cog: 0
+                            dog: 0
+                            dot: 0
+                            hot: 0
+                            log: 0
+                            lot: 0
+                  '''
+                */
+                //STEP6 currend word, 주어진 words중 하나와 글자를 비교
+                //diff 개수, visited Array(words Array 중에서 확인한 단어 보관 Array)
+                if (diff === 1 && !visited[word]) {
+                    // debugger;
+                    //STEP7 ***이미 if문 조건에 만족해서 사용한 단어 확인하기 위함, visited -> clousre영역
+                    visited[word] = 1; //true;
+
+                    //STEP8 재귀 호출로 문자 하나가 다른 단어를 찾았으니 
+                    //다음 문자하나가 다른 문자 찾기
+                    console.log("### stack check: ", {word});
+                    console.log("### stack check: ", count+1);
+                    console.log("### stack check: ", visited);
+                    recursive(word, count + 1); //recursive current word 교체
+
+                    //STEP7
+                    visited[word] = 0; //false;
+                }
+            });
+        }
+
+/* 
+
+        STEP6 currend word, 주어진 words중 하나와 글자를 비교
+        
+        STEP7 해주는 이유        
+        1. words에 배열 요소 중 recursive function으로 방문/확인한 것을 
+        풀어줘야 words에 배열 요소 중 다른 단어에서 같은 단어를 반복 확인 하지 않기 위해서 있는 로직
+        
+        STEP8 재귀 호출로 문자 하나가 다른 단어를 찾았으니 
+ */
+        return answer === Infinity ? 0 : answer;
+    }
+    console.log("ANSWER: ", solutionAnalysis("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]));
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+
+      //1. Using set object
+      const firstNames = ['yoon', 'yoon', 'kim', 'lee', 'park', 'hwang', 'yoon'];
+      let delDupl = [...new Set(firstNames)];
+      console.log(delDupl);
+
+      //2. Using filter()
+      const firstNames1 = ['yoon', 'yoon', 'kim', 'lee', 'park', 'hwang', 'yoon'];
+      let x = (firstNames1) => firstNames1.filter((v,i)=> firstNames1.indexOf(v) === i)
+      console.log(x(firstNames1));
+      
+      //3. forEach()
+      //array 각 인덱스를 돌면서 
+      const firstNames2 = ['yoon', 'yoon', 'kim', 'lee', 'park', 'hwang', 'yoon'];
+
+      function removeDupls(firstNames2){
+        let unique = {};
+        firstNames2.forEach(function(v){
+          if(!unique[v]){
+            unique[v] = true;
+          }
+        });
+        return Object.keys(unique);
+      }
+      console.log(removeDupls(firstNames2));
+
+      //추가: forEach 사용 배열에 있는 obj 형태를 obj 형태로 바꿔서 값의 유무 판단/ 사용
+      const firstNames3 = [
+        {class:1, name:'yoon'},
+        {class:2, name:'kim'},
+        {class:3, name:'park'},
+        {class:4, name:'hwang'}
+      ];
+
+      function removeDupls1(firstNames3){
+        let firstNames3Obj = {};
+        firstNames3.forEach(v => {
+          firstNames3Obj[v.name] = v; //STUDY POINT 
+        });
+        return firstNames3Obj;
+      }
+
+      let firstNames3Obj = removeDupls1(firstNames3);
+      console.log("yoon info: ", firstNames3Obj['yoon']);
+
+
+
+
+    </script>
+
+    <div>
+    </div>
+  </body>
+</html>

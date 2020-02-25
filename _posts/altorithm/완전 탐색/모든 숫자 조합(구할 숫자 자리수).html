@@ -1,0 +1,59 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+
+      /*
+        # 재귀 호출에 대한 이해 필요
+
+        * 모든 숫자 조함을 makeAllAssemble function m===n에서 print할 수 있지만
+          makeAllAssemble function return value로 할 수 없다.
+
+        * 아래 로직 설명
+        - 확실히 고른 문자들과 고르지 않은 문자들을 구별할 정수(m)를 지정해줍니다.
+          (m)인덱스 전의 문자는 바꾸지 않습니다.
+          문자를 추가한뒤 재귀함수를 콜할 때 이 정수(m)를 +1 해줍니다.
+
+          각 문자를 바꾸려면 substring(str, m, n) 사이에서 m 포지션의 문자를 m 부터 n 까지의 문자와 바꾸어 주며 재귀함수를 콜해줍니다.
+          이때 중요한건 재귀함수가 끝나면 바꾸었던 문자를 되돌려놓아야합니다.
+          그래야 재귀함수 안의 함수가 끝났을때 이어서 다른 재귀함수를 제대로된 문자열로 콜 할수 있습니다.
+      */
+      function makeAllAssemble(str, m, n) {
+        let result = [];
+        if (m === n) {
+          //모든 문자열 조합 재귀호출 확인용 log
+          // console.log({m, n})
+          console.log("### l === n", str);
+          result = [str];
+        } else {
+          for (var i = m; i <= n; i++) {
+            //모든 문자열 조합 재귀호출 확인용 log 
+            // console.log({m, n, i})
+            str = swap(str, m, i); 
+            result = [...result, ...makeAllAssemble(str, m+1, n)];
+            str = swap(str, m, i);
+            // console.log("------------");
+          }
+        }
+
+        return result;
+      }
+
+      function swap(str, i, j){
+        var temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+
+        return str;
+      }
+
+      var numbersArr = "123".toString().split('');
+      makeAllAssemble(numbersArr, 0, numbersArr.length-1);
+     
+    </script>
+
+    <div>
+    </div>
+  </body>
+</html>

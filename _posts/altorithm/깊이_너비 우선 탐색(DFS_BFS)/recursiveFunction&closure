@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+    <script>
+        /*
+            03.단어변환 문제에서 사용한 recursive funciton, closure 개념 구현 
+        */
+        function test(arr){
+            let count = 0;
+            let visited = [];   //arr을 순회하면서 순회한 요소는 visited에 저장
+
+            debugger;
+            test1();
+            function test1(){
+                let localValueTest1 = 0;
+                debugger;
+                //여기서 arr, count, visited, test1은 closure!
+                arr.forEach(function(v){
+                    debugger;
+                    //여기서 localValueTest1은 closure!
+                    if(!visited[v]){
+                        visited[v] = 1;
+                        console.log(++localValueTest1, ++count);
+                        test1();
+                        visited[v] = 0;
+                    }
+                })
+            }
+        }
+
+        test([1,2,3]) // 배열 각 요소 마다 5번씩 log 있는 부분을 순회한다. 총 15번
+        test([1,2])   // 배열 각 요소 마다 2번씩 log 있는 부분을 순회한다. 총 4번 
+    </script>
+</body>
+</html>
