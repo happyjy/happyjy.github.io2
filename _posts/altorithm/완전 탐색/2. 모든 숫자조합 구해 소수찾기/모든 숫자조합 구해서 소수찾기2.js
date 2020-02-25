@@ -14,12 +14,13 @@ const isPrime = (n) => {
 const makeAllNumber = (number = null, ...numbers) => {
   // const makeAllNumber = function(number = null, numbers){
   // console.log(arguments);
+  debugger;
   if (number === null) return [];
   if (numbers.length === 0) return [number];
   
   let arr = [number]; // arr : 조합된 숫자
   // console.log("### arr : ", arr);
-  debugger
+  debugger;
   for (const idx in numbers){
     // * rest : numbers에 idx 요소를 제외한 나머지 index 요소
     const rest = numbers.filter((v, i) => i !== parseInt(idx, 10));
@@ -40,23 +41,21 @@ const makeAllNumber = (number = null, ...numbers) => {
 }
 
 function solutions(numbers) {
-  // debugger;
-  numbers = numbers.split('');
-  //#STUDY1
-  
-  debugger;
-  let makedNumbers = makeAllNumber("", ...numbers);
-  console.log(makedNumbers);
-  // let makedNumbers = makeAllNumber("", ...numbers).filter(v => v !== '')
-                                                  // .map(v => parseInt(v));
-  makedNumbers = [...new Set(makedNumbers)];
+    // debugger;
+    numbers = numbers.split('');
+    //#STUDY1
+    debugger;
+    // let makedNumbers = makeAllNumber("", ...numbers);
+    let makedNumbers = makeAllNumber("", ...numbers).filter(v => v !== '')
+                                            .map(v => parseInt(v));
+    makedNumbers = [...new Set(makedNumbers)];    //중복숫자제거
+    console.log("#모든숫자: ", makedNumbers);
 
-  return makedNumbers.map(isPrime).filter(v => v === true).length;
-
+    return makedNumbers.map(isPrime).filter(v => v === true).length;
 }
 
+console.log(solutions("123"))
 
-solutions("123")
 /*
   # STUDY1
   # SUTDY2
