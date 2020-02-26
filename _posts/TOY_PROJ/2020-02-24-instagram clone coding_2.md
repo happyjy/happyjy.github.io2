@@ -12,7 +12,7 @@ keywords:
 Instagram clone with Express + Prisma + React
 
 # github
-[Front End(React)github 주소](https://github.com/happyjy/prismagram-frontend)
+[Front End(React)github 주소](https://github.com/happyjy/prismagram-frontend)  
 [Back End(Express, Prisma)github 주소](https://github.com/happyjy/prismagram)
 
 # 정리 노트 
