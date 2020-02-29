@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[DEV.HAPPY JYOON | Feed]]></title><description><![CDATA[Dev.jYoon Blog]]></description><link>https://happyjy.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 29 Feb 2020 14:57:13 GMT</lastBuildDate><item><title><![CDATA[객체지향 자바스크립트 2회차(MVVM 구현)]]></title><description><![CDATA[목표 객체지향을 가지고 이것 저것 만들어 볼 예정인데 그중 을 을 만들어 본다. 그리고 다음시간에는 이것을 가지고 서비스를 만들어 볼 예정입니다.  MVVM Model, View, ViewModel의 약자  MS의 pwf…]]></description><link>https://happyjy.github.io/객체지향 자바스크립트_2/</link><guid isPermaLink="false">https://happyjy.github.io/객체지향 자바스크립트_2/</guid><pubDate>Sat, 29 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;목표&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AA%A9%ED%91%9C&quot; aria-label=&quot;목표 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;목표&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[DEV.HAPPY JYOON | Feed]]></title><description><![CDATA[Dev.jYoon Blog]]></description><link>https://happyjy.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 29 Feb 2020 15:09:16 GMT</lastBuildDate><item><title><![CDATA[객체지향 자바스크립트 2회차(MVVM 구현)]]></title><description><![CDATA[목표 객체지향을 가지고 이것 저것 만들어 볼 예정인데 그중 을 을 만들어 본다. 그리고 다음시간에는 이것을 가지고 서비스를 만들어 볼 예정입니다.  MVVM Model, View, ViewModel의 약자  MS의 pwf…]]></description><link>https://happyjy.github.io/객체지향 자바스크립트_2/</link><guid isPermaLink="false">https://happyjy.github.io/객체지향 자바스크립트_2/</guid><pubDate>Sat, 29 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;목표&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AA%A9%ED%91%9C&quot; aria-label=&quot;목표 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;목표&lt;/h1&gt;
 &lt;p&gt;객체지향을 가지고 이것 저것 만들어 볼 예정인데 그중 &lt;code class=&quot;language-text&quot;&gt;MVVM&lt;/code&gt;을 을 만들어 본다. 그리고 다음시간에는 이것을 가지고 서비스를 만들어 볼 예정입니다. &lt;/p&gt;
 &lt;h1 id=&quot;mvvm&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#mvvm&quot; aria-label=&quot;mvvm permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;MVVM&lt;/h1&gt;
 &lt;ul&gt;
@@ -12,7 +12,37 @@
 &lt;li&gt;두가지가 있다. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;mvc-첫번째&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#mvc-%EC%B2%AB%EB%B2%88%EC%A7%B8&quot; aria-label=&quot;mvc 첫번째 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;MVC 첫번째&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;MVC%EC%B2%AB%EB%B2%88%EC%A7%B8.png&quot;&gt; &lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/08bfd254169d543f7a9ecc393021a0e2/f431c/MVC1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 54.60526315789473%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABqUlEQVQoz21S7a6UMBTc1/JCT1v6AZTCAldz1Rtj1MT3f4NxWmCzUX9Mzsm0nc75uBmjIdrAdRo/7qri96bwngVfiW+zVO5TErylgyv4vij8WhV+Er07NIrWzRgmWsOIIDnBEgT7IJiCRuAnmXHteeZ15eaoMVBg5r05KKxRwWqBfghSTHcO4j1aF9Ayb+X4sVwqUckRa16jRms7NLzfOA9xDsWYJn/THQ+WO1SaiITmvkJ4WZ+iz8JHTp6PyxuZJkh5s24oOqYK0lkzDMgxIo8JwnydHLYoLPUo92/syaKbU73/cVmqkerycvhCV3rOmF4zmm2vv3XsR2cNof+BIf+yrEh7hl0yPpxvqmAdCEsQY9F7OogtgpWzb7qWqK9SS+/IO4ruA4cUyZsDdRaMt6uZljFNGV8+v+F9H7Gw5OAdQgjwbEuJIXhO/dgCT1HFPldDp9jh8BQsMcaAnDM6HzByTV7Zy2Ecse87ZvZqS66u0TWgsiYPh5fgJVZL4i4qpZhL/d1TOHJYfd/XWFxWV+YUO0XNJfhc8jP5WHbGrgzohLX2wf9PrOAPZl2I6n12HGAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;MVC1&quot;
+        title=&quot;MVC1&quot;
+        src=&quot;/static/08bfd254169d543f7a9ecc393021a0e2/799d3/MVC1.png&quot;
+        srcset=&quot;/static/08bfd254169d543f7a9ecc393021a0e2/00d96/MVC1.png 148w,
+/static/08bfd254169d543f7a9ecc393021a0e2/0b23c/MVC1.png 295w,
+/static/08bfd254169d543f7a9ecc393021a0e2/799d3/MVC1.png 590w,
+/static/08bfd254169d543f7a9ecc393021a0e2/2a3d6/MVC1.png 885w,
+/static/08bfd254169d543f7a9ecc393021a0e2/f431c/MVC1.png 912w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt; &lt;/p&gt;
 &lt;h3 id=&quot;back-end에서의-mvc&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#back-end%EC%97%90%EC%84%9C%EC%9D%98-mvc&quot; aria-label=&quot;back end에서의 mvc permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Back-end에서의 MVC&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;model을 Controller가 가져와 View가 소비할 수 있는 데이터를 가공해서 View한테 준다. &lt;/li&gt;
@@ -62,7 +92,36 @@
 &lt;li&gt;클라이언트 쪽에서는 MBC 패턴을 잘 사용하지 않는데 MVC 패턴을 사용한 백본은 망했다&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;mvc-두번째&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#mvc-%EB%91%90%EB%B2%88%EC%A7%B8&quot; aria-label=&quot;mvc 두번째 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;MVC 두번째&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;MVC%EB%91%90%EB%B2%88%EC%A7%B8.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3acf0103173e613aaaeae97c65c69aac/b53fd/MVC2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 57.61124121779859%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAABYlAAAWJQFJUiTwAAABrklEQVQoz31SWZabMBDkXJmgFgK0AAbbiWNPJtv9L1HpapZxkvfyUVCSuqvXyonH2At+LTUeo8P3k8N9cPiUHb5ODl+UX/OK27C+vardray25JP6U8d7QUWSOzHnN8XPuTZ+imIBvqkT/0tcBckZ5LYJ/5gdSvckKMKD4KUWfCScR62gAfkOnve72u7kQK2gjniPKsaItm3R972BUf6HxtPZm23XdeYbY48QgolWIbQYhsEec+rRNN4iPovIVg7Bt6A2JUXknDFN05GQCTZNg3leELqIElvtj6APYmU9C5HzLrXsrSBHTWCYcL1eLbtDsNeSxxhwPzH1pCV5fNYJLmntCftWm7DHZZs2xXNKuI0BsWvQb20zQRoSQ6erkl4Qg9MB8Sy2GsyobDwr/6Bv+7n06qsV0p9i/NuU2b9Jy3593PF2Sbgkh0bLKDnhcQqWSdKMWBr385ze++lFDjHLkB8acjDLcrZe5lb3bNSFH0fMy4L5fME0ZDymxip47q9s7TgEd+KcGta1RbRJbtMvpWz/bHfrBvi/pv8uWu3p/oHtjo1m9gT5/ib+X6EdvwGlCK2DdGfLbgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;MVC2&quot;
+        title=&quot;MVC2&quot;
+        src=&quot;/static/3acf0103173e613aaaeae97c65c69aac/799d3/MVC2.png&quot;
+        srcset=&quot;/static/3acf0103173e613aaaeae97c65c69aac/00d96/MVC2.png 148w,
+/static/3acf0103173e613aaaeae97c65c69aac/0b23c/MVC2.png 295w,
+/static/3acf0103173e613aaaeae97c65c69aac/799d3/MVC2.png 590w,
+/static/3acf0103173e613aaaeae97c65c69aac/b53fd/MVC2.png 854w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;제왕적 MVC Model&lt;/li&gt;
 &lt;li&gt;
@@ -391,19 +450,35 @@ Binder는 변한 ViewModel을 가지고 sacan했던 view에 그린다.&lt;br&gt;
         loading=&quot;lazy&quot;
       /&gt;
   &lt;/a&gt;
-    &lt;/span&gt;
-- Scanner 존재의 역할
-1. Binder가 HTMLElement의 dataSet property를 Scan한다.
-2. Scanner로 부터 Binder를 알게 된다.
-3. 결국 Binder는 HTMLElement를 모르게 된다.
-- Scanner를 만드는 이유
-* &lt;strong&gt;우리는 객체마다 바뀌는 이유를 하나로 만들어야 한다. (SRP 원칙-Single Responsibility(단일책임))&lt;/strong&gt;
-* 원인에 따른 변화율이다
-* 코드를 바꾸는 이유가 같은가 다른가?
-- Binder는 ViewModel을 이용해서 view를 그릴때
-- Scanner는 HTMLElement를 해석(Scan)하는데 방법이 바뀔때
-* 그래서 Binder에서 Scaner를 빼내서 관리한다. &lt;/p&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Scanner 존재의 역할&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Binder가 HTMLElement의 dataSet property를 Scan한다.  &lt;/li&gt;
+&lt;li&gt;Scanner로 부터 Binder를 알게 된다.   &lt;/li&gt;
+&lt;li&gt;결국 Binder는 HTMLElement를 모르게 된다.   &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Scanner를 만드는 이유 &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;우리는 객체마다 바뀌는 이유를 하나로 만들어야 한다. (SRP 원칙-Single Responsibility(단일책임))&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;원인에 따른 변화율이다 &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;코드를 바꾸는 이유가 같은가 다른가? &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Binder는 ViewModel을 이용해서 view를 그릴때 &lt;/li&gt;
+&lt;li&gt;Scanner는 HTMLElement를 해석(Scan)하는데 방법이 바뀔때 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;그래서 Binder에서 Scaner를 빼내서 관리한다. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;BinderItem
 &lt;span
