@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="target" data-viewmodel="wrapper">
+        <h2 data-viewmodel="title"></h2>
+        <section data-viewmodel="contents"></section>
+    </section>
+    <script>
+        const type = (target, type) => { 
+            if(typeof type == "string"){
+                if(typeof target != type) throw `invaild type ${target} : ${type}`;
+            } else if(!(target instanceof type)) throw `invaild type ${target} : ${type}`;    
+            return target;
+        };
+
+
+        const ViewModel = class{
+            //POINT1
+            static #private = Symbol(); // Static private field
+            static get(data){
+                return new ViewModel(this.#private, data); 
+            }
+            //POINT2
+            styles = {}; attributes = {}; properties = {}; events = {}; 
+            constructor(checker, data){
+                //POINT1
+                if(checker != ViewModel.#private) throw "use ViewModel.get()!"; 
+                //POINT3
+                Object.entries(data).forEach(([k, v])=>{
+                    switch(k){
+                        case"styles": this.styles = v; break;
+                        case"attributes": this.attributes = v; break;
+                        case"properties":  this.properties = v; break;
+                        case"events": this.events = v; break;
+                        default: this[k] = v;
+                    }
+                });
+                Object.seal(this); 
+            }
+        };
+
+        const BinderItem = class{
+            el; viewmodel;
+            //POINT
+            constructor(el, viewmodel, _0=type(el, HTMLElement), _1=type(viewmodel, "string")){
+                this.el = el;
+                this.viewmodel = viewmodel;
+                Object.freeze(this);
+            } 
+        };
+
+        const Binder = class{
+            //POINT1
+            #items = new Set;
+            add (v, _ = type(v, BinderItem)) {this.#items.add(v);} 
+            //POINT2
+            render (viewmodel, _ = type(viewmodel, ViewModel)){
+                this.#items.forEach(item=>{
+                    const vm = type(viewmodel[item.viewmodel], ViewModel), 
+                    el = item.el; 
+                    Object.entries(vm.styles).forEach(([k, v])=>el.style[k] = v); 
+                    Object.entries(vm.attributes).forEach(([k, v])=>el.setAttribute
+                    (k, v)); 
+                    Object.entries(vm.properties).forEach(([k, v])=>el[k] = 
+                    v); 
+                    Object.entries(vm.events).forEach( ([k, v])=>el["on" + k] 
+                    = e =>v.call(el, e, viewmodel) );
+                }); 
+            }
+        };
+
+        const Scanner = class{
+            scan(el, _ = type(el, HTMLElement)){
+                //POINT1
+                const binder = new Binder; 
+                //POINT3
+                this.checkItem(binder, el);
+
+                //POINT2 - dom 순회
+                const stack = [el.firstElementChild];         
+                let target;
+                while(target = stack.pop()){
+                    //POINT3
+                    this.checkItem(binder, target);
+                    if(target.firstElementChild) stack.push(target.firstElementChild); 
+                    if(target.nextElementSibling) stack.push(target.nextElementSibling);
+                }
+                //POINT1
+                return binder;
+            }
+            //POINT3
+            checkItem(binder, el){
+                const vm = el.getAttribute("data-viewmodel"); 
+                if(vm) binder.add(new BinderItem(el, vm));
+            } 
+        };
+
+
+        const scanner = new Scanner();
+        const binder = scanner.scan(document.querySelector('#target'));
+
+        const getRandom = () => parseInt(Math.random() * 150) + 100
+        const viewmodel = ViewModel.get({
+            isStop: false,
+            //POINT1
+            changeContents () {
+                this.wrapper.styles.background = `rgb(${getRandom()},${getRandom()},${getRandom()})`;
+                this.contents.properties.innerHTML = Math.random().toString(16).replace('.', '');
+                // binder.render(viewmodel);
+            },
+            wrapper: ViewModel.get({
+                styles: { width: '50%', background: '#fff', cursor: 'pointer' },
+                events: { click(e, vm) { vm.isStop = true } }
+            }),
+            title: ViewModel.get({
+                properties: { innerHTML: 'Title' }
+            }),
+            contents: ViewModel.get({
+                properties: { innerHTML: 'Contents' }
+            })
+        })
+
+        const f = () => {
+            //POINT1
+            viewmodel.changeContents();
+            binder.render(viewmodel);
+            if (!viewmodel.isStop) requestAnimationFrame(f);
+        }
+
+        requestAnimationFrame(f);
+    </script>
+</body>
+</html>

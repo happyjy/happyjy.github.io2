@@ -1,17 +1,28 @@
 ---
-title: 코드스피츠-객체지향 1회(객체지향이란?)
+title: 객체지향 자바스크립트 1회차(객체지향이란? with design Pattern)
 date: 2020-02-23
 tags:   
   - 코드스피츠
   - 객제지향 자바스크립트
 keywords:
   - 객체지향
+  - design Pattern
+  - IOC
+  - DI
+  - SOLID
+  - SRP
+  - OCP
+  - Message
+  - 의존성
 ---
 
 # INTRO
-* 목표: 객체 지향을 자바스크립트로 해보자 
-* 객체지향 이론
-    - 오늘 배운 이론 남은 4개 강의에서 활용
+* 목표
+    - 객체 지향을 자바스크립트로 해보자.
+    - 디자인 패턴과 함께 알아보자.
+    - 오늘 배운 이론 남은 4개 강의에서 활용.
+        * SOLID(SRP, OCP, LSP, ISP, DIP)
+        * Message, 의존성, DI, IOC, 
 
 # Value Context, Identifier Context
 > value Context: 함수형 프로그래밍에서 사용  
@@ -57,7 +68,7 @@ console.log(JSON.stringify(a) === JSON.stringify(b));   //value context
 
 
 # Polymorphism
-> Polymorphism 대체가능성 + Polymorphism 내적일관성
+> Polymorphism 대체가능성 + Polymorphism 내적일관성  
 > 객체 지향 프로그래밍은 Polymorphism을 지원해야 한다.
 
 ## polymorphism of Prototype
