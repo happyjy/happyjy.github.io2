@@ -309,6 +309,7 @@ arr.toString();                         //1_2_3
 
 # 2-4 다중 프로토타입 체인
 * 새롭게 만드는 생성자 함수에 \_\_proto__를 연결해서 체인 관계를 만들수 있다.
+* Grade.prototype에 Array instance를 세팅으로 g1(Grade function의 instance)에서 push를 사용할 수 있게 된다.
 
 * Grade 생성자 함수와 인스턴스
     ```js
@@ -321,9 +322,13 @@ arr.toString();                         //1_2_3
         this.length = args.length;
     }
     var g = new Grade(100, 80);
+    g.push(1); //Uncaugh TypeError: g.push is not function
 
-    Grade.prototype = [];   //POINT
-
+    Grade.prototype = new Array();   //POINT
+    //Grade.prototype = [];   
+    //[].__proto__ === new Array().__proto__
+    //[] instanceof Array // true
+    
     var g1 = new Grade(10, 20);
     g1.push(1);
     console.log(g1);    //Grade(3) [10, 20, 1]
