@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[DEV.HAPPY JYOON | Feed]]></title><description><![CDATA[Dev.jYoon Blog]]></description><link>https://happyjy.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 29 Feb 2020 16:22:42 GMT</lastBuildDate><item><title><![CDATA[객체지향 자바스크립트 2회차(MVVM 구현)]]></title><description><![CDATA[목표 객체지향을 가지고 이것 저것 만들어 볼 예정인데 그중 을 을 만들어 본다. 그리고 다음시간에는 이것을 가지고 서비스를 만들어 볼 예정입니다.  MVVM Model, View, ViewModel의 약자  MS의 pwf…]]></description><link>https://happyjy.github.io/객체지향 자바스크립트_2/</link><guid isPermaLink="false">https://happyjy.github.io/객체지향 자바스크립트_2/</guid><pubDate>Sat, 29 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;목표&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AA%A9%ED%91%9C&quot; aria-label=&quot;목표 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;목표&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[DEV.HAPPY JYOON | Feed]]></title><description><![CDATA[Dev.jYoon Blog]]></description><link>https://happyjy.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 01 Mar 2020 02:40:48 GMT</lastBuildDate><item><title><![CDATA[객체지향 자바스크립트 ./2회차(MVVM 구현)]]></title><description><![CDATA[목표 객체지향을 가지고 이것 저것 만들어 볼 예정인데 그중 을 을 만들어 본다. 그리고 다음시간에는 이것을 가지고 서비스를 만들어 볼 예정입니다.  MVVM Model, View, ViewModel의 약자  MS의 pwf…]]></description><link>https://happyjy.github.io/객체지향 자바스크립트_2/</link><guid isPermaLink="false">https://happyjy.github.io/객체지향 자바스크립트_2/</guid><pubDate>Sat, 29 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;목표&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AA%A9%ED%91%9C&quot; aria-label=&quot;목표 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;목표&lt;/h1&gt;
 &lt;p&gt;객체지향을 가지고 이것 저것 만들어 볼 예정인데 그중 &lt;code class=&quot;language-text&quot;&gt;MVVM&lt;/code&gt;을 을 만들어 본다. 그리고 다음시간에는 이것을 가지고 서비스를 만들어 볼 예정입니다. &lt;/p&gt;
 &lt;h1 id=&quot;mvvm&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#mvvm&quot; aria-label=&quot;mvvm permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;MVVM&lt;/h1&gt;
 &lt;ul&gt;
@@ -45,7 +45,7 @@
     &lt;/span&gt; &lt;/p&gt;
 &lt;h3 id=&quot;back-end에서의-mvc&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#back-end%EC%97%90%EC%84%9C%EC%9D%98-mvc&quot; aria-label=&quot;back end에서의 mvc permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Back-end에서의 MVC&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;model을 Controller가 가져와 View가 소비할 수 있는 데이터를 가공해서 View한테 준다. &lt;/li&gt;
+&lt;li&gt;Model을 Controller가 가져와 View가 소비할 수 있는 데이터를 가공해서 View한테 준다. &lt;/li&gt;
 &lt;li&gt;Controller는 Model도 알고 있고 View도 알고 있다&lt;/li&gt;
 &lt;li&gt;Controller가 Model 의해서 받은 데이터를 적절히 가지고 가공해서 뒤로 넘겨 주면 주는 그 받은 데이터를 가지고 화면을 그립니다. &lt;/li&gt;
 &lt;/ul&gt;
@@ -59,7 +59,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;그런데 View가 Model과 의존성이 있는데 문제가 있다.!? &lt;/p&gt;
+&lt;p&gt;그런데 View가 Model과 의존성이 있는데 문제가 있다?! &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Model과 View가 바뀌는 원인은 다름&lt;/p&gt;
@@ -75,21 +75,25 @@
 &lt;h3 id=&quot;결론&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B2%B0%EB%A1%A0&quot; aria-label=&quot;결론 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;결론&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;MVC는 주로 백엔드에서 서버에서 사용을 하게 됩니다&lt;/p&gt;
+&lt;p&gt;MVC는 주로 백엔드에서 서버에서 사용&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;대표적으로 스프링&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;이유&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Model을 Controller에 넘기고 데이터를 가공해서 주는 View를 만들고 response로 던져버리면 끝난다.&lt;/strong&gt; 그 다음에 View가 Model을 참고해서 변경시키는 그런 과정이 없기 때문이다.&lt;/li&gt;
-&lt;li&gt;서버에서는 View와 Model을 연결짓는 의존성이 없다. Model -&gt; Controller -&gt; View 이렇게 단방향으로 처리하기 때문에 서버에서는 MVC 패턴이 괜찮다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;서버에서는 View와 Model을 연결짓는 의존성이 없다&lt;/strong&gt;. Model -&gt; Controller -&gt; View 이렇게 단방향으로 처리하기 때문에 서버에서는 MVC 패턴이 괜찮다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;클라이언트에서는 View에서 인터랙션이 일어나면 Model을 바꾸는 경우가 있어 너무 밀접한 관계를 가지고 있어 이것이 문제다
-이것이 mvc 패턴을 사용하기 어려운 원인이다. &lt;/li&gt;
-&lt;li&gt;클라이언트 쪽에서는 MBC 패턴을 잘 사용하지 않는데 MVC 패턴을 사용한 백본은 망했다&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클라이언트에서는 MVC 패턴을 사용하기 어렵다 &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;View에서 인터랙션이 일어나면 Model을 바꾸는 경우가 있어 너무 밀접한 관계를 가지고 있어 이것이 문제다.&lt;/strong&gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;클라이언트 쪽에서는 MVC 패턴을 잘 사용하지 않는데 MVC 패턴을 사용한 백본은 망했다&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;mvc-두번째&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#mvc-%EB%91%90%EB%B2%88%EC%A7%B8&quot; aria-label=&quot;mvc 두번째 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;MVC 두번째&lt;/h2&gt;
 &lt;p&gt;&lt;span
@@ -125,7 +129,7 @@
 &lt;ul&gt;
 &lt;li&gt;제왕적 MVC Model&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이 구조에서는 View가 Model의 의존구조가 없어졌지만, Controller의 의존이 더 강해졌다. &lt;/p&gt;
+&lt;p&gt;이 구조에서는 View가 Model의 의존구조가 없어졌지만, &lt;strong&gt;Controller의 의존이 더 강해졌다.&lt;/strong&gt; &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;View, Model의 변화를 모두 처리해줘야 한다. -&gt; Container의 유지 보수가 너무 힘들다 &lt;/li&gt;
 &lt;/ul&gt;
@@ -174,31 +178,31 @@
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;presenter는 view에 getter, setter로 접근한다.&lt;/strong&gt; &lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;view는 model에 대한 지식이 하나도 없다 &lt;/li&gt;
+&lt;li&gt;view는 Model에 대한 지식이 하나도 없다 &lt;/li&gt;
 &lt;li&gt;원래 DOM 객체, native 객체로 보이는게 아니라 getter, setter를 가지고 있는 인터페이스로 보이게 된다. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;mvc처럼 model을 던져 view를 제어하는게 아님.&lt;/li&gt;
+&lt;li&gt;mvc처럼 Model을 던져 view를 제어하는게 아님.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;사용하는 이유&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;뷰에대한 모델의 의존성 완전히 제거&lt;/strong&gt;로 첫번째 mvc패턴에서 보여준 view, model의 관계를 끊어 버린다.&lt;/li&gt;
-&lt;li&gt;presenter, Model만 개발하면 된다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;View에대한 Model의 의존성 완전히 제거&lt;/strong&gt;로 첫번째 MVC패턴에서 보여준 View, Model의 관계를 끊어 버린다.&lt;/li&gt;
+&lt;li&gt;Presenter, Model만 개발하면 된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;mvc를 탈피하기 위해서 mvp를 많이 사용한다. &lt;/p&gt;
+&lt;p&gt;MVC를 탈피하기 위해서 MVP를 많이 사용한다. &lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;뷰가 그림을 재량권을 다 잃어 버리고, 프레젠터가 게터,세터를 통해서 통제하는 방법으로 바꿔 주면된다. &lt;/li&gt;
-&lt;li&gt;하지만 뷰단에 getter, setter를 다 만들어줘야 한다. (= view가 무거워진다.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;View가 rednering 재량권을 다 잃어 버리고, Presenter가 getter, setter통해서 통제하는 방법으로 바꿔 주면된다.&lt;/strong&gt; &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;하지만 View단에 getter, setter를 다 만들어줘야 한다.&lt;/strong&gt; (= view가 무거워진다.) &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;단점&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;View에 getter, setter를 만들어줘야하는 부담이 있다. &lt;/li&gt;
+&lt;li&gt;View에 getter, setter를 만들어줘야하는 부담이 있다.&lt;/li&gt;
 &lt;li&gt;가볍게 어플리케이션을 만들기 부담&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -244,30 +248,36 @@
 &lt;li&gt;
 &lt;p&gt;핵심&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Binder, ViewModel  &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ViewModel은 binder에 의해서 view에대한 의존성을 없애 줬다.&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;ViewModel의 순수한 객체를 갱신&lt;br&gt;
--&gt; Binder에게 그려달라고 요청&lt;br&gt;
--&gt; Binder는 연결되어 있는 viewModel을 해석해서 관련된 View를 갱신&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;Binder&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;ViewModel&lt;/code&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Binder를 통해서 ViewModel은 View에대한 의존성을 없앴다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;ViewModel은 순수객체로 이루어져있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;viewModel&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MVVM이 View를 변경하는 방법&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;ViewModel의 순수한 객체를 갱신으로 View를 바꾼다.&lt;/li&gt;
+&lt;li&gt;Binder에게 그려달라고 요청  &lt;/li&gt;
+&lt;li&gt;Binder는 연결되어 있는 ViewModel을 해석해서 관련된 View를 갱신&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;ViewModel&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;view다! 하지만 진짜 그림을 그리는 view가 아니라 &lt;strong&gt;인메모리 객체로써의 순수한 data view(view를 대신하는 객체&lt;/strong&gt;)이다. &lt;/li&gt;
-&lt;li&gt;view를 대신하는 순수한 데이터 구조체 그래서 model에서도 viewmodel을 갱신 할 수 있다. 그래서 node에서도 ViewModel 변경으로 View를 변경할 수 있다. &lt;/li&gt;
+&lt;li&gt;view를 대신하는 순수한 데이터 구조체 그래서 Model에서도 ViewModel을 갱신 할 수 있다. 그래서 node에서도 ViewModel 변경으로 View를 변경할 수 있다. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;view&lt;/p&gt;
+&lt;p&gt;View&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;view는 viewModel이 변경되면 이에 맞게 View를 조작하면 된다. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Binder&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Binder&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Binder는 obseve에 의해서 ViewModel의 속성을 모두 알고 있고 변하면 View에게 알려준다. &lt;/li&gt;
+&lt;li&gt;Binder는 observe에 의해서 ViewModel의 속성을 모두 알고 있고 변하면 View에게 알려준다. &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;양방향 바인딩은 view, binder에 observe를 적용해서 구현한다.&lt;/p&gt;
 &lt;ul&gt;
@@ -286,8 +296,7 @@
 &lt;/ul&gt;
 &lt;h1 id=&quot;typecheck&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#typecheck&quot; aria-label=&quot;typecheck permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TypeCheck&lt;/h1&gt;
 &lt;p&gt;구현에 들어가 먼저 Type을 Check를 알아봅시다. &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Javascript는 compile언어가 아니기 때문에 runtime에 throw하지 않으면 무조건 오류가 전파됩니다.
-그래서 좋은 전략은 throw로 멈추면 된다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Javascript는 compile언어가 아니기 때문에 runtime에 throw하지 않으면 무조건 오류가 전파됩니다. 그래서 좋은 전략은 throw로 멈추면 된다.&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;==, ===차이 &lt;/p&gt;
@@ -332,20 +341,48 @@ test2(&amp;quot;abc&amp;quot;, 123, true);        //abc 123 true&lt;/code&gt;&lt
 &lt;h1 id=&quot;view-hook--bind&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#view-hook--bind&quot; aria-label=&quot;view hook  bind permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;View hook &amp;#x26; bind&lt;/h1&gt;
 &lt;p&gt;bind에 View를 그냥 연결 시켜줄 수 없다.&lt;br&gt;
 그래서 View에는 어떤 ViewModel과 연결 시켜줄 Hook해주는 과정이 필요하다.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;viewHook&amp;#x26;2%ED%9A%8C/Bind.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;위 view(template)이 하나의 viewModel과 연결이 된다.
-그래서 각 el은 어떤 viewModel의 어떤 키와 매칭 될것인지 지정하는 해야 한다.
-그 방법을 template의 dataset을 사용해서 hook 해줄 수 있다. &lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5b6fe305c184030999b2feea00c89966/5a8f9/viewHookAndBind.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.63023679417122%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB1UlEQVQoz22S7ZaaMBCGvZxdP1CkuyISAgiEL0ER1Nba7vZ09/7v4OnY/ml79sdzJplk3ryZZJQmLnlviPscr21Y7RueDynqUuB0kvv+g+jlhdX5TPbzDfP2TnC74eY+UeURtz5etML65PCw9hhZ40dWW0UyFOjXV/SXKxshf38jFQFfitXWJSw2RKXCGEXbahzHYjGfYNtTrNmE2XTC49Mzo/HDA0/BmnzIqfM1SewSXL+iTxfUcCK9fSORuTv0OImHVyn8RrPKA9RqjgkdMr2k3D6x2LiMIv1MIVdOzxW58bDmFtPFgplwj5a9xFoumSxsxrOp5OfMZM+jDpnZtqzZEmWfs2R8v7IyBq/rpEefccWVexw+oCeqa7JDR1CUbEyO2w/4EjdS7wv3nEpSRqHv45cVOt6iwxAdRYRCFEcEUUwgTrxdi8kL2qaVlsTEOsCvd4RB8C9ai6AM/KoWoZhQKSKZJ6FiK/Tykr0RpB2nKuAiD7NL1W/BsN39MfAfIqjY7BpUURCIZZ1lpLmhFNeXQ8m5jumvR06t4bpP6duKTNxG3R4tjkIR+ZvR3WaQZuKywpf+qLIkb8TR8UB32Ms3yWh2NaUcWMracOzYy19NCvOh4C+F/UEH55nOYQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;viewHookAndBind&quot;
+        title=&quot;viewHookAndBind&quot;
+        src=&quot;/static/5b6fe305c184030999b2feea00c89966/799d3/viewHookAndBind.png&quot;
+        srcset=&quot;/static/5b6fe305c184030999b2feea00c89966/00d96/viewHookAndBind.png 148w,
+/static/5b6fe305c184030999b2feea00c89966/0b23c/viewHookAndBind.png 295w,
+/static/5b6fe305c184030999b2feea00c89966/799d3/viewHookAndBind.png 590w,
+/static/5b6fe305c184030999b2feea00c89966/2a3d6/viewHookAndBind.png 885w,
+/static/5b6fe305c184030999b2feea00c89966/5a8f9/viewHookAndBind.png 1098w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;dataset&lt;/p&gt;
+&lt;p&gt;hook&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;html5 spec에 따르면 dataset 속성은 w3chtml5 validator를 통과하게 되어 있다. 왜냐하면 custom 속성을 마음대로 분리할 수 있는 속성이기 때문이다. &lt;/li&gt;
-&lt;li&gt;angular에서 사용하는 template에서 사용하는 custom 속성들은 validation을 돌리면 다 깨진다. &lt;/li&gt;
+&lt;li&gt;위 View(template)이 하나의 ViewModel과 연결이 된다.
+그래서 각 el은 어떤 ViewModel의 어떤 키와 매칭 될것인지 지정하는 해야 한다.
+그 방법을 template의 dataset을 사용해서 hook 해줄 수 있다. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;data-viewmodel, bind&lt;/p&gt;
+&lt;p&gt;el에 있는 data-viewmodel property value와 viewModel과 bind&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;data-viewmodel property의 value &quot;wrapper&quot;, &quot;title&quot;, &quot;contents&quot;은 나중에 bind에 의해서 ViewModel 속성에 매칭 될 것이다. &lt;/li&gt;
 &lt;/ul&gt;
@@ -356,18 +393,25 @@ test2(&amp;quot;abc&amp;quot;, 123, true);        //abc 123 true&lt;/code&gt;&lt
 &lt;li&gt;&lt;strong&gt;view에 있는 스캔하면서 data-viewmodel을 hook해서 ViewModel과 연결해서 나중에 viewModel은 view에 반영해주게 된다.&lt;/strong&gt; &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dataset&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;html5 spec에 따르면 dataset 속성은 w3chtml5 validator를 통과하게 되어 있다. 왜냐하면 custom 속성을 마음대로 분리할 수 있는 속성이기 때문이다. &lt;/li&gt;
+&lt;li&gt;angular에서 사용하는 template에서 사용하는 custom 속성들은 validation을 돌리면 다 깨진다. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&quot;role-design&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#role-design&quot; aria-label=&quot;role design permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Role Design&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;MVVM에서의 핵심은 &lt;code class=&quot;language-text&quot;&gt;Binder&lt;/code&gt;에 있다. &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Binder, view, ViewModel의 관계&lt;/p&gt;
+&lt;p&gt;Binder, View, ViewModel의 관계&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Binder가 view를 scan해서&lt;br&gt;
+&lt;li&gt;Binder가 View를 scan해서&lt;br&gt;
 특정 ViewModel에 넘기고&lt;br&gt;
 ViewModel이 변하면&lt;br&gt;
-Binder는 변한 ViewModel을 가지고 sacan했던 view에 그린다.&lt;br&gt;
-(ViewModel은 view를 모르기 때문에 Binder에게 시킨다.)&lt;/li&gt;
+Binder는 변한 ViewModel을 가지고 sacan했던 View에 그린다.&lt;br&gt;
+(ViewModel은 View를 모르기 때문에 Binder에게 시킨다.)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -375,7 +419,7 @@ Binder는 변한 ViewModel을 가지고 sacan했던 view에 그린다.&lt;br&gt;
 &lt;ul&gt;
 &lt;li&gt;template의 tag를 scan하는 방법: angular, vueJs&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;template에 자기 ViewModel을 연결해서 만드는 방법: react &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;template에 자기 ViewModel을 연결해서 만드는 방법: react&lt;/strong&gt; &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;react는 state, property를 이용해서 자기 view를 자기가 소유(view를 scan하지 않는다.)&lt;/li&gt;
 &lt;/ul&gt;
@@ -384,7 +428,7 @@ Binder는 변한 ViewModel을 가지고 sacan했던 view에 그린다.&lt;br&gt;
 &lt;p&gt;장단점 &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;angular에서는 ViewModel, view를 나눠서 관리하기 쉽다. &lt;/li&gt;
-&lt;li&gt;react는 state, view가 동시에 들어 있다. (component방식)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;react는 state, view가 동시에 들어 있다. (component방식)&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -423,15 +467,15 @@ Binder는 변한 ViewModel을 가지고 sacan했던 view에 그린다.&lt;br&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Scanner 존재의 역할&lt;/p&gt;
-&lt;ul&gt;
+&lt;p&gt;&lt;strong&gt;Scanner 존재의 역할&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;Binder가 HTMLElement의 dataSet property를 Scan한다.  &lt;/li&gt;
 &lt;li&gt;Scanner로 부터 Binder를 알게 된다.   &lt;/li&gt;
 &lt;li&gt;결국 Binder는 HTMLElement를 모르게 된다.   &lt;/li&gt;
-&lt;/ul&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Scanner를 만드는 이유 &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scanner를 만드는 이유&lt;/strong&gt; &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;우리는 객체마다 바뀌는 이유를 하나로 만들어야 한다. (SRP 원칙-Single Responsibility(단일책임))&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;
@@ -440,8 +484,8 @@ Binder는 변한 ViewModel을 가지고 sacan했던 view에 그린다.&lt;br&gt;
 &lt;li&gt;
 &lt;p&gt;코드를 바꾸는 이유가 같은가 다른가? &lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Binder는 ViewModel을 이용해서 view를 그릴때 &lt;/li&gt;
-&lt;li&gt;Scanner는 HTMLElement를 해석(Scan)하는데 방법이 바뀔때 &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Binder는 ViewModel을 이용해서 view를 그릴때&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scanner는 HTMLElement를 해석(Scan)하는데 방법이 바뀔때&lt;/strong&gt; &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -530,7 +574,7 @@ Binder는 변한 ViewModel을 가지고 sacan했던 view에 그린다.&lt;br&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;MVVM Pattern 도식화&lt;br&gt;
-&lt;img src=&quot;2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94.png&quot;&gt;&lt;/li&gt;
+&lt;img src=&quot;./2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94.png&quot;&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ViewModel &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;//POINT1&lt;/span&gt;
@@ -622,7 +666,7 @@ Binder가 어떤 viewModel과 결함해서 그릴지 모르기때문에 나중�
 그래서 hook해서 key만 가지고 있고 실제로 그림그릴때 ViewModel속성과 매칭(Binding)하기 위해서 key만 가지고 있는 것이다. &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;MVVM Pattern 도식화&lt;br&gt;
-&lt;img src=&quot;2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94.png&quot;&gt;&lt;/p&gt;
+&lt;img src=&quot;./2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94.png&quot;&gt;&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; BinderItem &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 el&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; viewmodel&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
@@ -639,22 +683,35 @@ el&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; viewmodel&lt;sp
 new BinderItem(section, &quot;wrapper&quot;);
 new BinderItem(h2, &quot;title&quot;);
 new BinderItem(section2, &quot;contents&quot;);&lt;/p&gt;
-&lt;section id=&quot;target&quot; data-viewmodel=&quot;wrapper&quot;&gt;
-  &lt;h2 data-viewmodel=&quot;title&quot;&gt;&lt;/h2&gt;
-  &lt;section data-viewmodel=&quot;contents&quot;&gt;&lt;/section&gt;
-&lt;/section&gt;
-```
-* POINT
-    - constructor param
-        * el: view의 elements
-        * viewmodel: hook의 key값(data-viewmodel의 value)
-        * _0, _1: el, viewmodel이 어떤 type인지 확인 할 수 있다. 
-    - freeze로 BinderItem은 변할 수 없도록 한다. 
-* POINT1
-    - 실제로 BinderItem은 **Scanner class의 checkItem에서** BinderItme을 설정한다.  
-      (new BinderItem(el, vm)코드 호출)
-    - new BinderItem으로 선언된 3개는 아래 html 코드와 관련된 내용이다. 
-    
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;```html
+&amp;lt;section id=&amp;quot;target&amp;quot; data-viewmodel=&amp;quot;wrapper&amp;quot;&amp;gt;
+  &amp;lt;h2 data-viewmodel=&amp;quot;title&amp;quot;&amp;gt;&amp;lt;/h2&amp;gt;
+  &amp;lt;section data-viewmodel=&amp;quot;contents&amp;quot;&amp;gt;&amp;lt;/section&amp;gt;
+&amp;lt;/section&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;POINT&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;constructor param&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;el: view의 elements&lt;/li&gt;
+&lt;li&gt;viewmodel: hook의 key값(data-viewmodel의 value)&lt;/li&gt;
+&lt;li&gt;_0, _1: el, viewmodel이 어떤 type인지 확인 할 수 있다. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;freeze로 BinderItem은 변할 수 없도록 한다. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;POINT1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실제로 BinderItem은 &lt;strong&gt;Scanner class의 checkItem에서&lt;/strong&gt; BinderItme을 설정한다.&lt;br&gt;
+(new BinderItem(el, vm)코드 호출)&lt;/li&gt;
+&lt;li&gt;new BinderItem으로 선언된 3개는 아래 html 코드와 관련된 내용이다. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&quot;binder&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#binder&quot; aria-label=&quot;binder permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Binder&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -665,7 +722,7 @@ new BinderItem(section2, &quot;contents&quot;);&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;MVVM Pattern 도식화&lt;br&gt;
-&lt;img src=&quot;2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94.png&quot;&gt;&lt;/p&gt;
+&lt;img src=&quot;./2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94.png&quot;&gt;&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; Binder &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;token comment&quot;&gt;//POINT1&lt;/span&gt;
 #items &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -691,9 +748,7 @@ new BinderItem(section2, &quot;contents&quot;);&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Scanner class의 checkItem에서 호출을 통해서 설정된다.&lt;/li&gt;
 &lt;li&gt;add를 통해서 #items는 BinderItem 인스턴스를 가지고 있겠다.&lt;/li&gt;
-&lt;li&gt;
-&lt;h1 id=&quot;item은-add를-통해서만-설정가능하다&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#item%EC%9D%80-add%EB%A5%BC-%ED%86%B5%ED%95%B4%EC%84%9C%EB%A7%8C-%EC%84%A4%EC%A0%95%EA%B0%80%EB%8A%A5%ED%95%98%EB%8B%A4&quot; aria-label=&quot;item은 add를 통해서만 설정가능하다 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;item은 add를 통해서만 설정가능하다.&lt;/h1&gt;
-&lt;/li&gt;
+&lt;li&gt;&quot;#item&quot;은 add를 통해서만 설정가능하다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -705,9 +760,7 @@ new BinderItem(section2, &quot;contents&quot;);&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;forEach &lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;h1 id=&quot;items을-순회하니까-binderitems-인스턴스가-하나씩-순회하겠다&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#items%EC%9D%84-%EC%88%9C%ED%9A%8C%ED%95%98%EB%8B%88%EA%B9%8C-binderitems-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EA%B0%80-%ED%95%98%EB%82%98%EC%94%A9-%EC%88%9C%ED%9A%8C%ED%95%98%EA%B2%A0%EB%8B%A4&quot; aria-label=&quot;items을 순회하니까 binderitems 인스턴스가 하나씩 순회하겠다 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;items을 순회하니까 Binderitems 인스턴스가 하나씩 순회하겠다.&lt;/h1&gt;
-&lt;/li&gt;
+&lt;li&gt;&quot;#items&quot;을 순회하니까 Binderitems 인스턴스가 하나씩 순회하겠다.&lt;/li&gt;
 &lt;li&gt;item.viewmodel은 hook의 key값이므로 viewmodel객체에서 유무를 확인한다. &lt;/li&gt;
 &lt;li&gt;item.el은 natvie element를 가지고 있다.&lt;/li&gt;
 &lt;li&gt;
@@ -740,7 +793,7 @@ new BinderItem(section2, &quot;contents&quot;);&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;dom 순회하는 코드를 만든다! &lt;/li&gt;
 &lt;li&gt;MVVM Pattern 도식화
-&lt;img src=&quot;2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94_Scanner%ED%91%9C%EC%8B%9C.png&quot;&gt;&lt;/li&gt;
+&lt;img src=&quot;./2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94_Scanner%ED%91%9C%EC%8B%9C.png&quot;&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; Scanner &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token function&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;el&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; _ &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;el&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; HTMLElement&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -808,73 +861,87 @@ new BinderItem(section2, &quot;contents&quot;);&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;client&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#client&quot; aria-label=&quot;client permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;client&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;MVVM Pattern 도식화&lt;br&gt;
-&lt;img src=&quot;2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94.png&quot;&gt;&lt;/p&gt;
+&lt;li&gt;MVVM Pattern 도식화&lt;br&gt;
+&lt;img src=&quot;./2%ED%9A%8C/mvvmPattern%EB%8F%84%EC%8B%9D%ED%99%94.png&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;//POINT1&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; viewmodel &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-wrapper&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    styles&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; width&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;50%&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; background&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;#ffa&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; cursor&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;pointer&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-title&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    properties&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; innerHTML&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Title&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-contents&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    properties&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; innerHTML&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Contents&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    wrapper&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        styles&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; width&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;50%&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; background&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;#ffa&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; cursor&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;pointer&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    title&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        properties&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; innerHTML&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Title&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    contents&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        properties&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; innerHTML&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Contents&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; scanner &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Scanner&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//POINT2&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; binder &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; scanner&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;#target&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//POINT3&lt;/span&gt;
+binder&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;viewmodel&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;POINT1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;render할대 필요한 viewmodel 객체 생성&lt;/li&gt;
+&lt;li&gt;ViewModel.get 함수를 보면 ViewModel 인스턴스를 반환한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;POINT2&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h1 id=&quot;target-dom을-순회해서-binder-인스턴스를-반환한다&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#target-dom%EC%9D%84-%EC%88%9C%ED%9A%8C%ED%95%B4%EC%84%9C-binder-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EB%A5%BC-%EB%B0%98%ED%99%98%ED%95%9C%EB%8B%A4&quot; aria-label=&quot;target dom을 순회해서 binder 인스턴스를 반환한다 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;target dom을 순회해서 binder 인스턴스를 반환한다.&lt;/h1&gt;
+&lt;/li&gt;
+&lt;li&gt;binder는 dom을 순회하면서 각dom에 BinderItem &quot;#item&quot; private variable에 세팅한다.(Set 객체)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;POINT3&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;render를 한다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;const scanner = new Scanner;
-//POINT2
-const binder = scanner.scan(document.querySelector(&quot;#target&quot;));
-//POINT3
-binder.render(viewmodel);&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;* POINT1
-    - render할대 필요한 viewmodel 객체 생성
-    - ViewModel.get 함수를 보면 ViewModel 인스턴스를 반환한다.
-* POINT2
-    - #target dom을 순회해서 binder 인스턴스를 반환한다.
-    - binder는 dom을 순회하면서 각dom에 BinderItem &amp;quot;#item&amp;quot; private variable에 세팅한다.(Set 객체)
-* POINT3
-    - render를 한다.
+&lt;h2 id=&quot;client개선&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#client%EA%B0%9C%EC%84%A0&quot; aria-label=&quot;client개선 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;client개선&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;배경 색을 계속 바꾸도록 변경하고 반뀌는 곳을 클릭하면 배경 바뀌는것이 멈춘다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; scanner &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Scanner&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; binder &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; scanner&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;#target&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
-## client개선
-- 배경 색을 계속 바꾸도록 변경하고 반뀌는 곳을 클릭하면 배경 바뀌는것이 멈춘다.
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;getRandom&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; viewmodel &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    isStop&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;//POINT1&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;changeContents&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;wrapper&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;background &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;rgb(&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getRandom&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getRandom&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getRandom&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;contents&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;properties&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;innerHTML &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;.&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        binder&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;viewmodel&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    wrapper&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        styles&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; width&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;50%&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; background&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;#fff&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; cursor&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;pointer&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        events&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;e&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; vm&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; vm&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;isStop &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    title&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        properties&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; innerHTML&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Title&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    contents&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ViewModel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        properties&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; innerHTML&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Contents&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 
-```js
-const scanner = new Scanner();
-const binder = scanner.scan(document.querySelector(&amp;#39;#target&amp;#39;));
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;//POINT1&lt;/span&gt;
+    viewmodel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;changeContents&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    binder&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;viewmodel&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;viewmodel&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;isStop&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;requestAnimationFrame&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
-const getRandom = () =&amp;gt; parseInt(Math.random() * 150) + 100
-const viewmodel = ViewModel.get({
-    isStop: false,
-    //POINT1
-    changeContents () {
-        this.wrapper.styles.background = `rgb(${getRandom()},${getRandom()},${getRandom()})`;
-        this.contents.properties.innerHTML = Math.random().toString(16).replace(&amp;#39;.&amp;#39;, &amp;#39;&amp;#39;);
-        binder.render(viewmodel);
-    },
-    wrapper: ViewModel.get({
-        styles: { width: &amp;#39;50%&amp;#39;, background: &amp;#39;#fff&amp;#39;, cursor: &amp;#39;pointer&amp;#39; },
-        events: { click(e, vm) { vm.isStop = true } }
-    }),
-    title: ViewModel.get({
-        properties: { innerHTML: &amp;#39;Title&amp;#39; }
-    }),
-    contents: ViewModel.get({
-        properties: { innerHTML: &amp;#39;Contents&amp;#39; }
-    })
-})
-
-const f = () =&amp;gt; {
-    //POINT1
-    viewmodel.changeContents();
-    binder.render(viewmodel);
-    if (!viewmodel.isStop) requestAnimationFrame(f);
-}
-
-requestAnimationFrame(f);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;token function&quot;&gt;requestAnimationFrame&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;POINT1&lt;/p&gt;
@@ -1223,99 +1290,7 @@ console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cl
 &lt;p&gt;&lt;a href=&quot;https://github.com/happyjy/prismagram-frontend&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Front End(React)github 주소&lt;/a&gt;&lt;br&gt;
 &lt;a href=&quot;https://github.com/happyjy/prismagram&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Back End(Express, Prisma)github 주소&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;정리-노트&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EB%A6%AC-%EB%85%B8%ED%8A%B8&quot; aria-label=&quot;정리 노트 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정리 노트&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.notion.so/happyjy0109/2019-Node-js-Express-ReactJS-Prisma-201910-2019XX-df8d226e12f74f63a4118df9570e75c4&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;notion 주소&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[완전탐색_모든숫자조합 구해서 소수찾기]]></title><description><![CDATA[문제 제한사항 질문의 수는 1 이상 100 이하의 자연수입니다. baseball의 각 행은 세 자리의 수, 스트라이크의 수, 볼의 수를 담고 있습니다. 입출력 예 해결 방법 for문 2개 outer for: 예상할 수 있는 3자리 숫자 Array…]]></description><link>https://happyjy.github.io/숫자야구/</link><guid isPermaLink="false">https://happyjy.github.io/숫자야구/</guid><pubDate>Mon, 24 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;문제&lt;/h1&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;    숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 
-
-    각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게 3자리의 숫자를 불러서 결과를 확인합니다. 
-    그리고 그 결과를 토대로 상대가 정한 숫자를 예상한 뒤 맞힙니다.
-
-    * 숫자는 맞지만, 위치가 틀렸을 때는 &amp;quot;볼&amp;quot;
-    * 숫자와 위치가 모두 맞을 때는 &amp;quot;스트라이크&amp;quot;
-    * 숫자와 위치가 모두 틀렸을 때는 &amp;quot;아웃&amp;quot;
-    
-    예를 들어, 아래의 경우가 있으면
-    A : 123
-    B : 1스트라이크 1볼.    //123 중 2개 숫자, 1개는 자리까지 맞음
-    A : 356
-    B : 1스트라이크 0볼.    //3XX확신 (위숫자에서 겹치는게 3뿐이라서)/ 1,2숫중 1개는 볼
-    A : 327
-    B : 2스트라이크 0볼.    //32X확신 (3은 두번째서 고정, 그렇다면 첫,두번째에서 1개 볼인데 겹치는수가 2)
-    A : 489
-    B : 0스트라이크 1볼.    //마지막자리 빼고 확정이기 때문에 이런 경우 첫번째 두번째 자리숫자가 볼의 대상이된다. 그래서 324, 328이 답이된다. 
-    이때 가능한 답은 324와 328 두 가지입니다.
-
-    질문한 세 자리의 수, 스트라이크의 수, 볼의 수를 담은 2차원 배열 baseball이 매개변수로 주어질 때, 가능한 답의 개수를 return 하도록 solution 함수를 작성해주세요.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;제한사항&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%9C%ED%95%9C%EC%82%AC%ED%95%AD&quot; aria-label=&quot;제한사항 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;제한사항&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;질문의 수는 1 이상 100 이하의 자연수입니다.&lt;/li&gt;
-&lt;li&gt;baseball의 각 행은 [세 자리의 수, 스트라이크의 수, 볼의 수]를 담고 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;입출력-예&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%85%EC%B6%9C%EB%A0%A5-%EC%98%88&quot; aria-label=&quot;입출력 예 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;입출력 예&lt;/h1&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;baseball	                                            return
-[[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]]	2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;해결-방법&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95&quot; aria-label=&quot;해결 방법 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;해결 방법&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;for문 2개&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;outer for: 예상할 수 있는 3자리 숫자 Array&lt;/li&gt;
-&lt;li&gt;inner for: 예상 정답 Array&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;가능 정답 찾기 로직&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;위 for문을 돌면서 2번 예상 정답 Array안에서 찾기&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;strike, ball 인경우를 조건문으로 찾는다.&lt;/p&gt;
-&lt;h1 id=&quot;step&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#step&quot; aria-label=&quot;step permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;STEP&lt;/h1&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;code&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#code&quot; aria-label=&quot;code permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CODE&lt;/h1&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;    &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;baseball&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; answer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;token comment&quot;&gt;// 서로 다른 3개의 수 조합. &lt;/span&gt;
-        &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;987&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; z&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;token comment&quot;&gt;// 서로 다른 3개 수 조합을 만들기 위해서 &lt;/span&gt;
-            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; z &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; j&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; j&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;baseball&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; j&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; strike &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; ball &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-                &lt;span class=&quot;token comment&quot;&gt;//query: 던진 숫자&lt;/span&gt;
-                &lt;span class=&quot;token comment&quot;&gt;//query_s: query_strike&lt;/span&gt;
-                &lt;span class=&quot;token comment&quot;&gt;//query_b: query_ball&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;query&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; query_s&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; query_b&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; baseball&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;j&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;query_x&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; query_y&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query_x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; query_y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; query_z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query_x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; query_x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; query_y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; strike&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; strike&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; strike&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query_s &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; strike&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; ball&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; ball&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; ball&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query_b &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; ball&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;j &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; baseball&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; answer&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; answer&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-    
-    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;356&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;327&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;489&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;//2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;정답&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EB%8B%B5&quot; aria-label=&quot;정답 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정답&lt;/h1&gt;
-&lt;p&gt;2&lt;/p&gt;</content:encoded></item><item><title><![CDATA[완전탐색_모든 숫자조합 구해서 소수찾기]]></title><description><![CDATA[문제 한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 
+&lt;p&gt;&lt;a href=&quot;https://www.notion.so/happyjy0109/2019-Node-js-Express-ReactJS-Prisma-201910-2019XX-df8d226e12f74f63a4118df9570e75c4&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;notion 주소&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[완전탐색_모든 숫자조합 구해서 소수찾기]]></title><description><![CDATA[문제 한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 
 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.
 각 종이 조각에 적힌 숫자가 적힌 문자열 numbers…]]></description><link>https://happyjy.github.io/모든숫자조합 구해서 소수찾기/</link><guid isPermaLink="false">https://happyjy.github.io/모든숫자조합 구해서 소수찾기/</guid><pubDate>Mon, 24 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;문제&lt;/h1&gt;
 &lt;p&gt;한자리 숫자가 적힌 종이 조각이 흩어져있습니다.
@@ -1462,7 +1437,99 @@ console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cl
 &lt;h1 id=&quot;정답&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EB%8B%B5&quot; aria-label=&quot;정답 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정답&lt;/h1&gt;
 &lt;p&gt;[1]
 [1,2,3]
-[3]&lt;/p&gt;</content:encoded></item><item><title><![CDATA[객체지향 자바스크립트 1회차(객체지향이란? with design Pattern)]]></title><description><![CDATA[INTRO 목표 객체 지향을 자바스크립트로 해보자. 디자인 패턴과 함께 알아보자. 오늘 배운 이론 남은 4개 강의에서 활용. SOLID(SRP, OCP, LSP, ISP, DIP) Message, 의존성, DI, IOC,  Value Context…]]></description><link>https://happyjy.github.io/객체지향 자바스크립트_1/</link><guid isPermaLink="false">https://happyjy.github.io/객체지향 자바스크립트_1/</guid><pubDate>Sun, 23 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;intro&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#intro&quot; aria-label=&quot;intro permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;INTRO&lt;/h1&gt;
+[3]&lt;/p&gt;</content:encoded></item><item><title><![CDATA[완전탐색_모든숫자조합 구해서 소수찾기]]></title><description><![CDATA[문제 제한사항 질문의 수는 1 이상 100 이하의 자연수입니다. baseball의 각 행은 세 자리의 수, 스트라이크의 수, 볼의 수를 담고 있습니다. 입출력 예 해결 방법 for문 2개 outer for: 예상할 수 있는 3자리 숫자 Array…]]></description><link>https://happyjy.github.io/숫자야구/</link><guid isPermaLink="false">https://happyjy.github.io/숫자야구/</guid><pubDate>Mon, 24 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;문제&lt;/h1&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;    숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 
+
+    각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게 3자리의 숫자를 불러서 결과를 확인합니다. 
+    그리고 그 결과를 토대로 상대가 정한 숫자를 예상한 뒤 맞힙니다.
+
+    * 숫자는 맞지만, 위치가 틀렸을 때는 &amp;quot;볼&amp;quot;
+    * 숫자와 위치가 모두 맞을 때는 &amp;quot;스트라이크&amp;quot;
+    * 숫자와 위치가 모두 틀렸을 때는 &amp;quot;아웃&amp;quot;
+    
+    예를 들어, 아래의 경우가 있으면
+    A : 123
+    B : 1스트라이크 1볼.    //123 중 2개 숫자, 1개는 자리까지 맞음
+    A : 356
+    B : 1스트라이크 0볼.    //3XX확신 (위숫자에서 겹치는게 3뿐이라서)/ 1,2숫중 1개는 볼
+    A : 327
+    B : 2스트라이크 0볼.    //32X확신 (3은 두번째서 고정, 그렇다면 첫,두번째에서 1개 볼인데 겹치는수가 2)
+    A : 489
+    B : 0스트라이크 1볼.    //마지막자리 빼고 확정이기 때문에 이런 경우 첫번째 두번째 자리숫자가 볼의 대상이된다. 그래서 324, 328이 답이된다. 
+    이때 가능한 답은 324와 328 두 가지입니다.
+
+    질문한 세 자리의 수, 스트라이크의 수, 볼의 수를 담은 2차원 배열 baseball이 매개변수로 주어질 때, 가능한 답의 개수를 return 하도록 solution 함수를 작성해주세요.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;제한사항&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%9C%ED%95%9C%EC%82%AC%ED%95%AD&quot; aria-label=&quot;제한사항 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;제한사항&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;질문의 수는 1 이상 100 이하의 자연수입니다.&lt;/li&gt;
+&lt;li&gt;baseball의 각 행은 [세 자리의 수, 스트라이크의 수, 볼의 수]를 담고 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;입출력-예&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%85%EC%B6%9C%EB%A0%A5-%EC%98%88&quot; aria-label=&quot;입출력 예 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;입출력 예&lt;/h1&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;baseball	                                            return
+[[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]]	2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;해결-방법&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95&quot; aria-label=&quot;해결 방법 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;해결 방법&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;for문 2개&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;outer for: 예상할 수 있는 3자리 숫자 Array&lt;/li&gt;
+&lt;li&gt;inner for: 예상 정답 Array&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가능 정답 찾기 로직&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위 for문을 돌면서 2번 예상 정답 Array안에서 찾기&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;strike, ball 인경우를 조건문으로 찾는다.&lt;/p&gt;
+&lt;h1 id=&quot;step&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#step&quot; aria-label=&quot;step permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;STEP&lt;/h1&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;code&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#code&quot; aria-label=&quot;code permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CODE&lt;/h1&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;    &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;baseball&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; answer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token comment&quot;&gt;// 서로 다른 3개의 수 조합. &lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;987&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; z&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;token comment&quot;&gt;// 서로 다른 3개 수 조합을 만들기 위해서 &lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; z &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; j&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; j&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;baseball&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; j&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; strike &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; ball &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+                &lt;span class=&quot;token comment&quot;&gt;//query: 던진 숫자&lt;/span&gt;
+                &lt;span class=&quot;token comment&quot;&gt;//query_s: query_strike&lt;/span&gt;
+                &lt;span class=&quot;token comment&quot;&gt;//query_b: query_ball&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;query&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; query_s&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; query_b&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; baseball&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;j&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;query_x&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; query_y&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query_x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; query_y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; query_z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query_x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; query_x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; query_y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; strike&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; strike&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; strike&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query_s &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; strike&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; ball&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_z&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; ball&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;z &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; query_y&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; ball&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query_b &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; ball&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+                &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;j &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; baseball&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; answer&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; answer&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;356&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;327&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;489&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;//2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;정답&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EB%8B%B5&quot; aria-label=&quot;정답 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정답&lt;/h1&gt;
+&lt;p&gt;2&lt;/p&gt;</content:encoded></item><item><title><![CDATA[객체지향 자바스크립트 1회차(객체지향이란? with design Pattern)]]></title><description><![CDATA[INTRO 목표 객체 지향을 자바스크립트로 해보자. 디자인 패턴과 함께 알아보자. 오늘 배운 이론 남은 4개 강의에서 활용. SOLID(SRP, OCP, LSP, ISP, DIP) Message, 의존성, DI, IOC,  Value Context…]]></description><link>https://happyjy.github.io/객체지향 자바스크립트_1/</link><guid isPermaLink="false">https://happyjy.github.io/객체지향 자바스크립트_1/</guid><pubDate>Sun, 23 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;intro&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#intro&quot; aria-label=&quot;intro permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;INTRO&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;목표&lt;/p&gt;
