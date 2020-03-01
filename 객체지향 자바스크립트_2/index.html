@@ -1258,8 +1258,7 @@ Binder는 변한 ViewModel을 가지고 sacan했던 View에 그린다.<br>
 <li>Binder가 scan할때 알수 있는건 "문자열, wrapper, title, content" 뿐이다.<br>
 Binder가 어떤 viewModel과 결함해서 그릴지 모르기때문에 나중에 lazy Binding를 하기 위함이다.<br>
 그래서 hook해서 key만 가지고 있고 실제로 그림그릴때 ViewModel속성과 매칭(Binding)하기 위해서 key만 가지고 있는 것이다. </li>
-<li>
-<p>MVVM Pattern 도식화<br>
+<li>MVVM Pattern 도식화<br>
 <span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;"
@@ -1289,28 +1288,27 @@ Binder가 어떤 viewModel과 결함해서 그릴지 모르기때문에 나중�
         loading="lazy"
       />
   </a>
-    </span></p>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> BinderItem <span class="token operator">=</span> <span class="token keyword">class</span><span class="token punctuation">{</span>
-el<span class="token punctuation">;</span> viewmodel<span class="token punctuation">;</span>
-
-<span class="token comment">//POINT</span>
-<span class="token function">constructor</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> viewmodel<span class="token punctuation">,</span> _0<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> HTMLElement<span class="token punctuation">)</span><span class="token punctuation">,</span> _1<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>viewmodel<span class="token punctuation">,</span> <span class="token string">"string"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>el <span class="token operator">=</span> el<span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>viewmodel <span class="token operator">=</span> viewmodel<span class="token punctuation">;</span>
-    Object<span class="token punctuation">.</span><span class="token function">freeze</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> 
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-</li>
+    </span></li>
 </ul>
-<p>//POINT1
-new BinderItem(section, "wrapper");
-new BinderItem(h2, "title");
-new BinderItem(section2, "contents");</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```html
-&lt;section id=&quot;target&quot; data-viewmodel=&quot;wrapper&quot;&gt;
-  &lt;h2 data-viewmodel=&quot;title&quot;&gt;&lt;/h2&gt;
-  &lt;section data-viewmodel=&quot;contents&quot;&gt;&lt;/section&gt;
-&lt;/section&gt;</code></pre></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> BinderItem <span class="token operator">=</span> <span class="token keyword">class</span><span class="token punctuation">{</span>
+    el<span class="token punctuation">;</span> viewmodel<span class="token punctuation">;</span>
+    
+    <span class="token comment">//POINT</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> viewmodel<span class="token punctuation">,</span> _0<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> HTMLElement<span class="token punctuation">)</span><span class="token punctuation">,</span> _1<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>viewmodel<span class="token punctuation">,</span> <span class="token string">"string"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>el <span class="token operator">=</span> el<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>viewmodel <span class="token operator">=</span> viewmodel<span class="token punctuation">;</span>
+        Object<span class="token punctuation">.</span><span class="token function">freeze</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">//POINT1</span>
+<span class="token keyword">new</span> <span class="token class-name">BinderItem</span><span class="token punctuation">(</span>section<span class="token punctuation">,</span> <span class="token string">"wrapper"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">new</span> <span class="token class-name">BinderItem</span><span class="token punctuation">(</span>h2<span class="token punctuation">,</span> <span class="token string">"title"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">BinderItem</span><span class="token punctuation">(</span>section2<span class="token punctuation">,</span> <span class="token string">"contents"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>target<span class="token punctuation">"</span></span> <span class="token attr-name">data-viewmodel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrapper<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">data-viewmodel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span> <span class="token attr-name">data-viewmodel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>contents<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">></span></span></code></pre></div>
 <ul>
 <li>
 <p>POINT</p>
