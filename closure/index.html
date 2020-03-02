@@ -532,57 +532,78 @@
 		<span class="token number">3</span><span class="token operator">-</span><span class="token number">4</span> 커링함수</code></pre></div>
 <h1 id="1-클로저의-의미-및-원리-이해" style="position:relative;"><a href="#1-%ED%81%B4%EB%A1%9C%EC%A0%80%EC%9D%98-%EC%9D%98%EB%AF%B8-%EB%B0%8F-%EC%9B%90%EB%A6%AC-%EC%9D%B4%ED%95%B4" aria-label="1 클로저의 의미 및 원리 이해 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1 클로저의 의미 및 원리 이해</h1>
 <h2 id="클로저란" style="position:relative;"><a href="#%ED%81%B4%EB%A1%9C%EC%A0%80%EB%9E%80" aria-label="클로저란 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>클로저란?</h2>
-<p>  : 함수형 프로그래밍 언어에서 등장하는 특징
-> 어떤 함수 A에서 선언한 변수 a를 참조하는 내부함수 B를 외부로 전달할 경우 A의 <strong>실행 컨텍스트가 종료된 이후에도 변수a가 사라지지 안는 현상</strong>
-> 내부함수를 외부로 전달하는 방법: 함수를 return하는 경우, callback으로 전달
-- mdn 설명
-> A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).<br>
-> In other words, a closure gives you access to an outer function’s scope from an inner function.
-> In JavaScript, closures are created every time a function is created, at function creation time.</p>
+<blockquote>
+<ul>
+<li>함수형 프로그래밍 언어에서 등장하는 특징  </li>
+<li>어떤 함수 A에서 선언한 변수 a를 참조하는 내부함수 B를 외부로 전달할 경우 A의 <strong>실행 컨텍스트가 종료된 이후에도 변수a가 사라지지 안는 현상</strong></li>
+<li>내부함수를 외부로 전달하는 방법: 함수를 return하는 경우, callback으로 전달</li>
+<li>mdn 설명<br>
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).<br>
+In other words, a closure gives you access to an outer function’s scope from an inner function.
+In JavaScript, closures are created every time a function is created, at function creation time.</li>
+</ul>
+</blockquote>
 <h2 id="외부-함수의-변수를-참조하는-내부-함수1" style="position:relative;"><a href="#%EC%99%B8%EB%B6%80-%ED%95%A8%EC%88%98%EC%9D%98-%EB%B3%80%EC%88%98%EB%A5%BC-%EC%B0%B8%EC%A1%B0%ED%95%98%EB%8A%94-%EB%82%B4%EB%B6%80-%ED%95%A8%EC%88%981" aria-label="외부 함수의 변수를 참조하는 내부 함수1 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>외부 함수의 변수를 참조하는 내부 함수(1)</h2>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```js
-var outer = function() {
-    var c = 1;
-    var c1
-    var inner = function() {
-        console.log(++c);
-    }
-    inner();
-};
-outer();
-```
-* inner함수 내부에서는 c를 선언하지 않았기 때문에 environmentRecord에서 값을 찾지 못하므로 outerEnvironmentReference에 지정된 상위 컨텍스트인 outer의 LexicalEnvironment에 접근해서 다시 c를 찾는다. 
-* outer함수의 실행 컨텍스트가 종료되면 LexicalEnvironmentReference에 저장된 식별자들(c, inner)에 대한 참조를 지운다. 
-    - 각 주소에 저장돼 있던 값들은 자신을 참조하는 변수가 하나도 없게 되므로 가비지 **컬렉터의 수집 대상**이된다.
-* inner function안에서 closure 영역에 있는 변수는 &#39;c&#39; 하나 뿐이다. c1처럼 변수 선언만 하고 할당하지 않으면 메모리에 올라오지 않는다. </code></pre></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> <span class="token function-variable function">outer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> c <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> c1
+    <span class="token keyword">var</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token operator">++</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<ul>
+<li>inner함수 내부에서는 c를 선언하지 않았기 때문에 environmentRecord에서 값을 찾지 못하므로 outerEnvironmentReference에 지정된 상위 컨텍스트인 outer의 LexicalEnvironment에 접근해서 다시 c를 찾는다. </li>
+<li>
+<p>outer함수의 실행 컨텍스트가 종료되면 LexicalEnvironmentReference에 저장된 식별자들(c, inner)에 대한 참조를 지운다. </p>
+<ul>
+<li>각 주소에 저장돼 있던 값들은 자신을 참조하는 변수가 하나도 없게 되므로 가비지 <strong>컬렉터의 수집 대상</strong>이된다.</li>
+</ul>
+</li>
+<li>inner function안에서 closure 영역에 있는 변수는 'c' 하나 뿐이다. c1처럼 변수 선언만 하고 할당하지 않으면 메모리에 올라오지 않는다. </li>
+</ul>
 <h2 id="외부-함수의-변수를-참조하는-내부-함수2" style="position:relative;"><a href="#%EC%99%B8%EB%B6%80-%ED%95%A8%EC%88%98%EC%9D%98-%EB%B3%80%EC%88%98%EB%A5%BC-%EC%B0%B8%EC%A1%B0%ED%95%98%EB%8A%94-%EB%82%B4%EB%B6%80-%ED%95%A8%EC%88%982" aria-label="외부 함수의 변수를 참조하는 내부 함수2 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>외부 함수의 변수를 참조하는 내부 함수(2)</h2>
 <p>outer 함수의 실행컨텍스트가 종료된 후 inner 함수를 호출하면?</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```js
-var outer = function() {
-    var c = 1;
-    var c1
-    var inner = function() {
-        console.log(++c);
-    }
-    inner();
-};
-var excuteInnerFunc = outer();
-consl.log(excuteInnerFunc); // 2
-consl.log(excuteInnerFunc); // 3
-```
-* inner함수의 실행 컨텍스트의 environmentRecord에는 수집할 정보가 없습니다.
-* outerEnvironmentReferenece에는 inner함수가 선언된 위치의 LexicalEnvironment가 참조복사
-* inner함수는 outer함수 내부에서 선언됐으므로, outer함수의 Lexicalenvironment가 담김
-    - 위 단계로 스코프 체이닝에 따라 outer에서 선언한 변수 a에 접근해서 1만큼 증가시킨 후 그 값인 2를 반환
-    - inner함수의 실행 컨텍스트가 종료
-* excuteInnerFunc를 두번째 호출하게 되면 위 단계를 걸쳐 2-&gt;3 으로 증가한다.
-
-* ***주의할점***
-    &gt; inner함수의 실행시점에는 outer함수는 이미 실생 종료된 상태인데 outer함수의 Lexicalenvironment에 어떻게 접근할 수 있는걸까? 
-    - 가비지 컬렉터의 동작 방식때문
-    - 가비지 컬렉터는 어떤 값을 참조하는 변수가 하나라도 있다면 그 값은 수집 대상에 포함시키지 않습니다.
-    - 언젠가 inner함수의 실행컨텍스트가 활성화 되면 outerEnvironmentReferenece가 outer함수의 Lexicalenvironment를 필요로 할 것이므로 수집 대상에서 제외
-        - 그래서 inner함수 c 변수에 접근 가능</code></pre></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> <span class="token function-variable function">outer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> c <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> c1
+    <span class="token keyword">var</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token operator">++</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> excuteInnerFunc <span class="token operator">=</span> <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+consl<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>excuteInnerFunc<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
+consl<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>excuteInnerFunc<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span></code></pre></div>
+<ul>
+<li>inner함수의 실행 컨텍스트의 environmentRecord에는 수집할 정보가 없습니다.</li>
+<li>outerEnvironmentReferenece에는 inner함수가 선언된 위치의 LexicalEnvironment가 참조복사</li>
+<li>
+<p>inner함수는 outer함수 내부에서 선언됐으므로, outer함수의 Lexicalenvironment가 담김</p>
+<ul>
+<li>위 단계로 스코프 체이닝에 따라 outer에서 선언한 변수 a에 접근해서 1만큼 증가시킨 후 그 값인 2를 반환</li>
+<li>inner함수의 실행 컨텍스트가 종료</li>
+</ul>
+</li>
+<li>excuteInnerFunc를 두번째 호출하게 되면 위 단계를 걸쳐 2->3 으로 증가한다.</li>
+<li>
+<p><strong><em>주의할점</em></strong></p>
+<blockquote>
+<p>inner함수의 실행시점에는 outer함수는 이미 실생 종료된 상태인데 outer함수의 Lexicalenvironment에 어떻게 접근할 수 있는걸까? </p>
+</blockquote>
+<ul>
+<li>가비지 컬렉터의 동작 방식때문</li>
+<li>가비지 컬렉터는 어떤 값을 참조하는 변수가 하나라도 있다면 그 값은 수집 대상에 포함시키지 않습니다.</li>
+<li>
+<p>언젠가 inner함수의 실행컨텍스트가 활성화 되면 outerEnvironmentReferenece가 outer함수의 Lexicalenvironment를 필요로 할 것이므로 수집 대상에서 제외</p>
+<ul>
+<li>그래서 inner함수 c 변수에 접근 가능</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="return-없이도-클로저가-발생하는-다양한-경우" style="position:relative;"><a href="#return-%EC%97%86%EC%9D%B4%EB%8F%84-%ED%81%B4%EB%A1%9C%EC%A0%80%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EB%8B%A4%EC%96%91%ED%95%9C-%EA%B2%BD%EC%9A%B0" aria-label="return 없이도 클로저가 발생하는 다양한 경우 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>return 없이도 클로저가 발생하는 다양한 경우</h2>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```js
 (function(){
