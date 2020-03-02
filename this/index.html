@@ -778,25 +778,52 @@ obj1<span class="token punctuation">.</span><span class="token function">outer</
 <strong>특별히 정의하지 않은 경우에는 기본적으로 함수와 마찬가지로 전역객체를 바라본다.</strong><br>
 콜백 함수에 bind를 사용하여 <a href="https://happyjy.github.io/this/#%EC%83%81%EC%9C%84-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EC%9D%98-this%EB%A5%BC-%EB%82%B4%EB%B6%80%ED%95%A8%EC%88%98%EB%82%98-%EC%BD%9C%EB%B0%B1%ED%95%A8%EC%88%98%EC%97%90-%EC%A0%84%EB%8B%AC%ED%95%98%EA%B8%B0" target="_blank" rel="nofollow noopener noreferrer">2-4 bind</a></p>
 </blockquote>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```js
-setTimeout(function(){
-    console.log(this);      //window 객체 
-}, 3000);
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">//window 객체 </span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-[1,2,3].forEach(function(v){
-    console.log(this, v);   //window 객체 
-})
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//window 객체 </span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-//event Callback function 참고
-document.body.innerHTML += `&lt;button id=&quot;a&quot;&gt; 클릭 &lt;/button&gt;`
-document.body.querySelector(&#39;#a&#39;).addEventListener(&#39;click&#39;, function(e){
-    console.log(this, e);
-})
-
-```
-* &quot;button click event Callback function this&quot;과 &quot;id=&#39;a&#39; dom&quot; 객체 비교 =&gt; **같다.**
-
-![](eventCallbackfunction.png)</code></pre></div>
+<span class="token comment">//event Callback function 참고</span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>innerHTML <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;button id="a"> 클릭 &lt;/button></span><span class="token template-punctuation string">`</span></span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#a'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<ul>
+<li>"button click event Callback function this"과 "id='a' dom" 객체 비교 => <strong>같다.</strong></li>
+</ul>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;"
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/8c61ebccbdc541829ef31293a7e75086/171b8/eventCallbackfunction.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 20.667726550079493%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsSAAALEgHS3X78AAAA+UlEQVQY012Pz1KCcBSFeZNSMUQQkAERFMipsUzlX1NmvXc+QJk7XbETvn64aNGZ+ebOnHvPmbnS6XTifD5T1zWN9t8/ZMWCvLBZJWM22xh/0mbsXxPFMtuPKUk2ZLn2xN4hyW3mjyGO5zN0XKSqqi5lTWmjL1G4mU95e1Ap7izSWKGY9VmHCumtLnyd7UIjmd4IOuRxm5kpEyg9Jj0ZiX/aHw68jmzSICKbBDz7Fu+xy0s0YuW5LE2DJ8MgNE08VWPc1/D7OoFmiKkgNS83HI9HyrLkc7fj3rVxdXEswv5AJRyKgDXAMwY4Sherc0VL7tCW5QutP7r8AlFLsK3GQzzEAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="eventCallbackfunction"
+        title="eventCallbackfunction"
+        src="/static/8c61ebccbdc541829ef31293a7e75086/799d3/eventCallbackfunction.png"
+        srcset="/static/8c61ebccbdc541829ef31293a7e75086/00d96/eventCallbackfunction.png 148w,
+/static/8c61ebccbdc541829ef31293a7e75086/0b23c/eventCallbackfunction.png 295w,
+/static/8c61ebccbdc541829ef31293a7e75086/799d3/eventCallbackfunction.png 590w,
+/static/8c61ebccbdc541829ef31293a7e75086/171b8/eventCallbackfunction.png 629w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
 <ul>
 <li>
 <p>addEventListner function 내부 구현 추측 </p>

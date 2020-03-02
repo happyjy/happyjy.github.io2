@@ -517,8 +517,6 @@
 # 소비자: then, catch, finally
 # 예시: loadScript</code></pre></div>
 <h1 id="excutor-promise" style="position:relative;"><a href="#excutor-promise" aria-label="excutor promise permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>excutor: promise</h1>
-<ul>
-<li>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// executor (제작 코드, "가수")</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
@@ -528,8 +526,6 @@
 <ul>
 <li>resolve(value): 성공적으로 끝난 경우 결과를 value param으로 전달하며 resolve 호출</li>
 <li>reject(error): 에러 발생시 에러 객체를 error param으로 전달하며 reject 호출</li>
-</ul>
-</li>
 </ul>
 </li>
 <li>new Promise(executor)의 callback 'resolve(value)', 'reject(error)'의 state, result 상태 </li>
@@ -587,40 +583,45 @@ then parameter에 두개를 전달해줄 수 있는데 첫번째는 param에 성
 <p>POINT 주석 참고</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"done!"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// POINT: resolve 함수는 .then의 첫 번째 함수(인수)를 실행합니다.</span>
+promise<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+    <span class="token parameter">result</span> <span class="token operator">=></span> <span class="token function">alert</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// 1초 후 "done!"을 출력      </span>
+    <span class="token parameter">error</span> <span class="token operator">=></span> <span class="token function">alert</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token comment">// 실행되지 않음</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+</li>
+<li>
+<p>아래 와 같이 성공했을때는 작성 가능하다 </p>
+<ul>
+<li>
+<p>then function에 parameter 한개만 전달해주면 된다.</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token parameter">resolve</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"done!"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+promise<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>alert<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1초 뒤 "done!" 출력</span></code></pre></div>
 </li>
 </ul>
-<p>// POINT: resolve 함수는 .then의 첫 번째 함수(인수)를 실행합니다.
-promise.then(
-result => alert(result), // 1초 후 "done!"을 출력<br>
-error => alert(error) // 실행되지 않음
-);</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">- 아래 와 같이 성공했을때는 작성 가능하다 
-    - then function에 parameter 한개만 전달해주면 된다.
-    ```js
-    var promise = new Promise(resolve =&gt; {
-        setTimeout(() =&gt; resolve(&quot;done!&quot;), 1000);
-    });
-
-    promise.then(alert); // 1초 뒤 &quot;done!&quot; 출력
-    ```</code></pre></div>
+</li>
+</ul>
 </li>
 <li>
 <p>excutor가 에러로 필해한 경우</p>
 <ul>
 <li>
-<p>POINT 주석 참고 </p>
+<p>POINT 주석 참고</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">reject</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"에러 발생!"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">reject</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"에러 발생!"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// POINT: reject 함수는 .then의 두 번째 함수를 실행합니다.</span>
+promise<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+    <span class="token parameter">result</span> <span class="token operator">=></span> <span class="token function">alert</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// 실행되지 않음</span>
+    <span class="token parameter">error</span> <span class="token operator">=></span> <span class="token function">alert</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token comment">// 1초 후 "Error: 에러 발생!"를 출력</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 </li>
 </ul>
-<p>// POINT: reject 함수는 .then의 두 번째 함수를 실행합니다.
-promise.then(
-result => alert(result), // 실행되지 않음
-error => alert(error) // 1초 후 "Error: 에러 발생!"를 출력
-);</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"></code></pre></div>
 </li>
 </ul>
 <h2 id="catch" style="position:relative;"><a href="#catch" aria-label="catch permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>catch</h2>
@@ -632,8 +633,8 @@ error => alert(error) // 1초 후 "Error: 에러 발생!"를 출력
 <p>예시</p>
 <ul>
 <li>POINT 주석 참고</li>
-<li>.catch(f)는 문법이 간결하다는 점만 빼고 .then(null,f)과 완벽하게 동일</li>
-</ul>
+<li>
+<p>.catch(f)는 문법이 간결하다는 점만 빼고 .then(null,f)과 완벽하게 동일</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
     <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">reject</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"에러 발생!"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -641,6 +642,8 @@ error => alert(error) // 1초 후 "Error: 에러 발생!"를 출력
 <span class="token comment">// POINT</span>
 <span class="token comment">// .catch(f)는 promise.then(null, f)과 동일하게 작동합니다</span>
 promise<span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span>alert<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1초 뒤 "Error: 에러 발생!" 출력</span></code></pre></div>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="finally" style="position:relative;"><a href="#finally" aria-label="finally permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>finally</h2>
