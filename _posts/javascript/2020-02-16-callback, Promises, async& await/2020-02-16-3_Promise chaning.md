@@ -1,5 +1,5 @@
 ---
-title:  Promise chaning
+title: Promise chaning
 date: 2020-02-16
 tags:
   - javascript Core
