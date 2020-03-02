@@ -605,31 +605,58 @@ consl<span class="token punctuation">.</span><span class="token function">log</s
 </li>
 </ul>
 <h2 id="return-없이도-클로저가-발생하는-다양한-경우" style="position:relative;"><a href="#return-%EC%97%86%EC%9D%B4%EB%8F%84-%ED%81%B4%EB%A1%9C%EC%A0%80%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EB%8B%A4%EC%96%91%ED%95%9C-%EA%B2%BD%EC%9A%B0" aria-label="return 없이도 클로저가 발생하는 다양한 경우 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>return 없이도 클로저가 발생하는 다양한 경우</h2>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```js
-(function(){
-    var a = 0 ;
-    var intervalId = null;
-    var inner = function() {
-        if (++a&gt;9) {
-            clearInterval(intervalId);
-        }
-        console.log(a);
-    };
-    intervalId = setInterval(inner, 1000);
-})()
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">var</span> intervalId <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>a<span class="token operator">></span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">clearInterval</span><span class="token punctuation">(</span>intervalId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    intervalId <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span>inner<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-// clouser &amp; eventListener
-(function(){
-    var count = 0;
-    var button = document.createElement(&#39;button&#39;);
-    button.innerText = &#39;click&#39;;
-    button.addEventListener(&#39;click&#39;, function(){
-        console.log(++count, &#39;times clicked&#39;);
-    });
-    document.body.appendChild(button);
-})()
-```
-![clouser&amp;eventListener](clouser&amp;eventListener.png)</code></pre></div>
+<span class="token comment">// clouser &amp; eventListener</span>
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> button <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    button<span class="token punctuation">.</span>innerText <span class="token operator">=</span> <span class="token string">'click'</span><span class="token punctuation">;</span>
+    button<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token operator">++</span>count<span class="token punctuation">,</span> <span class="token string">'times clicked'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>button<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;"
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/a9505f1f2aad4dc0aeaf48afbc359097/013cc/clouser%26eventListener.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 82.21393034825871%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAAsSAAALEgHS3X78AAACXUlEQVQ4y62UW2/TMBiG/Ru4QXBR1sQ52IljN04at+nW9LStoJ1AQhoCTROX2wX//+blc7qNMQ1NQrt49Kk+PPF3UJkuK7huDdeMIUWKiHOEIdHH8A4OzndEEUcQxpjPElxfZvh6GuDyIsLp5i223RswIQRE3cItt1h3HdZTi0ldoS0LNLbE1Gq0oww6E9AyhZKiF5e2xmp9jKaZIM8LaD2CNiWYMgb5ZA5dNbBlCUGbgl4qkhhpSjFNiBhxHCEhfNwJx1isjlDSPSlzku5gKiuQpBkKVUMVNWQmkUQkoEsJpRdRylFA+LQD+n3HyBQ427TYLDS2K4FM+HJEYKZV+JCFUBOL7nyLzXmLxZbYVJjOC4xbKsF+jdhKBDoBNykGeYJlp/Dr6gDfLyx0kWIYEkEKVh8rDMoY+bLB7GSF2UcHd2jhjmrUqwbFtKCSKAxrgb2KLtUkLFM0U4Gba4fLswKdG+Bwf6+H5ZmB1GPK3/Sp8CCgdHdpxjxGOAwR7AXgFD1+fTjgOGg+4PYqx+0PhZtvIX5+fke8B9OjEUxNIyMlUmqGJ/HN8N33yKfIvlnWVvh0cobT8y9YUnNsNe5hvrOGOt11C8znczjn0LYtqqrqsdb+xf1a0zRYLFckW2NMM1zRWk3jxvymonaXJC1JXt4d9h/xr34O/3J/djJxfdRa9+c9bKQM2ixDS4dygkd+1uIePwb/wu8nSfJw9h5mMo0ZifapduqRMHokfo6n8gehJqF/3cwLqdj8BdFLMEPj8ueFryAscvoDkL6GKcyTGv6X0A92IyQcpatfQfgbuuPprl2CQmoAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="clouser&amp;eventListener"
+        title="clouser&amp;eventListener"
+        src="/static/a9505f1f2aad4dc0aeaf48afbc359097/799d3/clouser%26eventListener.png"
+        srcset="/static/a9505f1f2aad4dc0aeaf48afbc359097/00d96/clouser%26eventListener.png 148w,
+/static/a9505f1f2aad4dc0aeaf48afbc359097/0b23c/clouser%26eventListener.png 295w,
+/static/a9505f1f2aad4dc0aeaf48afbc359097/799d3/clouser%26eventListener.png 590w,
+/static/a9505f1f2aad4dc0aeaf48afbc359097/013cc/clouser%26eventListener.png 804w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
 <h1 id="2-클로저와-메모리-관리" style="position:relative;"><a href="#2-%ED%81%B4%EB%A1%9C%EC%A0%80%EC%99%80-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B4%80%EB%A6%AC" aria-label="2 클로저와 메모리 관리 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2 클로저와 메모리 관리</h1>
 <ul>
 <li>객체지향, 함수형 모두를 아우르는 중요한 개념</li>
