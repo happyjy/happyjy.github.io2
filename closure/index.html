@@ -554,14 +554,14 @@ In JavaScript, closures are created every time a function is created, at functio
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
-<li>inner함수 내부에서는 c를 선언하지 않았기 때문에 environmentRecord에서 값을 찾지 못하므로 outerEnvironmentReference에 지정된 상위 컨텍스트인 outer의 LexicalEnvironment에 접근해서 다시 c를 찾는다. </li>
+<li><strong>inner함수 내부에서는 c를 선언하지 않았기 때문에 environmentRecord에서 값을 찾지 못하므로 outerEnvironmentReference에 지정된 상위 컨텍스트인 outer의 LexicalEnvironment에 접근해서 다시 c를 찾는다.</strong></li>
 <li>
 <p>outer함수의 실행 컨텍스트가 종료되면 LexicalEnvironmentReference에 저장된 식별자들(c, inner)에 대한 참조를 지운다. </p>
 <ul>
-<li>각 주소에 저장돼 있던 값들은 자신을 참조하는 변수가 하나도 없게 되므로 가비지 <strong>컬렉터의 수집 대상</strong>이된다.</li>
+<li>각 <u>주소에 저장돼 있던 값들은 자신을 참조하는 변수가 하나도 없게 되므로</u> <strong>가비지 컬렉터의 수집 대상</strong>이된다.</li>
 </ul>
 </li>
-<li>inner function안에서 closure 영역에 있는 변수는 'c' 하나 뿐이다. c1처럼 변수 선언만 하고 할당하지 않으면 메모리에 올라오지 않는다. </li>
+<li>inner function안에서 closure 영역에 있는 변수는 'c' 하나 뿐이다. <strong>c1처럼 변수 선언만 하고 할당하지 않으면 메모리에 올라오지 않는다.</strong> </li>
 </ul>
 <h2 id="외부-함수의-변수를-참조하는-내부-함수2" style="position:relative;"><a href="#%EC%99%B8%EB%B6%80-%ED%95%A8%EC%88%98%EC%9D%98-%EB%B3%80%EC%88%98%EB%A5%BC-%EC%B0%B8%EC%A1%B0%ED%95%98%EB%8A%94-%EB%82%B4%EB%B6%80-%ED%95%A8%EC%88%982" aria-label="외부 함수의 변수를 참조하는 내부 함수2 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>외부 함수의 변수를 참조하는 내부 함수(2)</h2>
 <p>outer 함수의 실행컨텍스트가 종료된 후 inner 함수를 호출하면?</p>
@@ -594,9 +594,9 @@ consl<span class="token punctuation">.</span><span class="token function">log</s
 </blockquote>
 <ul>
 <li>가비지 컬렉터의 동작 방식때문</li>
-<li>가비지 컬렉터는 어떤 값을 참조하는 변수가 하나라도 있다면 그 값은 수집 대상에 포함시키지 않습니다.</li>
+<li><strong>가비지 컬렉터는 어떤 값을 참조하는 변수가 하나라도 있다면 그 값은 수집 대상에 포함시키지 않습니다.</strong></li>
 <li>
-<p>언젠가 inner함수의 실행컨텍스트가 활성화 되면 outerEnvironmentReferenece가 outer함수의 Lexicalenvironment를 필요로 할 것이므로 수집 대상에서 제외</p>
+<p><strong>언젠가 inner함수의 실행컨텍스트가 활성화 되면 outerEnvironmentReferenece가 outer함수의 Lexicalenvironment를 필요로 할 것이므로 수집 대상에서 제외</strong></p>
 <ul>
 <li>그래서 inner함수 c 변수에 접근 가능</li>
 </ul>
@@ -609,6 +609,7 @@ consl<span class="token punctuation">.</span><span class="token function">log</s
     <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
     <span class="token keyword">var</span> intervalId <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    	<span class="token comment">//CallStack inner에서 clsoure scope: a, intervalId</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>a<span class="token operator">></span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">clearInterval</span><span class="token punctuation">(</span>intervalId<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -623,6 +624,7 @@ consl<span class="token punctuation">.</span><span class="token function">log</s
     <span class="token keyword">var</span> button <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     button<span class="token punctuation">.</span>innerText <span class="token operator">=</span> <span class="token string">'click'</span><span class="token punctuation">;</span>
     button<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	<span class="token comment">//callback function CallStack 에서 clsoure scope: count</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token operator">++</span>count<span class="token punctuation">,</span> <span class="token string">'times clicked'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>button<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -671,6 +673,7 @@ consl<span class="token punctuation">.</span><span class="token function">log</s
     <span class="token keyword">var</span> c <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> c1
     <span class="token keyword">var</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">//Call Stack inner에서 Closure Scope: c (c1은 참조를 안하고 있어 GC에 의해 수집)</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token operator">++</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -684,6 +687,7 @@ outer <span class="token operator">=</span> <span class="token keyword">null</sp
     <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
     <span class="token keyword">var</span> intervalId <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">//CallStack inner에서 clsoure scope: a, intervalId, inner(inner식별자의 함수 참조를 끊기위해 참조)</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>a<span class="token operator">></span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">clearInterval</span><span class="token punctuation">(</span>intervalId<span class="token punctuation">)</span><span class="token punctuation">;</span>
             inner <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>             <span class="token comment">// POINT: inner식별자의 함수 참조를 끊음  </span>
@@ -703,6 +707,7 @@ outer <span class="token operator">=</span> <span class="token keyword">null</sp
 
     <span class="token keyword">var</span> <span class="token function-variable function">clickHandler</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment">//console.log(++count, 'times clicked');</span>
+<span class="token comment">//callback function CallStack 에서 clsoure scope: count, clickHandler(식별자 함수 참조를 끊기위해서 closure영역 clickHandler참조)</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token operator">++</span>count <span class="token operator">></span> <span class="token number">9</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
             clickHandler <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>  <span class="token comment">//POINT: clickHandler 식별자 함수 참조를 끊음</span>
         <span class="token punctuation">}</span>
@@ -727,7 +732,7 @@ outer <span class="token operator">=</span> <span class="token keyword">null</sp
         <span class="token keyword">var</span> $li <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         $li<span class="token punctuation">.</span>innerText <span class="token operator">=</span> color<span class="token punctuation">;</span>
         $li<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>       <span class="token comment">//(B)</span>
-            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'your choice: '</span><span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'your choice: '</span><span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         $ul<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>$li<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -747,14 +752,14 @@ outer <span class="token operator">=</span> <span class="token keyword">null</sp
     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">===</span> window<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment">//POINT3, POINT2</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'### this is window -> '</span> <span class="token operator">+</span> <span class="token keyword">this</span> <span class="token operator">+</span> <span class="token string">"/// callback function param: "</span> <span class="token operator">+</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">//&lt;li>blue&lt;/li></span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//MouseEvent</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'### this: '</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">//Window {}</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'### color: '</span><span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//blue</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'--------------------'</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
         <span class="token comment">//POINT1</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'### this is HTMLElement -> this Value:'</span> <span class="token operator">+</span> <span class="token keyword">this</span> <span class="token operator">+</span> <span class="token string">"/// callback function param: "</span> <span class="token operator">+</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">//window</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//blue</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'*** this is HTMLElement -> this Value:'</span> <span class="token operator">+</span> <span class="token keyword">this</span> <span class="token operator">+</span> <span class="token string">"/// callback function param: "</span> <span class="token operator">+</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'*** this: '</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">//&lt;li>blue&lt;/li></span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'*** color: '</span><span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//MouseEvent</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'===================='</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>   
 <span class="token punctuation">}</span>            
@@ -803,8 +808,20 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <ul>
 <li>POINT1,2,3의 consoleColor function의 console 확인 필요 </li>
 <li>POINT1,2의 this, 첫번째 param을 다시 상기 시켜보자.</li>
-<li>POINT2의 제약사항<br>
-<strong>- 이벤트 객체가 인자로 넘어오는 순서가 바뀌는 점 및 함수 내부에서의 this가 원래의 그것과 달라지는 점은 감안해야한다.</strong></li>
+<li>
+<p>POINT1</p>
+<ul>
+<li>eventListener의 callback function에서 this: target dom</li>
+</ul>
+</li>
+<li>eventListener의 callback function에서 첫번째 param: event 객체</li>
+<li>
+<p>POINT2 제약사항  </p>
+<ul>
+<li><strong>이벤트 객체가 인자로 넘어오는 순서가 바뀌는 점(2번째 param으로 event 객체가 넘어옴)</strong></li>
+</ul>
+</li>
+<li><strong>함수 내부에서의 this가 eventListener callback function에서 가르키는것(target dom)과 달라지는 점은 감안해야한다.</strong></li>
 </ul>
 </li>
 <li>

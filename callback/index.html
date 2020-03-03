@@ -689,38 +689,35 @@ obj<span class="token punctuation">.</span><span class="token function">logValue
 <li>
 <p>예제1에서 만들었던 함수 재활용하는 방법 - cb2 확인해보자</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>
-    name<span class="token operator">:</span> <span class="token string">'obj1'</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">func</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">var</span> me <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>              <span class="token comment">//POINT: closure</span>
-        <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>me<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+name<span class="token operator">:</span> <span class="token string">'obj1'</span><span class="token punctuation">,</span>
+<span class="token function-variable function">func</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">var</span> me <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>              <span class="token comment">//POINT: closure</span>
+<span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">debugger</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>me<span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">var</span> obj2 <span class="token operator">=</span> <span class="token punctuation">{</span>
-    name<span class="token operator">:</span> <span class="token string">'obj2'</span><span class="token punctuation">,</span>
-    func<span class="token operator">:</span> obj1<span class="token punctuation">.</span>func
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">var</span> cb1 <span class="token operator">=</span> obj1<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">'cb1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">setTimeout</span><span class="token punctuation">(</span>cb1<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">var</span> cb2 <span class="token operator">=</span> obj2<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">'cb2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">setTimeout</span><span class="token punctuation">(</span>cb2<span class="token punctuation">,</span> <span class="token number">1500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">var</span> obj3 <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'obj3'</span> <span class="token punctuation">}</span>
-<span class="token keyword">var</span> cb3 <span class="token operator">=</span> obj1<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj3<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">//POINT: obj1.func = function(){ var me this; return function(p1){ console.log() }} </span>
-<span class="token function">setTimeout</span><span class="token punctuation">(</span>cb3<span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">/*
-    # 결과
-        * cb1: undefined "obj1" "callback1"
-        * cb2: undefined "obj2" "callback2"
-        * cb3: obj3 obj1 callback3
-*/</span></code></pre></div>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 </li>
 </ul>
+<p>var obj2 = {
+name: 'obj2',
+func: obj1.func
+};</p>
+<p>var cb1 = obj1.func().bind({name: 'cb1'});
+setTimeout(cb1, 1000);</p>
+<p>var cb2 = obj2.func().bind({name: 'cb2'});
+setTimeout(cb2, 1500);</p>
+<p>var obj3 = { name: 'obj3' }
+var cb3 = obj1.func.call(obj3);        //POINT: obj1.func = function(){ var me this; return function(p1){ console.log() }}
+setTimeout(cb3, 2000);</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">/*
+    # 결과
+        * cb1: obj1 {name: &quot;cb1&quot;}
+        * cb2: obj2 {name: &quot;cb2&quot;}
+        * cb3: obj3 Window {...}
+*/</code></pre></div>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"></code></pre></div>
 </li>
 <li>
 <p>콜백 함수 내부의 this에 따른 값을 바인딩하는 방법 (3/3)</p>
@@ -773,7 +770,7 @@ obj<span class="token punctuation">.</span><span class="token function">logValue
 <ul>
 <li>실행대기(setTimeout)<br>
 : 사용자의 요청에 의해 특정 시간이 경과되기 전까지 어떤 함수의 실행을 보류</li>
-<li>실행대기(addEventListener)<br>
+<li>이벤트처리(addEventListener)<br>
 : 사용자의 직접적인 개입이 있을 때 비로소 어떤 함수를 실행하도록 대기</li>
 <li>보류(XMLhttpRequest)<br>
 : 웹브라우저 자체가 아닌 별도의 대상에 무어가를 요청하고 그에 대한 응답이 왔을때 비로소 어떤 함수를 실행하도록 대기</li>
