@@ -1,3 +1,13 @@
+---
+title: Effective Javascript
+date: 2020-03-06
+tags:
+  - javascript
+keywords:
+  - Effective Javascript
+---
+
+
 # 1장 자바스크립트에 익숙해지기
 * 아이템 1 어떤 자바스크립트를 사용하고 있는지 알아야 한다  
 * 아이템 2 자바스크립트의 부동 소수점 숫자 이해하기  

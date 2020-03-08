@@ -22,9 +22,7 @@
         }
 
         const ViewModelListener = class {
-            viewmodelUpdated(updated) {
-                throw 'override';
-            }
+            viewmodelUpdated(updated) { throw 'override'; }
         }
 
         const ViewModel = class extends ViewModelListener {
