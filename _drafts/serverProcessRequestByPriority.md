@@ -3,7 +3,7 @@ title: server process request by priority
 date: 2020-01-19
 tags:
   - algorithm
-  - javascript
+  - Javascript
 ---
 
 # CONDITION

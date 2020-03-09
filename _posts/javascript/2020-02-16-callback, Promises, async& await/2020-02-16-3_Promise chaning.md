@@ -2,7 +2,7 @@
 title: Promise chaning
 date: 2020-02-16
 tags:
-  - javascript Core
+  - Javascript Core
 keywords:
   - Promise chaning
 ---
@@ -113,5 +113,5 @@ promise객체에 then을 연속적으로 사용할 수 있는 promise chaining�
     ````
 
 # 참고 
-- javascript.info  
+- Javascript.info  
 https://javascript.info/promise-chaining

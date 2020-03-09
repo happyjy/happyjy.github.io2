@@ -2,7 +2,7 @@
 title: ES6로 배열을 제거 할 수 있는 3가지 방법
 date: 2020-01-20
 tags:
-  - javascript
+  - Javascript
   - ES6
 keywords:
   - 배열

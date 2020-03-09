@@ -2,7 +2,7 @@
 title: Javascript RoadMap
 date: 2020-03-01
 tags:
-  - javascript Core
+  - Javascript Core
 keywords:
   - Javascript
 ---

@@ -2,7 +2,7 @@
 title: eventLoop
 date: 2020-02-16
 tags:
-  - javascript Core
+  - Javascript Core
 keywords:
   - eventLoop
 ---

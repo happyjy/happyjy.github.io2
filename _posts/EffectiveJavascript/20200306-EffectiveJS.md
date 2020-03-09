@@ -2,7 +2,7 @@
 title: Effective Javascript
 date: 2020-03-06
 tags:
-  - javascript
+  - Javascript
 keywords:
   - Effective Javascript
 ---

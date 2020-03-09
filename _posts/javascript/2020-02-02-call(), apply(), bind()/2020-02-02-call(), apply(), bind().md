@@ -2,12 +2,12 @@
 title: call(), apply(), bind()
 date: 2020-02-02
 tags:
-  - javascript Core
+  - Javascript Core
 keywords:
   - call
   - apply
   - bind
-  - javascript
+  - Javascript
 ---
 
 ```
