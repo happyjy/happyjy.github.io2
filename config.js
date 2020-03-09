@@ -21,7 +21,7 @@ module.exports = {
   website: 'https://happyjy.github.io',           // ex.'https://junhobaik.github.io'
   linkedin: '',                                                          // ex.'https://www.linkedin.com/in/junho-baik-16073a19ab'
   facebook: '',                                                          // ex.'https://www.facebook.com/zuck' or 'https://www.facebook.com/profile.php?id=000000000000000'
-  instagram: 'https://www.instagram.com/happyjy',                                                         // ex.'https://www.instagram.com/junhobaik'
+  instagram: 'https://www.instagram.com/happyjy_',                                                         // ex.'https://www.instagram.com/junhobaik'
   github: 'https://github.com/happyjy',                                                            // ex.'https://github.com/junhobaik'
 
   /** Post */
