@@ -50,7 +50,7 @@ const Tags = (props: TagsPageProps) => {
             setTargetTag(g.fieldValue);
           }}
         >
-          <a href={`#${g.fieldValue}`}>{g.fieldValue}</a>
+          <a href={`#${g.fieldValue}`}>{g.fieldValue}({g.totalCount})</a>
         </span>
       </li>
     );
