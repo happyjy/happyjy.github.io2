@@ -49,8 +49,9 @@
   right: 0;
   overflow: auto;
   margin-top: $header-height;
-  opacity: 0.4;
+  opacity: 1;
   max-height: 85%;
+  border-left: 1.3px solid #9b9b9b;
 
   @media screen and (max-width: $break-toc) {
     display: none;
