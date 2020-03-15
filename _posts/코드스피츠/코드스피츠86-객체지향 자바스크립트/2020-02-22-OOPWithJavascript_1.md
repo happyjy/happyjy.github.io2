@@ -189,7 +189,7 @@ const EssentialObject = class {
 * SRP Single Responsibility(단일책임)
 * OCP Open Closed(개방폐쇄)
 * LSP Liskov Substitusion(업캐스팅 안전)
-* ISP Interface Segregation(인터페이스분리
+* ISP Interface Segregation(인터페이스분리)
 * DIP Dependency Inversion(다운캐스팅금지)
 
 ### SRP Single Responsibility(단일책임)
@@ -235,15 +235,15 @@ const EssentialObject = class {
 
 * ISP 필요대상 
 	- 아래 위임, 인터페이스로 해결하는 방법을 소개하겠습니다.
-![](ISP-1회/필요대상.png)
+![](1회/ISP-필요대상.png)
 
 * 위임으로 해결하는 방법  
-![](ISP-1회/위임.png)
+![](1회/ISP-위임.png)
     - 위임(소유): 인터페이스로 분리하지 않고 처리하는 첫번째 옵션
     - 모듈A, B, C 바라볼 객체를 만들어서 객체별로 A,B,C를 상대하도록 만들어 준다
 
 * 인터페이스로 해결하는 방법  
-![](ISP-1회/interface.png)  
+![](1회/ISP-interface.png)  
     - 객체를 만들때 처음부터 인터페이스 A, B, C 세개를 가져와서 인터페이스에 맞게 메소드를 오버라이드한다. 
     - 그래서 외부에서 볼때는 객체를 보는게 아니라, 객체가 구현한 인터페이스를 보게 된다. 
 
