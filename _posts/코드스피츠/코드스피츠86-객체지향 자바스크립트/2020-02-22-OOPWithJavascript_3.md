@@ -742,14 +742,9 @@ requestAnimationFrame(f)
                 )
             )
 
-            subKey = '';
-            parent = null;
-            styles = {};
-            attributes = {};
-            properties = {};
-            events = {};
-            #isUpdated = new Set;
-            #listeners = new Set;
+            subKey = ''; parent = null;
+            styles = {}; attributes = {}; properties = {}; events = {};
+            #isUpdated = new Set; #listeners = new Set;
 
             constructor(data, _ = type(data, 'object')) {
                 super();
