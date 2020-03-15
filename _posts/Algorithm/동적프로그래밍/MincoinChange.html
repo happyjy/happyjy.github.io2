@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function MinConinChange(coins){
+            var conins = coins;
+            var cache = {};
+
+            this.makeChange = function(amount){
+                var me = this;
+                if (!amount) {
+                    return [];
+                }
+                if (cache[amount]){
+                    return cache[amount];
+                }
+                var min = [], newMin, newAmount;
+
+                for (var i=0; i<coins.length; i++){
+                    var coin = coins[i];
+                    newAmount = amount - coin;
+                    if (newAmount >=0 ){
+                        newMin = me.makeChange(newAmount);
+                    }
+                    if ( newAmount >= 0 && //조건1
+                        (newMin.length < min.length-1 || !min.length) //조건2
+                        && (newMin.length || !newAmount)){  //조건3
+                        min = [coin].concat(newMin);
+                        console.log(`new Min_ ${min} for ${amount}`);
+                    }
+                }
+                return (cache[amount] = min);
+            }
+        };
+
+        var minConinChange = new MinConinChange([1, 5, 10, 25]);
+        console.log(minConinChange.makeChange(36));
+    </script>
+    
+</body>
+</html>
