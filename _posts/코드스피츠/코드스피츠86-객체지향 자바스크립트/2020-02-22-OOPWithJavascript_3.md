@@ -17,7 +17,7 @@ keywords:
 
 # 목표 
 * 전략적 패턴 적용
-    - 기존 binder가 코드로 확정 되어 있다. 이 부분을 전략적으로 빼내는 방법을 살펴본다. 
+    - 기존 Binder 클래스가 코드로 확정 되어 있다. 이 부분을 전략적으로 빼내는 방법을 살펴본다. 
     
 * call -> Observation
     - Binder, ViewModel 통신을 이전 강의 까지 call로 해결해쓴는데 이번에 Observation으로 해결을 설명합니다.  
@@ -67,7 +67,7 @@ keywords:
 ### Binder class의 구조부분 확인
 ![Structure & control](./3회/1.Strategy_Structure&Control.png) 
 
-### Binder class의 전략 부분 확인
+### Binder class의 전략부분 확인
 * 전략부분: 특정 도메인(알고리즘,지식)을 해결하기 위한 전략적인 부분 
 ![Strategy](./3회/2.Strategy_Strategy.png)
 
@@ -104,7 +104,7 @@ keywords:
 * `Dependency`가 생기는 이유는 코드를 객체로 변경했기 때문 
     - 객체에 대한 의존성을 내부에서 생성해버리면 dependency만 생긴다. 이러면 다시 코드를 건드려야 해서 외부에서 공급(`Dependency Injection`)받아야지면 객체를 뺀이유가 생긴다.  
 
-
+# Binder 클래스 리팩토링
 ## Binder Class에 Composition 적용 과정
 ![Processor Class & Tempalte Method](./3회/4.ProcessorClass_TempalteMethod.png) 
 1. 연역적 추리(다양한 현상으로 부터 원리가 되는 추상화를 도출)를 통해서 strategy로 부터 공통점을 이끌어낸다. 
@@ -130,14 +130,15 @@ keywords:
 
 
 
-## Binder class에서 Processor class 정리
+## STEP1 Binder class에서 Processor class 정리
 > Binder class에서 strategy pattern, composition pattern을 통해서 Processor class를 생성하고  
 > Processor에 여러 전략을 사용하기 위해서 Template Method pattern을 적용  
 > 아래에서 Template Method pattern을 적용하기 위해서 Processor Class를 상속한것을 설명합니다.
 
 * Binder class의 Strategy부분은 Processor class 인스턴스 위임을 받아서 처리하려고한다. 
-* Binder class는 composition은 Processor class를 소유를 통해서(Processor class를 Dependency Injection)을 통해서 해결하려고 있고 이를 처리해주는 
-* Processor class에서는 process마다 다양한 처리 방법을 Template Method방법을 통해서 해결 
+* Binder class는 composition적용으로 Processor class를 소유를 통해서(Processor class를 Dependency Injection)을 통해서 해결하려고 있고 이를 처리해주는 
+* Processor class에서는 process마다 다양한 처리 방법을 Template Method방법을 통해서 해결  
+client code에 binder.addProcessor함수로 추가하는 intance(hook method) 참고 
 
 
 
@@ -149,7 +150,8 @@ keywords:
     - Binder class render는 view를 실제로 수정할때 사용되는 코드
     - 여기서 k, v는 viewmodel에서 받은 key, value값이다. 
 * 예를 들어 첫번째 el.style가 있는 코드는 cat(=category)는 Styles로 정의했다.
-* 익명상속된 클래스의 장점: 만든 인스턴스를 한번만 만들어 한번만 사용하게해 다시 사용할 수 없게 한다. 
+* 익명상속된 클래스의 장점  
+: 만든 인스턴스를 한번만 만들어 한번만 사용하게해 다시 사용할 수 없게 한다. 
 * 우리는 이렇게 el에 style, property, attribute, event를 설정할 수 있는 전략 4개를 만들었다. 
     - 4개 전략 이외에 예를들어 lazy loader, scroll injector등의 기능을 넣을 수 있게 됐다.  
 * 이렇게 Processor를 상속받아 만은 인스턴스는 각기 다른 객체이지만 하나 의 Processor type으로 인식하게 된다.  
@@ -160,16 +162,18 @@ keywords:
 * 어떤 객체가 다른 객체를 '필드'수준, '메소드'수준, '자식'수준으로 안다. 
 
 
-## Binder class 변경 
+## STEP2 Binder class 변경 
 > Binder에서 strategy 부분을 공급 받기 위해서 만든 Process class를 생성/ 상속 받은 클래스 인스턴스까지 만들어 봤으니 외부에서 Strategy를 주입 받기에 주입받는 Binder를 수정해보자 
 
 ![Processor Class & Hook Method](./3회/6.BinderClass_modification.png) 
 * 변수 #processors 설명
     - set으로 안만들고 Array로 만든 이유 
-    - 한개개의 category당 한개의 값만 갖기 위해서(제일 마지막에 들어 온것만 덮어 쓴다)
+    - 한개의 category당 한개의 값만 갖기 위해서(제일 마지막에 들어 온것만 덮어 쓴다)
 * 아래 코드 설명
     - 아래 주석 설명1, 설명2 참고 
     - processors의 순환문의 pk: Processor의 catetory(cat)   
+    
+* [보완]: 아래 설명을 따로 빼서 적어 놓기 
 ```js
     //# 설명1: 자바스크립트는 single thread machine이기 때문에 render method가 돌때 갑자기 addProcessor가 동작할 수 없다.
     const processors = Object.entries(this.#processors);
@@ -240,7 +244,8 @@ keywords:
     - observe: Binder가 ViewModel을 감시한다고 설정하고 
     - notify: ViewModel이 변하면 Binder에게 알려주는 형식이다. 
 * recognize property change
-    - 어떻게 인메모리객체가 변할떄 알려줄 수 있을까? 를 자바스크립트에서는 "defineProperty, Proxy"이 두가지를 지원해줍니다. 
+    - 어떻게 인메모리객체가 변할때 알려줄 수 있을까?  
+    자바스크립트에서는 "defineProperty, Proxy"이 두가지를 지원해줍니다. 
 * defineProperty & Proxy  
 우리는 defineProperty의 3번째 인자 descriptor에 setter, getter의 속성을 이용해서 구현합니다.
     - defineProperty: 
@@ -353,6 +358,7 @@ const ViewModel = class extends ViewModelListener {
 }
 
 ```
+* [보완] 숫자 앞에 설명 PREFIX 붙이기
 * 1.subject이기때문에 listener를 거느리고 있어야 notification을 할 수 있다. 
     * 변수 #listener에 listener를 받아서 notification될때 #listener에 nofication을 때려준다!
 * 2.addListener, removeListener method
@@ -361,6 +367,7 @@ const ViewModel = class extends ViewModelListener {
     * true, false가 아니라 Set type을 보내주는 이유 
         - update가 여러번 일어 날 수 있기 때문에 
 * 4.중복을 없앴다
+    * [보완] 전 강의 Binder Code 수정
     * 참고: [전 강의 Binder Code](https://happyjy.github.io/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8_2/#binder)
     * "".inclues.(k)
         - 문자열의 indexof는 자바스크립트에서 특별하게 빠르다. (object에서 key를 찾는 것보다)
@@ -417,7 +424,7 @@ const ViewModel = class extends ViewModelListener {
 
 # 3. Composite(ViewModel class 수정)
 > 내가 내 문제를 동일한 문제임에도 불구하고 내가 해결하지 않고 위임을 계속 반복해서 그것들을 취함하는 행동들을 말합니다. 
-> 이 부분은 ViewModel class와 관련되 있습니다. 
+> 이 부분은 ViewModel class와 관련 있습니다. 
 * 대중 계층에 대한 고민이 상항 있다. 
     - 예를 들어 폴더안에 파일 폴더안에 파일
     - 다중노드가 전개되어 있는 트리를 얼마나 빠르게 화면에 뿌릴 수 있는지 중요!
@@ -465,7 +472,7 @@ const ViewModel = class extends ViewModelListener {
     //POINT5.1 notify: observer에게 통보할 subjects들이 모인 곳
     // vm.notify는 결국 v.viewmodelUpdated를 통해서 binder의 viewmodelupdated를 통해서 el을 변경한다 !!!
     static notify(vm) {
-        this.#subjects.a dd(vm);
+        this.#subjects.add(vm);
         if (this.#inited) return
         this.#inited = true;
         const f = () => {
