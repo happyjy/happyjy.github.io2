@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>최소동전교환문제_동적프로그래밍</title>
 </head>
 <body>
     <script>
@@ -25,15 +25,19 @@
                     var coin = coins[i];
                     newAmount = amount - coin;
                     if (newAmount >=0 ){
+                        console.log(`##amount: ${amount}, ##i: ${i}, ##coin: ${coin}, ##newAmount: ${newAmount}`);
                         newMin = me.makeChange(newAmount);
                     }
                     if ( newAmount >= 0 && //조건1
                         (newMin.length < min.length-1 || !min.length) //조건2
                         && (newMin.length || !newAmount)){  //조건3
                         min = [coin].concat(newMin);
-                        console.log(`new Min_ ${min} for ${amount}`);
+                        // console.log(`#amount: ${amount}, #newAmount: ${newAmount}, #iterator: ${i}, new Min_ ${min} for ${amount}`);
                     }
                 }
+                console.log("--------------------------");
+                console.log("### amount, min: ", amount, min);
+                
                 return (cache[amount] = min);
             }
         };
