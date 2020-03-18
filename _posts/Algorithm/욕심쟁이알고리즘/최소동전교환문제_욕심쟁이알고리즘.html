@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최소동전교환문제</title>
+</head>
+<body> 
+    <script>
+        function MinCoinChange(coins){
+            var coins = coins;
+
+            this.makeChange = function(amount){
+                var change = [], total = 0;
+                for(var i=coins.length; i>=0; i--){     //코인 단위 역순으로(큰 코인부터)
+                    var coin = coins[i];
+                    while(total + coin <= amount){
+                        change.push(coin);
+                        total += coin;
+                    }
+                }
+                return change;
+            };
+
+        }
+
+        var minCoinChange = new MinCoinChange([1,5,10,25]);
+        console.log(minCoinChange.makeChange(36));
+    </script>    
+</body>
+</html>
