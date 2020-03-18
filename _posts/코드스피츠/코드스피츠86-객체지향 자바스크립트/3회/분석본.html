@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>undefined</title>
+</head>
+
+<body>
+    <section id="target" data-viewmodel="wrapper">
+        <h2 data-viewmodel="title"></h2>
+        <section data-viewmodel="contents"></section>
+    </section>
+    <script>
+        /*
+            jyoon1. ViewModel Class > define > reduce  
+            jyoon2. ViewModel Class > #listeners
+            jyoon3. ViewModel Class > subKey, parent
+            jyoon4. MVVM Binder과정
+                4.1 binder.addProcessor( new class extends Processr{ _process(){...} }())
+                4.2 binder.watch(rootViewModel);
+                4.3 binder.redner [분석필요]
+                4.4 process
+
+1
+            Scanner class > scan > checkItem > binder.add > #items에 BidnerItems inst 세팅
+            Binder class > #processors
+
+        */
+
+        const type = (target, type) => {
+            if (typeof type == "string") {
+                if (typeof target != type) throw `invalid type ${target} : ${type}`;
+            } else if (!(target instanceof type)) {
+                throw `invalid type ${target} : ${type}`;
+            }
+            return target;
+        };
+
+        const ViewModelListener = class {
+            viewmodelUpdated(updated) { throw 'override' };
+        };
+
+        const ViewModel = class extends ViewModelListener {
+            static get = data => new ViewModel(data);
+            //변경
+            static #subjects = new Set;
+            static #inited = false;            
+            static notify(vm) {                
+                // debugger;                
+                this.#subjects.add(vm);
+                if (this.#inited) return;
+                this.#inited = true;
+                const f = () => {
+                    this.#subjects.forEach(vm => {
+                            if (vm.#isUpdated.size) {
+                            vm.notify();
+                            vm.#isUpdated.clear();
+                        }
+                    })
+                    requestAnimationFrame(f);
+                }
+                requestAnimationFrame(f);
+            }
+            //변경
+            static descriptor = (vm, category, k, v) => ({
+                enumerable: true,
+                get: () => v,
+                set(newV) {
+                    // debugger;
+                    v = newV;
+                    vm.#isUpdated.add(new ViewModelValue(vm.subKey, category, k, v));
+                }
+            })
+            //변경
+            /*
+                # jyoon1. reduce 분석
+                : client에서 ViewModel.get을통해서 객 el에 설정할 data를 넘겨 
+                ViewModel instance를 반환 받는다.
+
+                vm       : ViewModel class 
+                category : el 속성들 (styles, attributes, properties)
+                obj      : el 속성에 설정할 data(Client에서 VeiwModel.get으로 전달 됨)
+                
+                
+                [k,v]    : eg: wrapper속성
+                            [
+                                ["width", "50%"]
+                                ["background", "#ffa"]
+                                ["cursor", "pointer"]
+                            ]
+            */
+            static define = (vm, category, obj) => (
+                Object.defineProperties(
+                    obj,
+                    Object.entries(obj)
+                        .reduce((r, [k, v]) => (r[k] = ViewModel.descriptor(vm, category, k, v), r), {})
+                        // Object.entries(obj).reduce((r, [k, v]) => {
+                        //     r[k] = ViewModel.descriptor(vm, category, k, v)
+                        //     return r
+                        // }, {})
+                        
+                )
+            )
+
+            subKey = ''; parent = null;
+            styles = {}; attributes = {}; properties = {}; events = {};
+            #isUpdated = new Set; #listeners = new Set;
+
+            constructor(data, _ = type(data, 'object')) {
+                // debugger;
+                super();
+                Object.entries(data).forEach(([k, v]) => {
+                    //변경
+                    //jyoon
+                    //ViewModel의 속성 값/ 위에 초기화 되어 있는 네개의 값이 있다.
+                    if ('styles,attributes,properties'.includes(k)) {
+                        debugger;
+                        if (!v || typeof v != 'object') throw `invalid object k: ${k}, v:${v}`;
+                        this[k] = ViewModel.define(this, k, v);
+                    } else {
+                        //POINT2
+                        /*
+                            # 한줄 요약 
+                                * Client에서 rootViewModel 세팅 시 수행되는 로직 부분으로 rootViewModel은 wrapper, title, contents ViewModel inst를 가지고 있는 말그대로 rootViewModel이다.
+                                * 여기서 중요한 점은 각 ViewModel에 listener를 설정해 변경이 일어나면 Binder가 알 수 있도록 세팅해주는 것이다.
+                                
+                                * ViewModel > descriptor에서 더 설명하겠지만 set설정 부분에 의해서 ViewModelValue 생성으로 view가 변경된다.
+
+                            # Client에서 rootViewModel 세팅 시 
+                                * v.parent, v.subKey 세팅 되는 값을 통해서 확인 parent, child를 알 수 있다.
+                            # Object.defineProperty 설명 
+                                * Object.defineProperty(obj, prop, descriptor)
+
+                            //jyoon delegator 같은 느낌
+                            //composition:   viewmodel의 내가 나의 자식들 viewmodel의 listener가 될 수 있다.
+                            //viewModel이 부모자식 개념이 생겨버림
+                        */
+                        Object.defineProperty(this, k, ViewModel.descriptor(this, '', k, v));
+                        if (v instanceof ViewModel) {   
+                            v.parent = this;
+                            v.subKey = k;
+                            v.addListener(this);  //자식 ViewModle에 addListener 적용
+                        }
+                    }
+                })
+                // debugger;
+                ViewModel.notify(this);
+                Object.seal(this);
+            }
+
+            viewmodelUpdated(updated) { updated.forEach(v => this.#isUpdated.add(v)) };
+            addListener(v, _ = type(v, ViewModelListener)) { this.#listeners.add(v) };
+            removeListener(v, _ = type(v, ViewModelListener)) { this.#listeners.delete(v) };
+            notify() { this.#listeners.forEach(v => v.viewmodelUpdated(this.#isUpdated)) };
+        };
+
+        //변경
+        const ViewModelValue = class {            
+            subKey; category; k; v; 
+            constructor(subKey, category, k, v) {
+                //변경
+                //POINT3
+                // debugger;// observer가 받는 객체 
+                Object.assign(this, { subKey, category, k, v });
+                Object.freeze(this);
+            }
+        }
+
+        //변경
+        const BinderItem = class {
+            el; vmName;
+            constructor(el, vmName, _0 = type(el, HTMLElement), _1 = type(vmName, 'string')) {
+                this.el = el;
+                this.vmName = vmName;
+                Object.freeze(this);
+            }
+        }
+
+        //변경
+        const Binder = class extends ViewModelListener {
+            #items = new Set;
+            #processors = {};
+            
+            add(v, _ = type(v, BinderItem)) { this.#items.add(v) }
+            addProcessor(v, _ = type(v, Processor)) { 
+                //변경
+                //POINT3
+                /*1
+                    this.#procesors = { 
+                        styles: { category: "styles"},
+                        attribute: {category: "attributes"},
+                        properties: {category: "properties"},
+                        events: {category: "events"}
+                    }
+                */
+                this.#processors[v.category] = v;
+            }
+            render(viewmodel, _ = type(viewmodel, ViewModel)) {
+                //변경: this.#processors변경에 의한 변경
+                //POINT4
+                // #viewmodel: rootViewModel
+                // #this.#processors: category별 el에 세팅하는 방법(Binder inst.addProcessor의해서 생성)
+                // #this.#items: BinderItem inst(data는 "el, vmName")(Scan Class에서 호출-Scan이 el viewmodel name으로 parsing)
+                const processores = Object.entries(this.#processors);
+                this.#items.forEach(({ vmName, el }) => {
+                    const vm = type(viewmodel[vmName], ViewModel);
+                    processores.forEach(([pk, processor]) => {
+                        Object.entries(vm[pk]).forEach(([k, v]) => {
+                            processor.process(vm, el, k, v);
+                        })
+                    })
+                })
+            }
+            watch(viewmodel, _ = type(viewmodel, ViewModel)){                
+                viewmodel.addListener(this);
+                //어쨋든 한번은 render로 viewModel을 보내주네 : ) 
+                this.render(viewmodel);
+            }
+            unwatch(viewmodel, _ = type(viewmodel, ViewModel)){
+                viewmodel.removeListener(this);
+            }
+            viewmodelUpdated(updated) {
+                //POINT6
+                // debugger;
+                const items = {};
+                this.#items.forEach(({ vmName, el }) => {
+                    items[vmName] = [type(rootViewModel[vmName], ViewModel), el];
+                })
+                updated.forEach(({ subKey, category, k, v }) => {
+                    if (!items[subKey]) return;
+                    const [vm, el] = items[subKey], processor = this.#processors[category];
+                    if (!el || !processor) return;
+                    processor.process(vm, el, k, v);
+                })
+            }
+        };
+
+        //변경
+        const Processor = class {
+            category;
+            constructor(category) {
+                this.category = category;
+                Object.freeze(this);
+            }
+            process(vm, el, k, v, _0 = type(vm, ViewModel),
+                                    _1 = type(el, HTMLElement),
+                                    _2 = type(k, "string")) {
+                this._process(vm, el, k, v);
+            }
+            _process(vm, el, k, v) { throw 'override' };
+        };
+
+        const Scanner = class {
+            scan(el, _ = type(el, HTMLElement)) {
+                const binder = new Binder();
+                this.checkItem(binder, el);
+                const stack = [el.firstElementChild];
+                let target;
+                while (target = stack.pop()) {
+                    this.checkItem(binder, target)
+                    if (target.firstElementChild) stack.push(target.firstElementChild);
+                    if (target.nextElementSibling) stack.push(target.nextElementSibling);
+                }
+                return binder;
+            }
+            checkItem(binder, el) {
+                const vmName = el.getAttribute('data-viewmodel');
+                if (vmName) binder.add(new BinderItem(el, vmName));
+            }
+        };
+
+        const scanner = new Scanner();
+        //BinderItem inst를 Binder class inst > #items에 설정
+        const binder = scanner.scan(document.querySelector('#target'));
+        //변경
+        //POINT1
+        // jyoon4. binder.addProcessor
+        binder.addProcessor(new class extends Processor {
+            _process(vm, el, k, v) { el.style[k] = v }
+        }('styles'));
+        binder.addProcessor(new class extends Processor {
+            _process(vm, el, k, v) { el.setAttribute(k, v) }
+        }('attributes'));
+        binder.addProcessor(new class extends Processor {
+            _process(vm, el, k, v) { el[k] = v }
+        }('properties'));
+        binder.addProcessor(new class extends Processor {
+            _process(vm, el, k, v) { el[`on${k}`] = e => v.call(el, e, vm) }
+        }('events'));
+
+        const getRandom = () => parseInt(Math.random() * 150) + 100;
+        const wrapper = ViewModel.get({
+            styles: { width: '50%', background: '#ffa', cursor: 'pointer' },
+            events: {
+                click(e, vm) {
+                    vm.parent.isStop = true
+                }
+            }
+        });
+        const title = ViewModel.get({ properties: { innerHTML: 'Title' } })
+        const contents = ViewModel.get({ properties: { innerHTML: 'Contents' } })
+        //jyoon 
+        //ViewMOdel Class에 static mehtod get으로 ViewModel인스턴스 생성
+        const rootViewModel = ViewModel.get({
+            isStop: false,
+            changeContents() {
+                this.wrapper.styles.background = `rgb(${getRandom()},${getRandom()},${getRandom()})`
+                this.contents.properties.innerHTML = Math.random().toString(16).replace('.', '')
+            },
+            wrapper,
+            title,
+            contents
+        });
+        //POINT7
+        /*
+            jyoon4.2 jyoon
+            rootViewModel inst을 binder에 설정( rootViewModel inst 프로퍼티 this.#listeners에 설정 )
+        */        
+        binder.watch(rootViewModel);
+        const f = () => {
+            //POINT8
+            rootViewModel.changeContents();
+            if (!rootViewModel.isStop) requestAnimationFrame(f);
+        };
+        requestAnimationFrame(f);
+    </script>
+</body>
+
+</html>
