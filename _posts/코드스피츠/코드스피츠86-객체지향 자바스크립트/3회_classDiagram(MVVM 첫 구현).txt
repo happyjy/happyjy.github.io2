@@ -1,0 +1,99 @@
+
+
+
+@startuml
+skinparam classAttributeIconSize 0
+
+class Dummy {
+ -field1
+ #field2
+ ~method1()
+ +method2()
+}
+
+
+
+class ViewModelListener {
+    viewmodelUpdated(updated)
+}
+
+class ViewModel extends ViewModelListener {
+    static get
+    static #subjects
+    static #inited
+    static notify(vm)
+    static descriptor(vm, category, k, v)
+    static define(vm, category, obj)
+    subKey
+    parent
+    styles
+    attributes
+    properties
+    events
+    #isUpdated
+    #listeners
+    constructor(data, _ = type(data, 'object'))
+    viewmodelUpdated(updated)
+    addListenerv, _ = type(v, ViewModelListener)()
+    removeListener(v, _ = type(v, ViewModelListener))
+    notify()
+    get events()
+    set events()
+}
+
+class ViewModelValue {
+    subKey
+    category
+    k
+    v
+    constructor(subKey, category, k, v)
+}
+
+class BinderItem {
+    el
+    vmName
+    constructor(el, vmName, _0 = type(el, HTMLElement), _1 = type(vmName, 'string'))
+}
+
+class Binder extends ViewModelListener {
+    #items
+    #processors
+    add(v, _ = type(v, BinderItem))
+    addProcessor(v, _ = type(v, Processor))
+    render(viewmodel, _ = type(viewmodel, ViewModel))
+    watch(viewmodel, _ = type(viewmodel, ViewModel)
+    unwatch(viewmodel, _ = type(viewmodel, ViewModel)
+    viewmodelUpdated(updated)
+}
+
+class Processor {
+    category
+    constructor(category)
+    process(vm, el, k, v, _0 = type(vm, ViewModel), _1 = type(el, HTMLElement), _2 = type(k, "string"))
+    _process(vm, el, k, v)
+}
+
+class Scanner{
+    scan(el, _ = type(el, HTMLElement))
+    checkItem(binder, el)
+}
+
+class styles extends Processor{
+
+}
+class attributes extends Processor{
+
+}
+class properties extends Processor{
+
+}
+class events extends Processor{
+
+}
+
+@enduml
+
+binder.addProcessor(new class extends Processor {
+binder.addProcessor(new class extends Processor {
+binder.addProcessor(new class extends Processor {
+binder.addProcessor(new class extends Processor {
