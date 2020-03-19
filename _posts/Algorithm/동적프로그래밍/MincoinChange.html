@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>최소동전교환문제_동적프로그래밍</title>
+    <title></title>
 </head>
 <body>
     <script>
@@ -11,6 +11,7 @@
             var conins = coins;
             var cache = {};
 
+            //동적 교환 문제 
             this.makeChange = function(amount){
                 var me = this;
                 if (!amount) {
@@ -21,29 +22,62 @@
                 }
                 var min = [], newMin, newAmount;
 
+                //core
+                //eg) coins=[2, 5, 10, 25];
                 for (var i=0; i<coins.length; i++){
                     var coin = coins[i];
-                    newAmount = amount - coin;
+                    newAmount = amount - coin;  //[분석1]coins 첫번째 요소 기준으로 amount가 줄어든다. 예를 들어 MinConinChange([2, 5, 10, 25]); conins[0]이 2고 거스름돈 36원시 16번 i가 0일때 순회한다.
+                    //[분석2] amount 2인데 coin 5,10,25 일때 newAmount가 음수라 아래 조건 도달 x
+                    // console.log(`[0]: #amount: ${amount}, #i: ${i}, #newAmount: ${newAmount}, #coin: ${coin}`);
                     if (newAmount >=0 ){
-                        console.log(`##amount: ${amount}, ##i: ${i}, ##coin: ${coin}, ##newAmount: ${newAmount}`);
-                        newMin = me.makeChange(newAmount);
+                        console.log(`[1]: #amount: ${amount}, #i: ${i}, #newMin: ${newMin}, #min.length: ${min.length}, #coin: ${coin}, #newAmount(amount - coin): ${newAmount}`);
+                        newMin = me.makeChange(newAmount);      // recursive call
+                        // console.log(`[2]: #amount: ${amount}, #i: ${i}, #newMin.length: ${newMin.length}, #min.length: ${min.length}, #coin: ${coin}, #newAmount(amount - coin): ${newAmount}`);
                     }
+                    console.log(`IF CONDITION => #newAmount: ${newAmount}, #newMin: ${newMin}, #min: ${min}`);
                     if ( newAmount >= 0 && //조건1
-                        (newMin.length < min.length-1 || !min.length) //조건2
-                        && (newMin.length || !newAmount)){  //조건3
+                        (newMin.length < min.length-1 || !min.length) //조건2   
+                        && (newMin.length || !newAmount)){  //
+                        //조건2.1: newMin.lenth < min.length-1 ? 기존에 최소거스름을 구한값(min) 갯수가 새롭게 만든 최소거스릅값보다 크면 
+                        //조건2.2: min.length = 0 ? 실행되는 프로세스 for문에서 한번도 이 조건문을 통과하지 못했을때
+                        //조건3.1: 새롭게 만든 최소 거스름값(newMin)이 없을때 
+                        //조건3.2: newAmount = 0 ? 딱맞아 떨어질때
+                        
+                        //#조건2, 3의 관계
+                        //조건2.1, 3.2: 현 스택, 프로세스에서 새롭게 구한 최소 거스름돈을 찾는 케이스
+                        //조건2.2, 3.1: 이전 스택에서 사용한 min을 사용해서 최소거스름돈을 찾는 케이스
                         min = [coin].concat(newMin);
-                        // console.log(`#amount: ${amount}, #newAmount: ${newAmount}, #iterator: ${i}, new Min_ ${min} for ${amount}`);
+                        console.log(`PASS IF ==> #amount: ${amount}, #newAmount: ${newAmount}, #iterator: ${i}, new Min_ ${min} for ${amount}`);
                     }
+                    //분석[4] 만들어질것인가? 기존것을 이용해서 거스름돈을 만들것인가? 
+                    // 5 => 1,1,3 VS 5 
+                    //  1,1,3은 기존 4원 거스름돈 1,3에서 1원을 더해 만든 거스름돈
+                    //  5는  newAmount 가 0일때 딱맞아 떨어지는(최소 거스름돈)이기 때문에 이것이 우선 순위 되어야 한다. 
+                    //        - 여기서 우선순위를 두는 방법은 배열에서 뒤로갈수록 큰 거스릅돈이고 배열은 앞에서 뒤로 순차적으로 돈다. ㅇㅣ 특성을 이용했다리.
                 }
-                console.log("--------------------------");
-                console.log("### amount, min: ", amount, min);
-                
-                return (cache[amount] = min);
+                //core
+                console.log("### amount, min: ", amount, min);                
+                console.log("return--------------------------");
+                console.log("");
+                return (cache[amount] = min);   //[분석3] 배열에 값 대입시 return 값은 대입한 값임...
             }
         };
 
-        var minConinChange = new MinConinChange([1, 5, 10, 25]);
-        console.log(minConinChange.makeChange(36));
+        var minConinChange = new MinConinChange([1,3,5]);
+        // var minConinChange = new MinConinChange([2,3,5]); //[todo]최소단위가 2일경우도 생각해보자 
+
+        /**
+            동적프로그래밍할때 
+            하위에 
+
+            * 분할 정복할때 재귀호출을 통해서 구해야 할 전략을 잘짜야겠다. 
+                - 전략: 
+            * 스택, 프로세스를 알아야 겠다. 
+            * 최소 거스름돈 구할때 조건을 잘 만들어야 겠다. 
+        
+
+        */
+        console.log(minConinChange.makeChange(7));
     </script>
     
 </body>
