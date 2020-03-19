@@ -1,8 +1,11 @@
-[TOC]
-
-
-
-
+---
+title: Arrow Function
+date: 2020-03-15
+tags:
+  - ES6
+keywords:
+  - Arrow Function
+---
 
 # 화살표 함수와 일반함수의 차이점
 
