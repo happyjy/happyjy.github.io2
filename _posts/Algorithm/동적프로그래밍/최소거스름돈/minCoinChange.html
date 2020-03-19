@@ -35,8 +35,8 @@
                         // console.log(`[2]: #amount: ${amount}, #i: ${i}, #newMin.length: ${newMin.length}, #min.length: ${min.length}, #coin: ${coin}, #newAmount(amount - coin): ${newAmount}`);
                     }
                     console.log(`IF CONDITION => #newAmount: ${newAmount}, #newMin: ${newMin}, #min: ${min}`);
-                    if ( newAmount >= 0 && //조건1
-                        (newMin.length < min.length-1 || !min.length) //조건2   
+                    if ( newAmount >= 0//조건1
+                        && (newMin.length < min.length-1 || !min.length) //조건2   
                         && (newMin.length || !newAmount)){  //
                         //조건2.1: newMin.lenth < min.length-1 ? 기존에 최소거스름을 구한값(min) 갯수가 새롭게 만든 최소거스릅값보다 크면 
                         //조건2.2: min.length = 0 ? 실행되는 프로세스 for문에서 한번도 이 조건문을 통과하지 못했을때
