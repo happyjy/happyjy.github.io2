@@ -507,7 +507,13 @@
 </ul>
 </li>
 <li><a href="/OOPWithJavascript_4/#2-%EC%84%AC%EC%84%B8%ED%95%9C-%EA%B6%8C%ED%95%9C-%EC%A1%B0%EC%A0%95">2. 섬세한 권한 조정</a></li>
-<li><a href="/OOPWithJavascript_4/#3-visitor-pattern">3. Visitor Pattern</a></li>
+<li>
+<p><a href="/OOPWithJavascript_4/#3-visitor-pattern">3. Visitor Pattern</a></p>
+<ul>
+<li><a href="/OOPWithJavascript_4/#%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%EC%A0%84-scanner-%EC%86%8C%EC%8A%A4-%EC%84%A4%EB%AA%85">리팩토링 전 Scanner 소스 설명</a></li>
+<li><a href="/OOPWithJavascript_4/#%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%ED%9B%84-scanner-%EC%86%8C%EC%8A%A4-%EC%84%A4%EB%AA%85">리팩토링 후 Scanner 소스 설명</a></li>
+</ul>
+</li>
 <li><a href="/OOPWithJavascript_4/#4-%EC%B6%94%EC%83%81%EA%B3%84%EC%B8%B5-%EB%B6%88%EC%9D%BC%EC%B9%98">4. 추상계층 불일치</a></li>
 <li><a href="/OOPWithJavascript_4/#5-%EC%84%A4%EA%B3%84-%EC%A2%85%ED%95%A9">5. 설계 종합</a></li>
 <li><a href="/OOPWithJavascript_4/#6">6.</a></li>
@@ -556,8 +562,30 @@ Interface Segregation
 <ul>
 <li>SOLID원칙 보고 어떻게 뷰모델에서 옵저버 서브젝트 파일을 빼낼까 고민 중...</li>
 <li>상속모델을 사용할 것이다 우측 하단과 비슷한 모델을 사용</li>
-<li>서브젝트모델 === 인터페이스A/<br>
-뷰모델 === 객체 === 서브젝트모델을 상속받은 모델</li>
+<li>
+<p>서브젝트모델 === 인터페이스A/<br>
+뷰모델 === 객체 === 서브젝트모델을 상속받은 모델</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">//설명1</span>
+<span class="token keyword">const</span> ViewModelSubject <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token class-name">extends</span> ViewModelListener<span class="token punctuation">{</span> 
+#info <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">;</span> #listeners <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">;</span>
+<span class="token comment">//설명2 add, clear</span>
+<span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> ViewModelValue<span class="token punctuation">)</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>#info<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span> 
+<span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>#info<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token function">addListener</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> ViewModelListener<span class="token punctuation">)</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>#listeners<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">//설명3</span>
+ViewModelSubject<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">removeListener</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> ViewModelListener<span class="token punctuation">)</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>#listeners<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//설명4</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>#listeners<span class="token punctuation">.</span>size<span class="token punctuation">)</span> ViewModelSubject<span class="token punctuation">.</span><span class="token function">unwatch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+<span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>#listeners<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token operator">=></span>v<span class="token punctuation">.</span><span class="token function">viewmodelUpdated</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>#info<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+</li>
 </ul>
 </li>
 <li>
@@ -601,29 +629,7 @@ Listener가 하나라도 생겼을때 감시하면 된다!(뷰모델을 감사�
 <li>
 <p>설명4 unwatch</p>
 <ul>
-<li>
-<p>뮤보델은 구독하는 listener가 없을때 unwatch를 하자!</p>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">//설명1</span>
-<span class="token keyword">const</span> ViewModelSubject <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token class-name">extends</span> ViewModelListener<span class="token punctuation">{</span> 
-#info <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">;</span> #listeners <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">;</span>
-<span class="token comment">//설명2 add, clear</span>
-<span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> ViewModelValue<span class="token punctuation">)</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>#info<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span> 
-<span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>#info<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
-<span class="token function">addListener</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> ViewModelListener<span class="token punctuation">)</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
-<span class="token keyword">this</span><span class="token punctuation">.</span>#listeners<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token comment">//설명3</span>
-ViewModelSubject<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token function">removeListener</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> ViewModelListener<span class="token punctuation">)</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>#listeners<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">//설명4</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>#listeners<span class="token punctuation">.</span>size<span class="token punctuation">)</span> ViewModelSubject<span class="token punctuation">.</span><span class="token function">unwatch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token punctuation">}</span>
-<span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>#listeners<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token operator">=></span>v<span class="token punctuation">.</span><span class="token function">viewmodelUpdated</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>#info<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-</li>
+<li>뮤보델은 구독하는 listener가 없을때 unwatch를 하자!</li>
 </ul>
 </li>
 </ul>
@@ -633,40 +639,6 @@ ViewModelSubject<span class="token punctuation">.</span><span class="token funct
 <ul>
 <li>pdf10
 requestAnimationFrame에 의해서 subject돌면서 뷰모델에 notify해준다. </li>
-<li>
-<p>pdf11</p>
-<ul>
-<li>notify가 무조건 돈다. </li>
-<li>
-<p>설명1 flag를 통한 Animation 제어</p>
-<ul>
-<li>requsetAnimationFrame를 동작 여부를 결정하는 flag "#inited"를 사용하고 있다. </li>
-</ul>
-</li>
-<li>
-<p>설명2, 설명3 flag를 통한 Animation 제어</p>
-<ul>
-<li>리스너가 없는 뷰모델을 여러개 만들어도 requestAnimationFrame은 돌지 않는다. 뷰모델에 리스너를 등록해야지 그 뷰모델을 감시하기 시작하고 리스너를 다 빼서 하나도 없다면 requestAnimation도 멈추게 된다. </li>
-<li>기존 notify함수에 this.#subjects.add(vm); 코드로 subject를 관리했는데 이렇게 하면 외부에서는 notify에 #subject에 add한다는 사실을 모른다. 그래서 외부에서 알 수 있도록 watch, unwatch함수 #subject.add, #subject.delete를 통해서 관리해주고 있다. </li>
-</ul>
-</li>
-<li>
-<p>추가 정보: 플래그변수, 싱글스레드, 멀티스레드 </p>
-<ul>
-<li>Javascript는 싱글스레드이기 때문에 플래그 변수로 제어하기 쉽다. 다른 언어는 멀시스레드이기 때문에 플래그 제어가 안된다. </li>
-<li>플래그 기만에 효율적인 알고리즘짜는것을 계속해서 연습해야 한다. </li>
-<li>멀티 스레드에서 작업할때는 플래그 기만이 아니라 멀티스레드에서 안정성을 확보하고 효율성을 확보하는 패턴을 배워야한다.</li>
-</ul>
-</li>
-<li>
-<p>추가 정보: static method</p>
-<ul>
-<li>notify static private method로 설정해야하는데 Javascript에는 static method를 지원하지 않아서 공개적으로 되어 있다. </li>
-<li>watch, unwatch도 외부에 공개 되어야 하지만 public은 아니다. 내부 Framework안에서 돌기 때문에 </li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> ViewModelSubject <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token class-name">extends</span> ViewModelListener<span class="token punctuation">{</span> 
 
@@ -702,6 +674,42 @@ requestAnimationFrame에 의해서 subject돌면서 뷰모델에 notify해준다
         <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>#subjects<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token keyword">this</span><span class="token punctuation">.</span>#inited <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> 
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>    </code></pre></div>
+<ul>
+<li>
+<p>pdf11</p>
+<ul>
+<li>notify가 무조건 돈다. </li>
+<li>
+<p>설명1 flag를 통한 Animation 제어</p>
+<ul>
+<li>requsetAnimationFrame를 동작 여부를 결정하는 flag "#inited"를 사용하고 있다. </li>
+</ul>
+</li>
+<li>
+<p>설명2, 설명3 flag를 통한 Animation 제어</p>
+<ul>
+<li>리스너가 없는 뷰모델을 여러개 만들어도 requestAnimationFrame은 돌지 않는다. 뷰모델에 리스너를 등록해야지 그 뷰모델을 감시하기 시작하고 리스너를 다 빼서 하나도 없다면 requestAnimation도 멈추게 된다. </li>
+<li>기존 notify함수에 this.#subjects.add(vm); 코드로 subject를 관리했는데 이렇게 하면 외부에서는 notify에 #subject에 add한다는 사실을 모른다. 그래서 외부에서 알 수 있도록 watch, unwatch함수 #subject.add, #subject.delete를 통해서 관리해주고 있다. </li>
+</ul>
+</li>
+<li>
+<p>추가 정보: 플래그변수, 싱글스레드, 멀티스레드 </p>
+<ul>
+<li>Javascript는 싱글스레드이기 때문에 플래그 변수로 제어하기 쉽다. 다른 언어는 멀시스레드이기 때문에 플래그 제어가 안된다. </li>
+<li>플래그 기만에 효율적인 알고리즘짜는것을 계속해서 연습해야 한다. </li>
+<li>멀티 스레드에서 작업할때는 플래그 기만이 아니라 멀티스레드에서 안정성을 확보하고 효율성을 확보하는 패턴을 배워야한다.</li>
+</ul>
+</li>
+<li>
+<p>추가 정보: static method</p>
+<ul>
+<li>notify static private method로 설정해야하는데 Javascript에는 static method를 지원하지 않아서 공개적으로 되어 있다. </li>
+<li>watch, unwatch도 외부에 공개 되어야 하지만 public은 아니다. 내부 Framework안에서 돌기 때문에 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1 id="2-섬세한-권한-조정" style="position:relative;"><a href="#2-%EC%84%AC%EC%84%B8%ED%95%9C-%EA%B6%8C%ED%95%9C-%EC%A1%B0%EC%A0%95" aria-label="2 섬세한 권한 조정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 섬세한 권한 조정</h1>
 <blockquote>
 <p>위 ISP방법을 통해서 ViewModel이 가벼워 졌는데 이제는 섬세한 권한 조정을 하려고 한다. </p>
@@ -714,6 +722,63 @@ requestAnimationFrame에 의해서 subject돌면서 뷰모델에 notify해준다
 <li>Java의 기본 권한 private, Javascript 기본권한 public</li>
 <li>그래서 생기는 문제는 getter, setter외부에 노출이 되면 코드 조작이 가능해서 문제가 생긴다. </li>
 </ul>
+</li>
+<li>
+<p>아래 코드에 설명할 부분을 주석으로 6가지를 표시 했으며 아래 설명이 있습니다.</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> ViewModel <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token class-name">extends</span> ViewModelSubject<span class="token punctuation">{</span>
+<span class="token keyword">static</span> <span class="token keyword">get</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ViewModel</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+styles <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> attributes <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> properties <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> events <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
+
+<span class="token comment">//설명1 readonly</span>
+#subKey <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+<span class="token keyword">get</span> <span class="token function">subKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>#subKey<span class="token punctuation">;</span><span class="token punctuation">}</span>
+#parent <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token keyword">get</span> <span class="token function">parent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>#parent<span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+<span class="token comment">//설명2 [설명6과 관련]Transaction 연산</span>
+<span class="token function">setParent</span><span class="token punctuation">(</span><span class="token parameter">parent<span class="token punctuation">,</span> subKey</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>#parent <span class="token operator">=</span> <span class="token function">type</span><span class="token punctuation">(</span>parent<span class="token punctuation">,</span> ViewModel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>#subKey <span class="token operator">=</span> subKey<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">constructor</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token string">"object"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">[</span>cat<span class="token punctuation">,</span> obj<span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span> 
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">"styles,attributes,properties"</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>cat<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>obj <span class="token operator">||</span> <span class="token keyword">typeof</span> obj <span class="token operator">!=</span> <span class="token string">"object"</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">invalid object cat:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>cat<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, obj:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>obj<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span> 
+            <span class="token keyword">this</span><span class="token punctuation">[</span>cat<span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">defineProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">r<span class="token punctuation">,</span> <span class="token punctuation">[</span>k<span class="token punctuation">,</span> v<span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
+                r<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> 
+                    enumerable<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token function-variable function">get</span><span class="token operator">:</span><span class="token parameter">_</span><span class="token operator">=></span>v<span class="token punctuation">,</span> <span class="token function-variable function">set</span><span class="token operator">:</span><span class="token parameter">newV</span><span class="token operator">=></span><span class="token punctuation">{</span>
+                    v <span class="token operator">=</span> newV<span class="token punctuation">;</span>
+                    <span class="token comment">//설명3 update할 객체 세팅 방법 변경</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ViewModelValue</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>#subKey<span class="token punctuation">,</span> cat<span class="token punctuation">,</span> k<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> r<span class="token punctuation">;</span> 
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            Object<span class="token punctuation">.</span><span class="token function">defineProperties</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> 
+                <span class="token punctuation">[</span>cat<span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    enumerable<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    <span class="token function-variable function">get</span><span class="token operator">:</span> <span class="token parameter">_</span> <span class="token operator">=></span> obj<span class="token punctuation">,</span>
+                    <span class="token function-variable function">set</span><span class="token operator">:</span> <span class="token parameter">newV</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+                        obj <span class="token operator">=</span> newV<span class="token punctuation">;</span>
+                        <span class="token comment">//설명3 update할 객체 세팅 방법 변경</span>
+                        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ViewModelValue</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>#subKey<span class="token punctuation">,</span> <span class="token string">"root"</span><span class="token punctuation">,</span> cat<span class="token punctuation">,</span> obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span> 
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//설명6 [설명2와 관련]트렌젝션으로 setParent로 한번에 처리</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">ViewModel</span><span class="token punctuation">)</span> obj<span class="token punctuation">.</span><span class="token function">setParent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> cat<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//설명4 ViewModel.notify(this); 제거</span>
+    <span class="token comment">//ViewModel.notify(this);</span>
+    Object<span class="token punctuation">.</span><span class="token function">seal</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+<span class="token comment">//설명5 viewModel</span>
+<span class="token function">viewmodelUpdated</span><span class="token punctuation">(</span><span class="token parameter">updated</span><span class="token punctuation">)</span><span class="token punctuation">{</span>updated<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token operator">=></span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 </li>
 <li>
 <p>설명1 readonly</p>
@@ -792,65 +857,22 @@ v.parent = this; v.subKey = k;, v.addListener(this); </li>
 </ul>
 </li>
 </ul>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> ViewModel <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token class-name">extends</span> ViewModelSubject<span class="token punctuation">{</span>
-    <span class="token keyword">static</span> <span class="token keyword">get</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ViewModel</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
-    styles <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> attributes <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> properties <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> events <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
-    
-    <span class="token comment">//설명1 readonly</span>
-    #subKey <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
-    <span class="token keyword">get</span> <span class="token function">subKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>#subKey<span class="token punctuation">;</span><span class="token punctuation">}</span>
-    #parent <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-    <span class="token keyword">get</span> <span class="token function">parent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>#parent<span class="token punctuation">;</span><span class="token punctuation">}</span>
-    
-    <span class="token comment">//설명2 [설명6과 관련]Transaction 연산</span>
-    <span class="token function">setParent</span><span class="token punctuation">(</span><span class="token parameter">parent<span class="token punctuation">,</span> subKey</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>#parent <span class="token operator">=</span> <span class="token function">type</span><span class="token punctuation">(</span>parent<span class="token punctuation">,</span> ViewModel<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>#subKey <span class="token operator">=</span> subKey<span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    
-    <span class="token function">constructor</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token string">"object"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
-        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">[</span>cat<span class="token punctuation">,</span> obj<span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span> 
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">"styles,attributes,properties"</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>cat<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>obj <span class="token operator">||</span> <span class="token keyword">typeof</span> obj <span class="token operator">!=</span> <span class="token string">"object"</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">invalid object cat:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>cat<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, obj:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>obj<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span> 
-                <span class="token keyword">this</span><span class="token punctuation">[</span>cat<span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">defineProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">r<span class="token punctuation">,</span> <span class="token punctuation">[</span>k<span class="token punctuation">,</span> v<span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
-                    r<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> 
-                        enumerable<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token function-variable function">get</span><span class="token operator">:</span><span class="token parameter">_</span><span class="token operator">=></span>v<span class="token punctuation">,</span> <span class="token function-variable function">set</span><span class="token operator">:</span><span class="token parameter">newV</span><span class="token operator">=></span><span class="token punctuation">{</span>
-                        v <span class="token operator">=</span> newV<span class="token punctuation">;</span>
-                        <span class="token comment">//설명3 update할 객체 세팅 방법 변경</span>
-                        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ViewModelValue</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>#subKey<span class="token punctuation">,</span> cat<span class="token punctuation">,</span> k<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
-                    <span class="token punctuation">}</span><span class="token punctuation">;</span>
-                    <span class="token keyword">return</span> r<span class="token punctuation">;</span> 
-                <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
-                Object<span class="token punctuation">.</span><span class="token function">defineProperties</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> 
-                    <span class="token punctuation">[</span>cat<span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-                        enumerable<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-                        <span class="token function-variable function">get</span><span class="token operator">:</span> <span class="token parameter">_</span> <span class="token operator">=></span> obj<span class="token punctuation">,</span>
-                        <span class="token function-variable function">set</span><span class="token operator">:</span> <span class="token parameter">newV</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-                            obj <span class="token operator">=</span> newV<span class="token punctuation">;</span>
-                            <span class="token comment">//설명3 update할 객체 세팅 방법 변경</span>
-                            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ViewModelValue</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>#subKey<span class="token punctuation">,</span> <span class="token string">"root"</span><span class="token punctuation">,</span> cat<span class="token punctuation">,</span> obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-                        <span class="token punctuation">}</span>
-                    <span class="token punctuation">}</span> 
-                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment">//설명6 [설명2와 관련]트렌젝션으로 setParent로 한번에 처리</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">ViewModel</span><span class="token punctuation">)</span> obj<span class="token punctuation">.</span><span class="token function">setParent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> cat<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//설명4 ViewModel.notify(this); 제거</span>
-        <span class="token comment">//ViewModel.notify(this);</span>
-        Object<span class="token punctuation">.</span><span class="token function">seal</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-    <span class="token punctuation">}</span>
-    <span class="token comment">//설명5 viewModel</span>
-    <span class="token function">viewmodelUpdated</span><span class="token punctuation">(</span><span class="token parameter">updated</span><span class="token punctuation">)</span><span class="token punctuation">{</span>updated<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token operator">=></span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre></div>
 <h1 id="3-visitor-pattern" style="position:relative;"><a href="#3-visitor-pattern" aria-label="3 visitor pattern permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Visitor Pattern</h1>
+<ul>
+<li>
+<p>Scanner? </p>
+<ul>
+<li>특정 el 하위를 검색해서 viewmodel대상인 여부를 확인해서 BinderItem을 만들어서 binder에게 넘겨준다. </li>
+</ul>
+</li>
+</ul>
+<h2 id="리팩토링-전-scanner-소스-설명" style="position:relative;"><a href="#%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%EC%A0%84-scanner-%EC%86%8C%EC%8A%A4-%EC%84%A4%EB%AA%85" aria-label="리팩토링 전 scanner 소스 설명 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>리팩토링 전 Scanner 소스 설명</h2>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> Scanner <span class="token operator">=</span> <span class="token keyword">class</span><span class="token punctuation">{</span>
     <span class="token function">scan</span><span class="token punctuation">(</span><span class="token parameter">el<span class="token punctuation">,</span> _ <span class="token operator">=</span> <span class="token function">type</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> HTMLElement<span class="token punctuation">)</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">const</span> binder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Binder</span><span class="token punctuation">;</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">checkItem</span><span class="token punctuation">(</span>binder<span class="token punctuation">,</span> el<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">//설명2 Visitor 패턴 적용 대상</span>
         <span class="token keyword">const</span> stack <span class="token operator">=</span> <span class="token punctuation">[</span>el<span class="token punctuation">.</span>firstElementChild<span class="token punctuation">]</span><span class="token punctuation">;</span> 
         <span class="token keyword">let</span> target<span class="token punctuation">;</span>
         <span class="token keyword">while</span><span class="token punctuation">(</span>target <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -858,13 +880,93 @@ v.parent = this; v.subKey = k;, v.addListener(this); </li>
             <span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span>firstElementChild<span class="token punctuation">)</span> stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span>firstElementChild<span class="token punctuation">)</span><span class="token punctuation">;</span> 
             <span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span>nextElementSibling<span class="token punctuation">)</span> stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span>nextElementSibling<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
+        <span class="token comment">//설명2-end</span>
+
         <span class="token keyword">return</span> binder<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     <span class="token function">checkItem</span><span class="token punctuation">(</span><span class="token parameter">binder<span class="token punctuation">,</span> el</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//설명1 스캐너 역할</span>
         <span class="token keyword">const</span> vm <span class="token operator">=</span> el<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">"data-viewmodel"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
         <span class="token keyword">if</span><span class="token punctuation">(</span>vm<span class="token punctuation">)</span> binder<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BinderItem</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> vm<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span> 
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<ul>
+<li>
+<p>설명1 스캐너의 역할</p>
+<ul>
+<li>Binder의 Scanner가 아니라 Scanner Class로 빠진이유. (스캐너를 빼낸 이유) </li>
+<li>vuejs el속성들을 쓰고 싶다면 이곳에서 조작 후 아이템에 꽂아 주면 된다. </li>
+</ul>
+</li>
+<li>
+<p>설명2 Visitor 패턴 </p>
+<ul>
+<li>dom을 파싱 하는 부분은 Scanner, Binder class역할이라고 보기에 어렵다. 그래서 Visitor 패턴을 사용한다. </li>
+<li>Visitor 패턴 등장 인물2개/ care taker(원본데이터, 보살핌을 받는애) - Visitor 패턴 </li>
+<li>Visitor에게 caretaker를 주면 Visitor가 돌아준다? </li>
+</ul>
+</li>
+<li>
+<p>binder? </p>
+<ul>
+<li>그림을 그릴 대상을 binderItem으로 가지고 있다가 viewmodel에 꽂아 주면 viewmodel에 맞게 그림을 그려주는 역할을 하고 있다. </li>
+</ul>
+</li>
+</ul>
+<h2 id="리팩토링-후-scanner-소스-설명" style="position:relative;"><a href="#%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%ED%9B%84-scanner-%EC%86%8C%EC%8A%A4-%EC%84%A4%EB%AA%85" aria-label="리팩토링 후 scanner 소스 설명 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>리팩토링 후 Scanner 소스 설명</h2>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> Visitor <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token punctuation">{</span>
+    <span class="token comment">//설명1</span>
+    <span class="token function">visit</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> target<span class="token punctuation">,</span> _0<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> <span class="token string">"function"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token string">"override"</span> 
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> DomVisitor <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token class-name">extends</span> Visitor<span class="token punctuation">{</span>
+    <span class="token comment">//설명2 Generic</span>
+    <span class="token function">visit</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> target<span class="token punctuation">,</span> _0<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> <span class="token string">"function"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> _1<span class="token operator">=</span><span class="token function">type</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> HTMLElement<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> stack <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> curr <span class="token operator">=</span> target<span class="token punctuation">.</span>firstElementChild<span class="token punctuation">;</span> 
+        <span class="token keyword">do</span> <span class="token punctuation">{</span>
+            <span class="token function">action</span><span class="token punctuation">(</span>curr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>curr<span class="token punctuation">.</span>firstElementChild<span class="token punctuation">)</span> stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>curr<span class="token punctuation">.</span>firstElementChild<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>curr<span class="token punctuation">.</span>nextElementSibling<span class="token punctuation">)</span> stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>curr<span class="token punctuation">.</span>nextElementSibling<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>curr <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> Scanner <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token punctuation">{</span>
+    #visitor
+    <span class="token function">constructor</span> <span class="token punctuation">(</span><span class="token parameter">visitor<span class="token punctuation">,</span> _ <span class="token operator">=</span> <span class="token function">type</span><span class="token punctuation">(</span>visitor<span class="token punctuation">,</span> DomVisitor<span class="token punctuation">)</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>#visitor <span class="token operator">=</span> visitor<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">scan</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> _ <span class="token operator">=</span> type9target<span class="token punctuation">,</span> HTMLElement</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> binder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Binder</span>
+        <span class="token keyword">const</span> <span class="token function-variable function">f</span> <span class="token operator">=</span> <span class="token parameter">el</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> vm <span class="token operator">=</span> el<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">'data-viewmodel'</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>vm<span class="token punctuation">)</span> binder<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BinderItem</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> vm<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">f</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>#visitor<span class="token punctuation">.</span><span class="token function">visit</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> target<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> binder<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<ul>
+<li>
+<p>설명1 추상인터페이스</p>
+<ul>
+<li>추상인터페이스에서 target이 어떤 타입(HTMLElement, JSON 등등)인지 알 필요가 없습니다. </li>
+<li>오버라이드를 하지 않으면 죽기때문에! 즉 오버라이드할때 target의 타입을 지정해줘야 한다. </li>
+</ul>
+</li>
+<li>
+<p>설명2 Generic</p>
+<ul>
+<li>자식에서 궃적인 형을 알게 되는 것을 Generic이라고 한다. </li>
+<li>Generic은 원래 class옆에 표시하는건데 자바스크립트에서는 Generic이 있지 않기 때문에 이렇게 표시해준다. </li>
+<li>언어가 어떤 기능을 지원하는것보단 그 개념을 어떻게 적용하는지가 중요하다. </li>
+</ul>
+</li>
+</ul>
 <h1 id="4-추상계층-불일치" style="position:relative;"><a href="#4-%EC%B6%94%EC%83%81%EA%B3%84%EC%B8%B5-%EB%B6%88%EC%9D%BC%EC%B9%98" aria-label="4 추상계층 불일치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. 추상계층 불일치</h1>
 <h1 id="5-설계-종합" style="position:relative;"><a href="#5-%EC%84%A4%EA%B3%84-%EC%A2%85%ED%95%A9" aria-label="5 설계 종합 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. 설계 종합</h1>
 <h1 id="6" style="position:relative;"><a href="#6" aria-label="6 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6.</h1></div></div><div class="social-share"><ul><li class="social-share-item email"><button separator=" " aria-label="email" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#7f7f7f"></circle><path d="M17,22v20h30V22H17z M41.1,25L32,32.1L22.9,25H41.1z M20,39V26.6l12,9.3l12-9.3V39H20z" fill="white"></path></svg></button></li><li class="social-share-item facebook"><button aria-label="facebook" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#3b5998"></circle><path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" fill="white"></path></svg></button></li><li class="social-share-item twitter"><button aria-label="twitter" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#00aced"></circle><path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" fill="white"></path></svg></button></li><li class="social-share-item linkedin"><button aria-label="linkedin" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#007fb1"></circle><path d="M20.4,44h5.4V26.6h-5.4V44z M23.1,18c-1.7,0-3.1,1.4-3.1,3.1c0,1.7,1.4,3.1,3.1,3.1 c1.7,0,3.1-1.4,3.1-3.1C26.2,19.4,24.8,18,23.1,18z M39.5,26.2c-2.6,0-4.4,1.4-5.1,2.8h-0.1v-2.4h-5.2V44h5.4v-8.6 c0-2.3,0.4-4.5,3.2-4.5c2.8,0,2.8,2.6,2.8,4.6V44H46v-9.5C46,29.8,45,26.2,39.5,26.2z" fill="white"></path></svg></button></li><li class="social-share-item reddit"><button aria-label="reddit" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#5f99cf"></circle><path d="m 52.8165,31.942362 c 0,-2.4803 -2.0264,-4.4965 -4.5169,-4.4965 -1.2155,0 -2.3171,0.4862 -3.128,1.2682 -3.077,-2.0247 -7.2403,-3.3133 -11.8507,-3.4782 l 2.5211,-7.9373 6.8272,1.5997 -0.0102,0.0986 c 0,2.0281 1.6575,3.6771 3.6958,3.6771 2.0366,0 3.6924,-1.649 3.6924,-3.6771 0,-2.0281 -1.6575,-3.6788 -3.6924,-3.6788 -1.564,0 -2.8968,0.9758 -3.4357,2.3443 l -7.3593,-1.7255 c -0.3213,-0.0782 -0.6477,0.1071 -0.748,0.4233 L 32,25.212062 c -4.8246,0.0578 -9.1953,1.3566 -12.41,3.4425 -0.8058,-0.7446 -1.8751,-1.2104 -3.0583,-1.2104 -2.4905,0 -4.5152,2.0179 -4.5152,4.4982 0,1.649 0.9061,3.0787 2.2389,3.8607 -0.0884,0.4794 -0.1462,0.9639 -0.1462,1.4569 0,6.6487 8.1736,12.0581 18.2223,12.0581 10.0487,0 18.224,-5.4094 18.224,-12.0581 0,-0.4658 -0.0493,-0.9248 -0.1275,-1.377 1.4144,-0.7599 2.3885,-2.2304 2.3885,-3.9406 z m -29.2808,3.0872 c 0,-1.4756 1.207,-2.6775 2.6894,-2.6775 1.4824,0 2.6877,1.2019 2.6877,2.6775 0,1.4756 -1.2053,2.6758 -2.6877,2.6758 -1.4824,0 -2.6894,-1.2002 -2.6894,-2.6758 z m 15.4037,7.9373 c -1.3549,1.3481 -3.4816,2.0043 -6.5008,2.0043 l -0.0221,-0.0051 -0.0221,0.0051 c -3.0209,0 -5.1476,-0.6562 -6.5008,-2.0043 -0.2465,-0.2448 -0.2465,-0.6443 0,-0.8891 0.2465,-0.2465 0.6477,-0.2465 0.8942,0 1.105,1.0999 2.9393,1.6337 5.6066,1.6337 l 0.0221,0.0051 0.0221,-0.0051 c 2.6673,0 4.5016,-0.5355 5.6066,-1.6354 0.2465,-0.2465 0.6477,-0.2448 0.8942,0 0.2465,0.2465 0.2465,0.6443 0,0.8908 z m -0.3213,-5.2615 c -1.4824,0 -2.6877,-1.2002 -2.6877,-2.6758 0,-1.4756 1.2053,-2.6775 2.6877,-2.6775 1.4824,0 2.6877,1.2019 2.6877,2.6775 0,1.4756 -1.2053,2.6758 -2.6877,2.6758 z" fill="white"></path></svg></button></li><li class="social-share-item pocket"><button aria-label="pocket" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#EF3F56"></circle><path d="M41.084 29.065l-7.528 7.882a2.104 2.104 0 0 1-1.521.666 2.106 2.106 0 0 1-1.522-.666l-7.528-7.882c-.876-.914-.902-2.43-.065-3.384.84-.955 2.228-.987 3.1-.072l6.015 6.286 6.022-6.286c.88-.918 2.263-.883 3.102.071.841.938.82 2.465-.06 3.383l-.015.002zm6.777-10.976C47.463 16.84 46.361 16 45.14 16H18.905c-1.2 0-2.289.82-2.716 2.044-.125.363-.189.743-.189 1.125v10.539l.112 2.096c.464 4.766 2.73 8.933 6.243 11.838.06.053.125.102.19.153l.04.033c1.882 1.499 3.986 2.514 6.259 3.014a14.662 14.662 0 0 0 6.13.052c.118-.042.235-.065.353-.087.03 0 .065-.022.098-.042a15.395 15.395 0 0 0 6.011-2.945l.039-.045.18-.153c3.502-2.902 5.765-7.072 6.248-11.852L48 29.674v-10.52c0-.366-.041-.728-.161-1.08l.022.015z" fill="white"></path></svg></button></li></ul></div><aside class="ad"><ins class=" adsbygoogle" style="display:block" data-ad-client="ca-pub-4694803443368514" data-ad-slot="5214956675" data-ad-layout="" data-ad-layout-key="" data-ad-format="auto" data-full-width-responsive="true"></ins></aside><div class="comments"><div id="disqus_thread"></div></div></div><div class="toc outside"><ul>
@@ -877,7 +979,13 @@ v.parent = this; v.subKey = k;, v.addListener(this); </li>
 </ul>
 </li>
 <li><a href="/OOPWithJavascript_4/#2-%EC%84%AC%EC%84%B8%ED%95%9C-%EA%B6%8C%ED%95%9C-%EC%A1%B0%EC%A0%95">2. 섬세한 권한 조정</a></li>
-<li><a href="/OOPWithJavascript_4/#3-visitor-pattern">3. Visitor Pattern</a></li>
+<li>
+<p><a href="/OOPWithJavascript_4/#3-visitor-pattern">3. Visitor Pattern</a></p>
+<ul>
+<li><a href="/OOPWithJavascript_4/#%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%EC%A0%84-scanner-%EC%86%8C%EC%8A%A4-%EC%84%A4%EB%AA%85">리팩토링 전 Scanner 소스 설명</a></li>
+<li><a href="/OOPWithJavascript_4/#%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%ED%9B%84-scanner-%EC%86%8C%EC%8A%A4-%EC%84%A4%EB%AA%85">리팩토링 후 Scanner 소스 설명</a></li>
+</ul>
+</li>
 <li><a href="/OOPWithJavascript_4/#4-%EC%B6%94%EC%83%81%EA%B3%84%EC%B8%B5-%EB%B6%88%EC%9D%BC%EC%B9%98">4. 추상계층 불일치</a></li>
 <li><a href="/OOPWithJavascript_4/#5-%EC%84%A4%EA%B3%84-%EC%A2%85%ED%95%A9">5. 설계 종합</a></li>
 <li><a href="/OOPWithJavascript_4/#6">6.</a></li>
