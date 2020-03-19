@@ -1,0 +1,87 @@
+application/octet-stream
+application/json
+
+
+
+#문제 
+iframe.src 세팅을 통해서 서버와 통신 후 파일을 받아 오고 있다. 
+그러나 특정 url을 get방식을 통해서 호출해서 받아온 파일 resonse header에 content-type이 application/json이 였다. (파일을 잘 받는 content-type은 application/octet-stream이다.)
+
+#원인
+resonse header에 content-type이 application/json이라면 파일을 받지 못했다는 의미인데 
+iframe.src 세팅을 통해서 파일을 받으면 후처리가 불가능 ($.ajax통신을 통해서 서버 후처리 할 수 있는 방법 조사-iframe.src)
+
+#해결방법
+iframe.src 세팅을 통해서 파일을 받으면 후처리가 불가능해 
+$.ajax 통신을 통해서 후처리 하는 방식으로 다운로드 구조 변경
+
+
+ecount.common.api사용하지 않은이유 
+- api 후처리에 대해서 공통화가 되어 있는데 
+지금 문제에 대한 후처리가 없어서 정상 다운로드 될때도 error 팝업이 뜬다.
+- 후처리ecount.common 에서 해주려고 했는데 ..음? 로그아웃됨.
+[ ] 왜 로그 아웃 되는지 확인해보자. 
+
+* appliation/octet-stream MIME에 대해서 
+	- MIME: 전자메일의 표준형식
+	- application/octet-stream은 binary file 입니다. 
+	- 이파일은 어플리케이션에서 열리것입니다.
+
+
+
+
+
+
+
+
+
+
+
+function a(options) {
+        
+	return {
+		beforeSend: function() {
+		  
+			arguments[1].timerReturnValue = window.setTimeout(function () {
+	
+
+			}, 1000);
+		},
+		complete: function() {
+			this.timerReturnValue && clearTimeout(this.timerReturnValue);
+			
+
+		}
+	}
+}
+
+
+function a(options) { 
+        
+	
+	return (function(){
+		var setTimeoutReturnValue = 0;
+		return {
+			beforeSend: function() {
+			  
+				setTimeoutReturnValue = window.setTimeout(function () {
+		
+
+				}, 1000);
+			},
+			complete: function() {
+				setTimeoutReturnValue && clearTimeout(setTimeoutReturnValue);
+				
+
+			}
+		}
+	})()
+		
+	
+}
+
+
+
+
+
+
