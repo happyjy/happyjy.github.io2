@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1. 10진수 2진수로 만들기  
+                * 나누기, 나머지 연산자: %, / 연산자
+                * Math.floor: 소수점 버리기 
+            2. 2진수 순회하면서 1과 1사이 0이 제일 많은 숫자 구하기
+                * 반복문 -> for, reduce
+                * 변수 하나 추가해서 0 숫자 카운트 
+                    기존에 저장한 숫자보다 크면 제일 큰 숫자 변환하기
+                2.1 없으면 0
+
+            # 추가 시도할 항목
+                * reduce! 사용해보기
+                : 현재 for문으로 순회함.
+        */
+        function getLargestBinaryGap(n){
+            
+            var binaryNum=[];
+            while(n >= 1){
+                binaryNum.push(n%2);
+                n = Math.floor(n/2);
+            }
+            
+            binaryNum = binaryNum.reverse();
+
+            var largestBinaryGap = 0;
+            var countingBinaryGap = 0;
+            for(var i=0; i<binaryNum.length; i++){
+                var num = binaryNum[i];
+                 if(num === 0){
+                    countingBinaryGap++;
+                } else if(num === 1){
+                    if(countingBinaryGap > largestBinaryGap) {
+                       largestBinaryGap = countingBinaryGap; 
+                    }
+                    countingBinaryGap = 0;
+                }
+            }
+            return largestBinaryGap;
+        }
+
+        function getLargestBinaryGapByReduce(n){
+            var binaryNum=[];
+            while(n >= 1){
+                binaryNum.push(n%2);
+                n = Math.floor(n/2);
+            }
+            
+            binaryNum = binaryNum.reverse();
+            let largestBinaryGap = 0;
+            //100110001
+            var countFlag = false;
+            binaryNum.reduce((p, c) => {
+                if (c === 1 && !countFlag){
+                    countFlag = true;
+                    return p;
+                } else if (c === 0 && countFlag){
+                    return ++p;
+                } else if (c === 1 && countFlag){
+                    largestBinaryGap = p > largestBinaryGap ? p : largestBinaryGap;
+                    return 0;
+                }
+            }, 0);
+
+            return largestBinaryGap;
+        }
+        
+        //10 -> 1010(2)
+        //5  -> 0101(2)
+        console.log(getLargestBinaryGap(10))
+        console.log(getLargestBinaryGap(5))
+        console.log(getLargestBinaryGapByReduce(10))
+        console.log(getLargestBinaryGapByReduce(5))
+    </script>
+</body>
+</html>
