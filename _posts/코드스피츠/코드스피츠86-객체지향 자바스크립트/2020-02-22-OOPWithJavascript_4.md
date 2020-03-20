@@ -48,27 +48,28 @@ keywords:
     - 상속모델을 사용할 것이다 우측 하단과 비슷한 모델을 사용
     - 서브젝트모델 === 인터페이스A/   
     뷰모델 === 객체 === 서브젝트모델을 상속받은 모델
+
 ```js
-//설명1
-const ViewModelSubject = class extends ViewModelListener{ 
-    #info = new Set; #listeners = new Set;
-    //설명2 add, clear
-    add(v, _=type(v, ViewModelValue)){this.#info.add(v);} 
-    clear(){this.#info.clear();}
-    addListener(v, _=type(v, ViewModelListener)){ 
-        this.#listeners.add(v); 
-        //설명3
-        ViewModelSubject.watch(this);
-    }
-    removeListener(v, _=type(v, ViewModelListener)){
-        this.#listeners.delete(v);
-        //설명4
-        if(!this.#listeners.size) ViewModelSubject.unwatch(this); 
-    }
-    notify(){
-        this.#listeners.forEach(v=>v.viewmodelUpdated(this.#info));
-    }
-};
+    //설명1
+    const ViewModelSubject = class extends ViewModelListener{ 
+        #info = new Set; #listeners = new Set;
+        //설명2 add, clear
+        add(v, _=type(v, ViewModelValue)){this.#info.add(v);} 
+        clear(){this.#info.clear();}
+        addListener(v, _=type(v, ViewModelListener)){ 
+            this.#listeners.add(v); 
+            //설명3
+            ViewModelSubject.watch(this);
+        }
+        removeListener(v, _=type(v, ViewModelListener)){
+            this.#listeners.delete(v);
+            //설명4
+            if(!this.#listeners.size) ViewModelSubject.unwatch(this); 
+        }
+        notify(){
+            this.#listeners.forEach(v=>v.viewmodelUpdated(this.#info));
+        }
+    };
 ```
 * pdf8, 9
     - 설명1 상속
@@ -79,8 +80,8 @@ const ViewModelSubject = class extends ViewModelListener{
         4장 ViewModel -> ViewModelSubject -> ViewModelListener
         ```
     - 설명2 add, clear추가 
-        - #isUpdated -> #info
-        - #info는 부모에 있는 private 속성이다. 자식이 못건드리기 때문에 부모에 속성 #info private 속성을 제거, 추가할때는 부모쪽에서 서비스를 내려줘야한다. 그래서 내가 ViewModel #info를 변경하고 싶을때는 부모쪽 메소드에서 ViewModel Value를 직접 넘겨 ViewModel를 직접 넘겨서 ViewModel Value를 부모인 서브젝트가 직접 추가하도록 위임해서 동작하게 해야한다. clear도 부모에게 직접 요청해서 추가해야 한다.
+        - `#isUpdated -> #info
+        - `#info는 부모에 있는 private 속성이다. 자식이 못건드리기 때문에 부모에 속성 #info private 속성을 제거, 추가할때는 부모쪽에서 서비스를 내려줘야한다. 그래서 내가 ViewModel #info를 변경하고 싶을때는 부모쪽 메소드에서 ViewModel Value를 직접 넘겨 ViewModel를 직접 넘겨서 ViewModel Value를 부모인 서브젝트가 직접 추가하도록 위임해서 동작하게 해야한다. clear도 부모에게 직접 요청해서 추가해야 한다.
     - 설명3 watch
         - 이전에는 addListener를 하고 ViewModel이 생성되는 시점에 바로 전체 서브젝트 리스트에 등록했다. 
         - 지금은 Listener가 들어온순간 서브젝트를 watch로 보낼 것이다.
@@ -98,7 +99,7 @@ requestAnimationFrame에 의해서 subject돌면서 뷰모델에 notify해준다
 
 const ViewModelSubject = class extends ViewModelListener{ 
 
-...//위 코드 참고
+    //... 위 코드 참고
 
     static #subjects = new Set; static #inited = false; 
     static notify(){
@@ -131,6 +132,7 @@ const ViewModelSubject = class extends ViewModelListener{
     }
 }    
 ```
+
 * pdf11
     - notify가 무조건 돈다. 
     - 설명1 flag를 통한 Animation 제어
@@ -353,14 +355,10 @@ const Scanner = class {
     - 오버라이드를 하지 않으면 죽기때문에! 즉 오버라이드할때 target의 타입을 지정해줘야 한다. 
 
 * 설명2 Generic
-    - 자식에서 궃적인 형을 알게 되는 것을 Generic이라고 한다. 
+    - 자식에서 구체적인 타입을 알게 되는 것을 Generic이라고 한다. 
     - Generic은 원래 class옆에 표시하는건데 자바스크립트에서는 Generic이 있지 않기 때문에 이렇게 표시해준다. 
     - 언어가 어떤 기능을 지원하는것보단 그 개념을 어떻게 적용하는지가 중요하다. 
-
-
 
 # 4. 추상계층 불일치
 
 # 5. 설계 종합
-
-# 6. 
