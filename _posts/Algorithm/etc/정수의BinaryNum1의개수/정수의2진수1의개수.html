@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function countSetBits(n){
+            count = 0;
+            while(n){
+                n &= (n-1);
+                count += 1;
+            }
+            return count;
+        }
+
+        countSetBits(5); //2
+        /*
+            # Bitwise operators
+                * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators
+            
+                & 연산자는 같은 2진수 자리에 모두 1일때 1을 반환 
+                | 
+
+            #
+            5: 0101
+            4: 1000
+            3: 0110
+            2: 0010
+
+            # step1
+            5 & 4 = 0101 & 1000 = 1000(4) -> count = 2
+
+            # step2
+            4 & 3 = 1000 & 0110 = 0000(0) -> while문 끝
+        */
+    </script>
+</body>
+</html>
