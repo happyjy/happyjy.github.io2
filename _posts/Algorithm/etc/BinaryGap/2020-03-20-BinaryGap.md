@@ -8,9 +8,7 @@ keywords:
 ---
 
 # 문제 
-* 주어진 금액을 돈전 d1, d2, d3... dn으로 바꿔줄 때 필요한 동전의 최소 개수
-* 예
-    - 1, 5, 10, 25센트 동전이 있고 36센트를 바꿀때 최소 동전 개수는 25, 10, 1 센트이다.
+* 주어진 10진수를 2진수로 바꾸고 1과 1사이에 0이 가장 많을때 0의 개수를 구하는 문제
         
 # 해결 방법 
 1. 10진수 2진수로 만들기  
@@ -54,6 +52,11 @@ keywords:
         }
         return largestBinaryGap;
     }
+
+    //10 -> 1010(2)
+    //5  -> 0101(2)
+    console.log(getLargestBinaryGap(10));   //1
+    console.log(getLargestBinaryGap(5));    //1
 ```
 
 # CODE2 - 가장 큰 BinaryGap 찾을 "reduce" 사용
@@ -84,6 +87,10 @@ keywords:
 
         return largestBinaryGap;
     }
+    //10 -> 1010(2)
+    //5  -> 0101(2)
+    console.log(getLargestBinaryGapByReduce(10));    //1
+    console.log(getLargestBinaryGapByReduce(5));    //1
 ```
 
 # 코드스피츠 ViewModel class에서 생성자 함수에서 reduce 예제
