@@ -4,8 +4,8 @@
 </head>
 
 <body>
-  <script>
-    /*
+    <script>
+        /*
         일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 
         이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다.
         이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.
@@ -13,7 +13,7 @@
         1. 인쇄 대기목록의 가장 앞에 있는 문서(J)를 대기목록에서 꺼냅니다.
         ***** 2. 나머지 인쇄 대기목록에서 J보다 중요도가 높은 문서가 한 개라도 존재하면 J를 대기목록의 가장 마지막에 넣습니다.
         3. 그렇지 않으면 J를 인쇄합니다.
-        ***** 예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있고 중요도가 2 1 3 2 라면 C D A B 순으로 인쇄하게 됩니다.
+        ***** 예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있고 중요도가 2 1 3 2 라면 C D A B 순으로 인쇄하게 됩니다. 3221
 
         내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 알고 싶습니다. 위의 예에서 C는 1번째로, A는 3번째로 인쇄됩니다.
 
@@ -28,49 +28,58 @@
         # 입출력 예
         priorities	        location	return
         [2, 1, 3, 2]	      2	        1
-        [1, 1, 9, 1, 1, 1]	0	        5
+        [1, 1, 9, 1, 1, 1]	  0	        5
         
-        입출력 예 설명
+        # 입출력 예 설명
         예제 #1
         문제에 나온 예와 같습니다. priorities 3은 locations 이 2 algorithms이 끝나면 위치는 배열 첫번째 에있어 return은 1이다.
 
-        예제 #2
+        # 예제 #2
         6개의 문서(A, B, C, D, E, F)가 인쇄 대기목록에 있고 중요도가 1 1 9 1 1 1 이므로 C D E F A B 순으로 인쇄합니다.
       */
 
-    function solution(priorities, location) {
-      let answer = 0;
+        function solution(priorities, location) {
+            let answer = 0;
 
-      //POINT1: 
-      let mapping = priorities.map((priority, idx) => {
-        return {
-          loc: idx === location,
-          val: prioirty
+            //POINT1: 
+            let newPriorities = priorities.map((priority, idx) => {
+                return {
+                    target: idx === location,
+                    priority: priority
+                }
+            })
+
+            let flag = true;
+            while (flag) {
+                let firstOne = newPriorities.shift();
+                // let firstOne = newPriorities.splice(0, 1)[0];//배열 첫번째 인자 빼내기
+
+                if (newPriorities.some(item => item.priority > firstOne.priority)) { //배열 첫번째 인자 priority가 나머지 배열 인자들과 비교
+                    newPriorities.push(firstOne); //나머지 배열 인자에 더 큰수가 있다면 배열 맨뒤에 push
+                } else {
+                    newPriorities.unshift(firstOne);
+                    newPriorities.map((v,i) => v.idx = ++i);
+                    flag = false;
+                }                 
+            }
+
+            return newPriorities.filter( v => v.target)[0].idx;
         }
-      })
 
-      while (true) {
-        let cur = mapping.splice(0, 1)[0];//배열 첫번째 인자 빼내기
-
-        if (mapping.some(itme => item.val > cur.val)) { //배열 첫번째 인자 val가 나머지 배열 인자들과 비교
-          mapping.push(cur);  //나머지 배열 인자에 더 큰수가 있다면 배열 맨뒤에 push
-        } else {
-          answer++;           //배열 첫번째 인자가 제일 큰수라면 그때 반복한 횟수(==배열에 그 숫자가 있던 index)반환
-          if(cur.loc) return answer;  //유효성검사를 한번 더 : 위 if문에 의해서 return을 바로 해도 되는데 현재 비교 기준인자 loc property가(cur.loc) true인지 유효성 검사를 한번 더 한다.
-        }
-      }
-      return answer;
-    }
+        console.log(solution([1, 2, 3, 2], 0 )); // 답:3 3,2,1,2 
+        console.log(solution([1, 2, 3, 2], 4 )); // 답:3 3,2,1,2 
+        console.log(solution([2, 1, 3, 2], 2));  // 답:1 3,1,2,2
+        console.log(solution([1, 1, 9, 1, 1, 1], 0)); // 답:5 9,1,1,1,1,1 
 
 
-    /*
-      1. some 
-      * The some() method 'tests whether at least one element in the array passes the test implemented by the provided function'. 
-      It returns a Boolean value. 
-      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-    */
 
-  </script>
+        /*
+          1. some 
+          * The some() method 'tests whether at least one element in the array passes the test implemented by the provided function'. 
+          It returns a Boolean value. 
+          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+        */
+    </script>
 </body>
 
 </html>
