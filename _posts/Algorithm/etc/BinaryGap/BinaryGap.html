@@ -48,16 +48,16 @@
         }
 
         function getLargestBinaryGapByReduce(n){
-            var binaryNum=[];
+            let binaryNum=[];
             while(n >= 1){
                 binaryNum.push(n%2);
                 n = Math.floor(n/2);
             }
             
+            //100110001
             binaryNum = binaryNum.reverse();
             let largestBinaryGap = 0;
-            //100110001
-            var countFlag = false;
+            let countFlag = false;
             binaryNum.reduce((p, c) => {
                 if (c === 1 && !countFlag){
                     countFlag = true;

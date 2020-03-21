@@ -25,12 +25,12 @@ keywords:
 # 추가 시도할 항목
 * reduce 사용해보기! 현재 for문으로 순회하고 있다.  
     - 코드스피츠 객체지향 자바스크립트에서 3회차에서 observer pattern 적용시 Object.setProperty에서 reduce를 사용해서 
-    - [!] reduce를 사용해서 reutrn 값으로 BinaryGap중 가장 큰것을 구할 수 있을 것이라고 생각했으나 
-    생각해보면 1과 1사이에 있는 0의 개수를 reduce callback function으로 해결 할 수 없었다. 
+    - [!] reduce를 사용해서 reutrn 값으로 BinaryGap중 가장 큰것을 구할 수 있을 것이라고 생각했으나 1과 1사이에 있는 0의 개수를 reduce callback function 로직으로만 해결 할 수 없었다.  
+    가장큰 BinaryGap을 비교할 수 있느 변수 하나, countFlag(0 카운트 여부)를 확인하는 변수 하나 두개가 더 필요했다.
     이럴거면 일반 반복문으로 순회하면서 원하는 값을 구하는데 추가 변수(가장큰 BinaryGap, countingFlag)를 사용해서 구하는게 더 좋을 것같다.
     - reduce는 일반 배열을 사용해서 안에 로직을 만들때 개발자가 실수할까봐 만든 함수라고 알고 있다. 
 
-# CODE1 - 가장 큰 BinaryGap 찾을 떄 일반 배열 사용
+# CODE1 - 가장 큰 BinaryGap 찾을 때 "일반 배열" 사용
 ```js
     function getLargestBinaryGap(n){
         
@@ -56,20 +56,21 @@ keywords:
     }
 ```
 
-# CODE2 - 가장 큰 BinaryGap 찾을 떄 일반 배열 사용
+# CODE2 - 가장 큰 BinaryGap 찾을 "reduce" 사용
 ```js
     function getLargestBinaryGapByReduce(n){
-        var binaryNum=[];
+        let binaryNum=[];
         while(n >= 1){
             binaryNum.push(n%2);
             n = Math.floor(n/2);
         }
         
+        //100110001
         binaryNum = binaryNum.reverse();
         let largestBinaryGap = 0;
-        //100110001
-        var countFlag = false;
+        let countFlag = false;
         binaryNum.reduce((p, c) => {
+            console.log(p,c)
             if (c === 1 && !countFlag){
                 countFlag = true;
                 return p;
