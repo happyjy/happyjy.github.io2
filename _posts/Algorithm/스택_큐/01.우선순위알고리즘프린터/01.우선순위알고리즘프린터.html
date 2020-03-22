@@ -42,7 +42,7 @@
             let answer = 0;
 
             //POINT1: 
-            let newPriorities = priorities.map((priority, idx) => {
+            let dictionaryPriorities = priorities.map((priority, idx) => {
                 return {
                     target: idx === location,
                     priority: priority
@@ -51,14 +51,14 @@
 
             let flag = true;
             while (flag) {
-                let firstOne = newPriorities.shift();
-                // let firstOne = newPriorities.splice(0, 1)[0];//배열 첫번째 인자 빼내기
+                let firstOne = dictionaryPriorities.shift();
+                // let firstOne = dictionaryPriorities.splice(0, 1)[0];//배열 첫번째 인자 빼내기
 
-                if (newPriorities.some(item => item.priority > firstOne.priority)) { //배열 첫번째 인자 priority가 나머지 배열 인자들과 비교
-                    newPriorities.push(firstOne); //나머지 배열 인자에 더 큰수가 있다면 배열 맨뒤에 push
+                if (dictionaryPriorities.some(item => item.priority > firstOne.priority)) { //배열 첫번째 인자 priority가 나머지 배열 인자들과 비교
+                    dictionaryPriorities.push(firstOne); //나머지 배열 인자에 더 큰수가 있다면 배열 맨뒤에 push
                 } else {
-                    newPriorities.unshift(firstOne);
-                    newPriorities.map((v,i) => v.idx = ++i);
+                    dictionaryPriorities.unshift(firstOne);
+                    dictionaryPriorities.map((v,i) => v.idx = ++i);
                     flag = false;
                 }                 
             }
