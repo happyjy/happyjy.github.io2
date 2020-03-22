@@ -77,7 +77,8 @@
                 }
 
                 //4. 트럭을 1만큼 움직인다.
-                statusBridge.map(o => ++o.dist);
+                // statusBridge.map(o => ++o.dist);
+                statusBridge = statusBridge.map(o => (++o.dist, o));
                 // statusBridge.forEach(o => {
                 //     o.dist++;
                 // });
@@ -97,14 +98,32 @@
             # dictionary object가 인자인 배열은 값을 변경할 수 있지만 
                 그냥 배열은 값이 변동 되지 않느다. 
 
-                var a = [1,2,3];
-                a.forEach(v => console.log(++v));
-                //[1,2,3]
+                * forEach에서 확인
+                    var a = [1,2,3];
+                    a.forEach(v => console.log(++v));
+                    //[1,2,3]
 
-                var a = [{dist:1}, {dist:2}, {dist:3}];
-                a.forEach(v => v.dist++);
-                //0: {dist: 2} 1: {dist: 3} 2: {dist: 4}
+                    var a = [{dist:1}, {dist:2}, {dist:3}];
+                    a.forEach(v => v.dist++);
+                    //0: {dist: 2} 1: {dist: 3} 2: {dist: 4}
+                * 
+                    
+                    
+                * map에서 확인
+                    var a = [1,2,3];
+                    var aa = a.map( v => ++v );
+                    
+                    //a  : [1,2,3]
+                    //aa : [2,3,4]
+
+
+                    var b = [{dist:1}, {dist:2}, {dist:3}];
+                    var bb = b.map( v => (++v.dist, v));
+                    //b  : [{dist:2}, {dist:3}, {dist:4}]   <- 확인!
+                    //bb : [{dist:2}, {dist:3}, {dist:4}]
         */
+
+        
 
         /* 
             ### Array.reduce();
