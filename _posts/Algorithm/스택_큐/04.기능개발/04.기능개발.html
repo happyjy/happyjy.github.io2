@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-
         /*
             프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 
             각 기능은 진도가 100%일 때 서비스에 반영할 수 있습니다.
@@ -36,66 +37,73 @@
 
                 따라서 7일째에 2개의 기능, 9일째에 1개의 기능이 배포됩니다.
         */
-       
+
         function solution(progresses, speeds) {
-          //1. progresses, speeds를 이용해 각 progresses index의 인자가 몇일 뒤에 완료 되는지 days array에 넣는다.
-          //2. 1에서 만든 array와 비교하면서 answer에 답을 채운다.
-          let answer = [0];
-          let days = progresses.map((progress, index) => Math.ceil((100 - progress) / speeds[index]))
-          let dayOfFirstProgress = days[0];
+            //STPE1. progresses, speeds를 이용해 각 progresses index의 인자가 몇일 뒤에 완료 되는지 days array에 넣는다.
+            //STEP2. 1에서 만든 array와 비교하면서 answer에 답을 채운다.
+            let answer = [0];
+            //STEP1
+            let days = progresses.map((progress, index) => Math.ceil((100 - progress) / speeds[index]))
+            let compareDayProgress = days[0];
 
-          for(let i = 0, j = 0; i<days.length; i++){
-            if(days[i] <= dayOfFirstProgress){
-              answer[j] += 1;
-            } else {
-              answer[++j] = 1;
+            //STEP2
+            //STEP2.1
+            for (let i = 0, j = 0; i < days.length; i++) {
+                if (days[i] <= compareDayProgress) {
+                    answer[j] += 1; //
+                } else {
+                    answer[++j] = 1;
+                    // STEP2.2: 
+                    compareDayProgress = days[i]; 
+                }
             }
-          }
 
-          return answer;
+            return answer;
         }
 
 
         //STEP1. 완료되는 날짜를 Math.ceil을 사용하지 않은 예
         function solution1(progresses, speeds) {
-          var answer = [];
+            var answer = [];
 
-          var daysToNeed = [];
-          var spendDays, functionCnt = 0;
-          //STEP1
-          for(var i = 0; i < progresses.length; i ++){
-              spendDays = 0;
-              while(1){
-                  spendDays++;
-                  progresses[i] += speeds[i];
-                  if(progresses[i] >= 100){
-                      break;
-                  }
-              }
-              daysToNeed.push(spendDays);
-          }
-          
-          spendDays = daysToNeed[0];
-          functionCnt = 1;
-          for(var i = 1; i < daysToNeed.length; i ++){
-              if(daysToNeed[i] <= spendDays){
-                  functionCnt ++;
-              }
-              else{
-                  spendDays = daysToNeed[i];
-                  answer.push(functionCnt);
-                  functionCnt = 1;
-              }
+            var daysToNeed = [];
+            var spendDays, functionCnt = 0;
+            //STEP1
+            for (var i = 0; i < progresses.length; i++) {
+                spendDays = 0;
+                while (1) {
+                    spendDays++;
+                    progresses[i] += speeds[i];
+                    if (progresses[i] >= 100) {
+                        break;
+                    }
+                }
+                daysToNeed.push(spendDays);
+            }
 
-              //index i가 daysToNeed array에 맨뒤로 갔을때 무조건 push
-              if(i === daysToNeed.length -1){
-                  answer.push(functionCnt);
-              }
-          }
+            spendDays = daysToNeed[0];
+            functionCnt = 1;
+            for (var i = 1; i < daysToNeed.length; i++) {
+                if (daysToNeed[i] <= spendDays) {
+                    functionCnt++;
+                } else {
+                    spendDays = daysToNeed[i];
+                    answer.push(functionCnt);
+                    functionCnt = 1;
+                }
 
-          return answer;
+                //index i가 daysToNeed array에 맨뒤로 갔을때 무조건 push
+                if (i === daysToNeed.length - 1) {
+                    answer.push(functionCnt);
+                }
+            }
+
+            return answer;
         }
+
+        console.log(solution([93,30,55,92], [1,30,5,1]));
     </script>
-    
+
 </body>
+
 </html>
