@@ -9,12 +9,6 @@ keywords:
   - MVVM
 ---
 
-# TODO
-[ ] class diagram 그리기
-
-
-
-
 객체지향 프로그램이란 처음에 이루고자하는 목표에서부터 덩어리진 것을 차근차근 분리하고 깍아내는 과정 
 어떻게 깍을지 기준정하는 방법은? "역할"
 덩어리진 코드를 클래스로 나누려고 할때 "역할, 기준"이 필요하다. 객체지향에서 "역할, 기준"은 역할, 책임 모델이라고 하는 것입니다.
@@ -29,21 +23,52 @@ keywords:
 > Interface Segregation
 > 인터페이스 분리하는 원칙(이 원칙으로 덩어리진 코드들을 나눌 수 있다.)
 
-* 한코드에 여러개가 들어가 있으면 이것들을 인터페이스별로 잘라서 분리 할 수 있다. 
-    - 역기서 인터페이스는 역할을 얘기합니다.(실제 물리적인 인터페이스를 말하는 것이 아님)
-* 객체지향에서 코드 분리할때 가장 기본적인 방법이다. 
 
+* 한 코드에 여러개가 들어가 있으면 이것들을 인터페이스별로 잘라서 분리 할 수 있다. 
+    - 여기서 인터페이스는 역할을 얘기합니다.(실제 물리적인 인터페이스를 말하는 것이 아님)
+* 객체지향에서 코드 분리할때 가장 기본적인 방법이다. 
 * ViewModel을 이 법칙을 적용해보려고 한다. 
  
 
 ## 1.1 옵저버 서브젝트 파일 리팩토링 하기
 * pdf4, 5, 6
+```js
+#isUpdated = new Set; #listeners = new Set;
+addListener(v, _=type(v, ViewModelListener)){ 
+    this.#listeners.add(v);
+}
+removeListener(v, _=type(v, ViewModelListener)){
+    this.#listeners.delete(v); 
+}
+notify(){ 
+    this.#listeners.forEach(v=>v.viewmodelUpdated(this.#isUpdated));
+}
+
+static #subjects = new Set; 
+static #inited = false; 
+static notify(vm){
+    this.#subjects.add(vm); 
+    if(this.#inited) return; 
+    this.#inited = true; 
+    const f =_=>{
+        this.#subjects.forEach(vm=>{ 
+            if(vm.#isUpdated.size){
+                vm.notify();
+                vm.#isUpdated.clear(); 
+            }
+        });
+        requestAnimationFrame(f);
+    };
+    requestAnimationFrame(f);
+}
+```
     - 뷰모델에는 어울리지 않다고 보인다 
     - 옵저버패턴에 서브젝트 역할 -> 분리하자!
         * 메소드 코드를 분리할때 변수도 같이 이동해야한다.
         * 메소드 설계시 의존하고 있는 필드를 역할별로 필드를 같이 쓰지 않게 잘 설계해야 한다.  
 
-* pdf7
+* SOLID 원칙을 보며 고민...
+![Strategy](./4회/7.SOLID.png)
     - SOLID원칙 보고 어떻게 뷰모델에서 옵저버 서브젝트 파일을 빼낼까 고민 중...
     - 상속모델을 사용할 것이다 우측 하단과 비슷한 모델을 사용
     - 서브젝트모델 === 인터페이스A/   
@@ -72,29 +97,66 @@ keywords:
     };
 ```
 * pdf8, 9
-    - 설명1 상속
-        - 3강에서 ViewModel은 ViewModelListener을 상속는데 여기서 ViewModelSubject에 ViewModelListener을 상속 받는 이유는 뭘까? 
-            - Javascript는 다중 상속이 안돼서 어쩔 수 없이 ViewModelSubject가 ViewModelListener을 상속받고 ViewModel이 ViewModelSubject를 상속받는다 
-        ```
-        3장 ViewModel ->                     ViewModelListener
-        4장 ViewModel -> ViewModelSubject -> ViewModelListener
-        ```
-    - 설명2 add, clear추가 
-        - `#isUpdated -> #info
-        - `#info는 부모에 있는 private 속성이다. 자식이 못건드리기 때문에 부모에 속성 #info private 속성을 제거, 추가할때는 부모쪽에서 서비스를 내려줘야한다. 그래서 내가 ViewModel #info를 변경하고 싶을때는 부모쪽 메소드에서 ViewModel Value를 직접 넘겨 ViewModel를 직접 넘겨서 ViewModel Value를 부모인 서브젝트가 직접 추가하도록 위임해서 동작하게 해야한다. clear도 부모에게 직접 요청해서 추가해야 한다.
-    - 설명3 watch
-        - 이전에는 addListener를 하고 ViewModel이 생성되는 시점에 바로 전체 서브젝트 리스트에 등록했다. 
-        - 지금은 Listener가 들어온순간 서브젝트를 watch로 보낼 것이다.
-        뷰모델 생성했다고 바로 requestAnimationFrame 넣어서 감시할 필요가 없다. 
-        Listener가 하나라도 생겼을때 감시하면 된다!(뷰모델을 감사하는 사람이 없어 변화를 추적할 필요가 없다.)
-    - 설명4 unwatch
-        - 뮤보델은 구독하는 listener가 없을때 unwatch를 하자!
+```js
+const ViewModelSubject = class extends ViewModelListener{ 
+    #info = new Set; #listeners = new Set;
+    add(v, _=type(v, ViewModelValue)){this.#info.add(v);} 
+    clear(){this.#info.clear();}
+    addListener(v, _=type(v, ViewModelListener)){ 
+        this.#listeners.add(v); 
+        ViewModelSubject.watch(this);
+    }
+    removeListener(v, _=type(v, ViewModelListener)){
+        this.#listeners.delete(v);
+        if(!this.#listeners.size) ViewModelSubject.unwatch(this); 
+    }
+    notify(){this.#listeners.forEach(v=>v.viewmodelUpdated(this.#info));}
+};
+```
+- 설명1 상속
+    - 3강에서 ViewModel은 ViewModelListener을 상속는데 여기서 ViewModelSubject에 ViewModelListener을 상속 받는 이유는 뭘까? 
+        - Javascript는 다중 상속이 안돼서 어쩔 수 없이 ViewModelSubject가 ViewModelListener을 상속받고 ViewModel이 ViewModelSubject를 상속받는다 
+    ```
+    3장 ViewModel ->                     ViewModelListener
+    4장 ViewModel -> ViewModelSubject -> ViewModelListener
+    ```
+- 설명2 add, clear추가 
+    - `#isUpdated -> #info
+    - `#info는 부모에 있는 private 속성이다. 자식이 못건드리기 때문에 부모에 속성 #info private 속성을 제거, 추가할때는 부모쪽에서 서비스를 내려줘야한다. 그래서 내가 ViewModel #info를 변경하고 싶을때는 부모쪽 메소드에서 ViewModel Value를 직접 넘겨 ViewModel를 직접 넘겨서 ViewModel Value를 부모인 서브젝트가 직접 추가하도록 위임해서 동작하게 해야한다. clear도 부모에게 직접 요청해서 추가해야 한다.
+- 설명3 watch
+    - 이전에는 addListener를 하고 ViewModel이 생성되는 시점에 바로 전체 서브젝트 리스트에 등록했다. 
+    - 지금은 Listener가 들어온순간 서브젝트를 watch로 보낼 것이다.
+    뷰모델 생성했다고 바로 requestAnimationFrame 넣어서 감시할 필요가 없다. 
+    Listener가 하나라도 생겼을때 감시하면 된다!(뷰모델을 감사하는 사람이 없어 변화를 추적할 필요가 없다.)
+- 설명4 unwatch
+    - 뮤보델은 구독하는 listener가 없을때 unwatch를 하자!
 
 
 ## 1.2 notify 리팩토링
 * pdf10
+```js
+static #subjects = new Set; 
+static #inited = false; 
+static notify(vm){
+    this.#subjects.add(vm);
+    if(this.#inited) return;
+    this.#inited = true; 
+    const f =_=>{
+        this.#subjects.forEach(vm=>{ 
+            if(vm.#isUpdated.size){
+                vm.notify();
+                vm.#isUpdated.clear(); 
+            }
+        });
+        requestAnimationFrame(f);
+    };
+    requestAnimationFrame(f); 
+}
+```
 requestAnimationFrame에 의해서 subject돌면서 뷰모델에 notify해준다. 
 
+
+* pdf11-12
 ```js
 
 const ViewModelSubject = class extends ViewModelListener{ 
@@ -132,23 +194,21 @@ const ViewModelSubject = class extends ViewModelListener{
     }
 }    
 ```
+- notify가 무조건 돈다. 
+- 설명1 flag를 통한 Animation 제어
+    - requsetAnimationFrame를 동작 여부를 결정하는 flag "#inited"를 사용하고 있다. 
+- 설명2, 설명3 flag를 통한 Animation 제어
+    - 리스너가 없는 뷰모델을 여러개 만들어도 requestAnimationFrame은 돌지 않는다. 뷰모델에 리스너를 등록해야지 그 뷰모델을 감시하기 시작하고 리스너를 다 빼서 하나도 없다면 requestAnimation도 멈추게 된다. 
+    - 기존 notify함수에 this.#subjects.add(vm); 코드로 subject를 관리했는데 이렇게 하면 외부에서는 notify에 #subject에 add한다는 사실을 모른다. 그래서 외부에서 알 수 있도록 watch, unwatch함수 #subject.add, #subject.delete를 통해서 관리해주고 있다. 
 
-* pdf11
-    - notify가 무조건 돈다. 
-    - 설명1 flag를 통한 Animation 제어
-        - requsetAnimationFrame를 동작 여부를 결정하는 flag "#inited"를 사용하고 있다. 
-    - 설명2, 설명3 flag를 통한 Animation 제어
-        - 리스너가 없는 뷰모델을 여러개 만들어도 requestAnimationFrame은 돌지 않는다. 뷰모델에 리스너를 등록해야지 그 뷰모델을 감시하기 시작하고 리스너를 다 빼서 하나도 없다면 requestAnimation도 멈추게 된다. 
-        - 기존 notify함수에 this.#subjects.add(vm); 코드로 subject를 관리했는데 이렇게 하면 외부에서는 notify에 #subject에 add한다는 사실을 모른다. 그래서 외부에서 알 수 있도록 watch, unwatch함수 #subject.add, #subject.delete를 통해서 관리해주고 있다. 
+- 추가 정보: 플래그변수, 싱글스레드, 멀티스레드 
+    - Javascript는 싱글스레드이기 때문에 플래그 변수로 제어하기 쉽다. 다른 언어는 멀시스레드이기 때문에 플래그 제어가 안된다. 
+    - 플래그 기만에 효율적인 알고리즘짜는것을 계속해서 연습해야 한다. 
+    - 멀티 스레드에서 작업할때는 플래그 기만이 아니라 멀티스레드에서 안정성을 확보하고 효율성을 확보하는 패턴을 배워야한다.
 
-    - 추가 정보: 플래그변수, 싱글스레드, 멀티스레드 
-        - Javascript는 싱글스레드이기 때문에 플래그 변수로 제어하기 쉽다. 다른 언어는 멀시스레드이기 때문에 플래그 제어가 안된다. 
-        - 플래그 기만에 효율적인 알고리즘짜는것을 계속해서 연습해야 한다. 
-        - 멀티 스레드에서 작업할때는 플래그 기만이 아니라 멀티스레드에서 안정성을 확보하고 효율성을 확보하는 패턴을 배워야한다.
-
-    - 추가 정보: static method
-        - notify static private method로 설정해야하는데 Javascript에는 static method를 지원하지 않아서 공개적으로 되어 있다. 
-        - watch, unwatch도 외부에 공개 되어야 하지만 public은 아니다. 내부 Framework안에서 돌기 때문에 
+- 추가 정보: static method
+    - notify static private method로 설정해야하는데 Javascript에는 static method를 지원하지 않아서 공개적으로 되어 있다. 
+    - watch, unwatch도 외부에 공개 되어야 하지만 public은 아니다. 내부 Framework안에서 돌기 때문에 
 
 
 # 2. 섬세한 권한 조정
@@ -360,5 +420,25 @@ const Scanner = class {
     - 언어가 어떤 기능을 지원하는것보단 그 개념을 어떻게 적용하는지가 중요하다. 
 
 # 4. 추상계층 불일치
+![](./4회/추상계층불일치/추상계층불일치1.png)
+![](./4회/추상계층불일치/추상계층불일치2.png)
+![](./4회/추상계층불일치/추상계층불일치3.png)
+![](./4회/추상계층불일치/추상계층불일치4.png)
+![](./4회/추상계층불일치/추상계층불일치5.png)
+![](./4회/추상계층불일치/추상계층불일치6.png)
 
 # 5. 설계 종합
+![](./4회/설계종합/설계종합1.png)
+![](./4회/설계종합/설계종합2.png)
+![](./4회/설계종합/설계종합3.png)
+![](./4회/설계종합/설계종합4.png)
+![](./4회/설계종합/설계종합5.png)
+![](./4회/설계종합/설계종합6.png)
+![](./4회/설계종합/설계종합7.png)
+![](./4회/설계종합/설계종합8.png)
+![](./4회/설계종합/설계종합9.png)
+![](./4회/설계종합/설계종합10.png)
+![](./4회/설계종합/설계종합11.png)
+![](./4회/설계종합/설계종합12.png)
+![](./4회/설계종합/설계종합13.png)
+![](./4회/설계종합/설계종합14.png)
