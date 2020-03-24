@@ -442,3 +442,181 @@ const Scanner = class {
 ![](./4회/설계종합/설계종합12.png)
 ![](./4회/설계종합/설계종합13.png)
 ![](./4회/설계종합/설계종합14.png)
+
+
+
+
+
+# 추상계층 불일치 
+Scanner 클래스 리팩토링! 추상계층을 일치시켜주는 작업을 한다. 
+연역적인 케이스를 가지고 연역적으로 원리를(추상적으로) 도출한뒤(귀납적) 다시 연역적으로 다시 도출
+	귀납적: 원리 -> 현상 예측/ 연역적: 현상 -> 원리 도출
+
+	* Scanner 클래스 constructor에 Domvisitor객체를 주입
+		* 왜 Domvisitor를 바로 만들지 않고 Visitor 클래스를 만들어서 상속 받아서 구현했나? 
+		* 순수한 메모리 객체? Dom에 의존적이 네이티브 객체? 
+		
+		* 계층이 2, 1개 로 나뉘어 있다. 
+			- Visitor, Domvisotor -순수한 메모리객체, Dom에 의존적인 네이티브 객체
+			- Scanner
+			
+		* 한쪽이 추상계층으로 했다면 다른 한쪽도 추상계층으로 맞춰줘야 한다. 
+	
+	
+	* Scanner 클래스 scan에 Element 지식 설명
+		* 이것도 추상계층으로 나눈다 
+		* 리펙토링을 하면 Scanner 클래스는 인메모리 객체만 남게 된다. (네이티브 객체가 하나도 없다)
+			- 기존에 Scanner는 dom베이스 객체가 있었는데 없애 버린것이다. 
+		* Scanner를 추상화 시켜 dom 객체가 없다면 DomScanner는 Scanner를 상속받아 scan 함수를 오버라이딩 한다.  
+			- DomScanner 클래스에 생성자 함수 DomVisitor를 받는다. 그리고 super로 Scanner 클래스에 전달하는데 Scanner 클래스는 Visitor 클래스를 받는다. 
+				- 자식은 부모를 대체 가능하기 때문에 문제 없다. 
+		* Scanner scan 함수에 받는 인자 값 타입이 없었는데 DomScanner scan에 타입을 설정(제너릭)함으로 구상화 했다.  
+	
+	* Scanner, Visitor, DomScanner, DomVisitor 클래스 설명(하늘색선 있는 ppt)
+		> 아래 두 계층을 나눈 설명은 이게 바로 추상레이어를 일치 시켜준 것이다. 
+		* Scanner, Visitor: Dom에 대한 네이티브 객체가 없고 인메모리 객체만 있는 추상 계층이 생기고 
+		* DomScanner, DomVisitor: 더러운 Dom관련 처리를 해주는 구상클래스 세계
+		
+		* 마틴파울러 아저씨는 기능, 도메인 적인 기능을 나눠서 서로 협력하게 만들어야 한다고 얘기 하셨다. 
+			기능: 변하지 않는 부분
+			도메인: 변하는 부분 
+			- 그래야 나중에 도메인이 바뀌었을때 그 부분만 교체 가능하다고 얘기 하셨다. 
+			- 그래서 여기서 Scanner, Visitor는 "기능"적인 부분
+				DomScanner, DomVisitor은 "도메인(Dom)"을 처리하는 부분이 된다. 
+			
+			- 그런데 도메인은 상황에 따라 바뀔 수 있다. 어떤경우에는 비즈니스 부분을 보호하고 네이티브에 이것이 스프링, my-sql? 이되던 문제 없이 동작할거야 라고 하면 도메인 쪽이 기능이 되는 것이다. 즉 변한는 부분과 변하지 않는 부분을 구분하라는 것이다. 
+			
+		* 결과적으로 "변화율"을 고려해서 레이어를 나눈것이다. 
+		- 변화율때문에 코드를 나눠서 정복한것이있다 그건? 코드를 고치지 않고 코드를 추가함으로 수정할 수 있다.
+			- 예를 들어 Dom이 아닌 Canvas를 다룰 때 코드를 고치지 않고 CanvasScanner, CanvasVisitor를 만들면 됩니다.
+			따라서 기존 코드의 변화가 없고 회귀 테스트가 필요없다. 
+			- 여기에 "추상레이어"의 장점은 코드를 수정하는게 아니라 코드를 추가함으로 요구사항, 문제가 생겼을때 해결할 수 있다.  여기서는 요구사항에 따라서 어떠한 Scanner, Visitor를 만들어 추가 할 수 있다. 
+			- 이게 바로 "설계"에 목메다는 이유입니다!!!
+				
+		* 추상화 계층을 분리함으로써 "OCP" 를 지키고 있다. 
+		다른말고 OCP를 지키려면 추상화 클래스가 필수다! 
+			- O: OPEN, C: CLOSE - 확장에는 열려있고 수정에는 닫혀있다!
+			- SOLID 법칙은 사실 법칙이 아니라 객체지향설계를 잘하면 얻어질 수 있는 결과물이다. 
+		
+		* 추상화계층을 만듬으로 "OCP"말고 다른 장점 
+			- 추상화계층 클래스(Scanner, Visitor 클래스)는 initialize할때 로딩하고
+				구상클래스틑 원할때 동적 로딩하면 된다. 즉  코드의 늦은 초기화, 클래스 초기화를 유도할 수 있다. 
+				-> 이게 "의존성 역전의 법칙(DIP)"이다...
+			
+		 
+	* const scanner = new DomScanner(new DomVisitor) 코드 있는 ppt
+		- 구상 visitor를 구상 Scanner에게 줘서 scaner type 변수에 넘기다.
+		
+		
+# 설계종합
+* UML diagram은 스팩이 너무 넓기 때문에 아래 캡쳐한것처럼 클래스 관계도를 그리자 
+
+	* ViewModel 
+	: subject관련된건 ViewModelSubject로 이사갔어요 
+	: Dom에 의존적인 클래스 없다. 모두 인메모리 객체를 가지고 있다. 
+	
+		- ViewModelSubject 
+		: 이때 최적화를 했다.  
+		: 좋은코드가 나오는 이유는 인간머리의 복잡성을 정복할 정도 쪼개져 있기때문,,, 그런데 쪼개는게 힘들어 왜? 아무렇게나 쪼개면 일관성이 없기 때문에 어떻게 쪼갤지 모르는게 문제야.
+		: 객체 지향은 역할에 따라서 쪼개는것이다 !
+		- ViewModelListener  
+		
+		- ViewModelValue
+		: 아래와 같이 ViewModelValue은  다음 세개 클래스에 의존 되어 있다. ViewModel, ViewModelSubject, ViewModelListener
+		: 선이 많이 몰리면 수정하기 어려운 객체 
+		ViewModel -> ViewModelSubject -> ViewModelListener
+		ViewModelValue -> ViewModel
+		ViewModelValue -> ViewModelSubject
+		ViewModelValue -> ViewModelListener
+		
+		
+		: 이래서 Dom과 관련되 lib, fw에서는 제일 먼저 자기 이벤트를 정복해서 네이티브 이벤트를 보여주지 않으려고 한다. 왜냐하면 네이티브이벤트에 돔과 과련된 이벤트를 짜면 감당이 안되기 때문이다. 
+		이벤트는 옵저버 모델에서 무조건 이렇게 무겁게 된다. 
+		옵저버 모델의 약점이다. ㅠ
+		: 하지만 설계잘했다. ! 왜? 
+			- 단방향 의존성이기 때문이다. 양향도 없고 순회해서 다시 돌아오는 경우도 없다!
+			- 연관은 자연스럽다! 왜? 코드를 객체로 뺏고 그 객체를 빼기전 코드와 연관 지었기 때문에 의존성이 자동으로 생긴다. 하지만 의존성이 발생하는게 나쁜게 아니라 의존성을 단방향으로 유지하는게 중요한 것입니다. 		
+		: 클래스 관계도를 그리고 코드를 수정할일이 생겼을때 무거운 코드 클래스인지 확인해자.
+		
+		
+	* Scanner
+		- DomScanner
+		: DomScanner에 DomVisitor를 넣어줬긴 했지만 
+		DomScanner가 DomVisitor에 의존적이다 물어보면?... 애매해 하지만 간접적으로 알고 있다. 
+		DomScanner는 DomVisitor를 생성자 함수에서 받고 있다.  
+		
+		
+		DomScanner -> Scanner -> Visitor <- DomVisitor
+		 
+	
+	* Binder
+		: 결국 Scanner는 Binder를 만들어 낸다. 
+		- Binder의 주요 기능은? 
+			: add를 통해서 items를 set으로 가지고 있다 
+			: viewModelUpdate Listener를 구현해서 Listener로 부터 업데이트 된것을 render에 반영할 수 있고 
+			: addProcessor로 rendering에 필요한 것들을 processor 로 가지고 
+			: 특정 뷰모델은 watch, unwatch, 직접 render할 수 있다.  
+		
+		DomScanner -> Scanner -> Visitor <- DomVisitor
+					  Scanner -> Binder
+
+		- Binder의 의존성을 확인해보자 
+			: 모두 단방향이다. Binder는 Scanner쪽을 모르고 ViewModelValue에서 Binder를 의존하지 않기 때문에 모두 단방향이다. 
+			: 나가는 선이 많은(Binder) 같이 변화, 깨지기 쉬운 클래스 
+			반대로 들어오는 선이이 많은 클래스(ViewModelValue)는 무거운 클래스 
+			
+			: Binder -> ViewModel
+			: Binder -> ViewModelValue
+			: Binder -> ViewModelListener
+		
+		- BinderItem
+			: element, viewmodel을 알고 있다. 
+			: element가 들어가 있어서 문제가 된다. 
+			: Binder -> BinderItem
+			
+		- Processor
+			: element, viewModel을 받아서 처리해주는 클래스 
+			: Binder -> Processor
+		
+		- ConcreateProcessor
+			: Processsor는 method만 가지고 있는 것 구상 Processor가 실제적으로 Dom 지식을 가지고 있다. 
+			: ConcreateProcessor -> Processor
+	
+	* 실제 Dom 정보를 가지고 있는 클래스는? 그리고 클라이언트에서 작성해야할 클래스는? 	
+		- ConcreateProcessor, DomScanner, DomVisitor 클래스 
+		- 위 클래스를 제외 하고 인메모리 객체를 가지고 있다. 
+	
+	* MVVM이 좋은점? 
+		- ConcreateProcessor, DomScanner, DomVisitor 클래스를 교체하면 안드로이드, IOS에서 사용할 수 있다. 
+		
+	* 옵저버 패턴을 적용해서 ViewModel 클래스 주변으로 "ViewModelSubject, ViewModelListener, ViewModelValue" 다음과 같은 클래들이 생겨났다. 
+		- 그림, 설명한것처럼 비용이 싸지 않습니다. 그래서 Binder에서 render를 call하는 경우도 있습니다. 
+		
+		
+* 코드를 깍아나갈때 중요한 점 
+	- 추상화 레벨을 맞춰야 한다. 
+	: Binder, Scanner, Visitor이 세개 클래스는 dom 네이티브 객체를 가지고 있지 않는다. 
+	: 이것을 맞추기 위해서 DomScanner, DomVisitor가 탄생한 것   
+
+* 코드를 짤때 궁극적으로 강사님이 원하는건? 
+	- dom, node, db가 됐던 특정한 네이티브 지식이 나오면 코드를 분리하자 그리고 그 위에 네이티브 지식을 모르는 것들끼리 통신을 하게 하자 ! 그러면 녹색 클래스를(Dom 네이티브지식을 가진 클래스) 제외하고 재활용 할 수 있다. 
+		: Binder, Scaner, Visitor 클래스가 어떻게 되어 있는지 확인해보자 
+
+* 다음 시간에는 중요한 패턴 2가지를 배울 것 입니다. 
+	- 추상팩토리메소드 패턴 
+	- 커맨드 패턴 
+	
+	
+	
+# 작업 클래스
+```js
+
+const Scanner = class {}
+const DomScanner = class extends Scanner {}
+
+const Visitor = class {}
+const DomVisitor = class extends Visitor {}
+
+const scanner = new DomScanner(new DomVisitor);
+
+```
