@@ -83,7 +83,7 @@
             var answer = [];
             // POINT3: 배열 오른쪽부터 검사하는 방법
             for (var i = heights.length - 1; i >= 1; i--) { //오른쪽 부터 시작하는 for문
-                var continueFlag = true;
+                var continueFlag = true;    //역할: 수신받을 수신탑이 하나도 없으면 inner for문에 flag를 여부를 확인 후 0(수신 받을 탑 x)을 추가해준다.
                 for (var j = i - 1; j >= 0; j--) { //i 변수 보다 idx 1왼쪽 것과 비교
                     if (continueFlag && heights[i] < heights[j]) {
                         answer.unshift(j + 1);
