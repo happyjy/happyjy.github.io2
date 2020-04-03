@@ -9,14 +9,12 @@ keywords:
   - MVVM
 ---
 
- # https://youtu.be/5UUISCK6CL4
+# https://youtu.be/5UUISCK6CL4
  * VMSubject > notify에서 this.notifyTarget은 hook으로 상속받은 애가 결정하도록 되어 있다. 
  * [ ] 이게 뭐때문에 설명한것지 찾아보기 
 
 
-
 # Processor
-
 * https://youtu.be/5UUISCK6CL4
     - binder에다가 addProcessor로 원하는 Process를 만들어 끼워 넣어주는 형태로 되어 있다. 
 

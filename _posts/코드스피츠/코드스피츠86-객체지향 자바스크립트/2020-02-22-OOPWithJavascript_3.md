@@ -13,7 +13,6 @@ keywords:
   - Composite Pattern
 ---
 
-**과제 - 강의 들으면 [보완]이라고 한 것들 찾아서 스터디해서 채워 넣기**
 
 # 목표 
 * 전략적 패턴 적용
@@ -23,8 +22,6 @@ keywords:
     - Binder, ViewModel 통신을 이전 강의 까지 call로 해결해쓴는데 이번에 Observation으로 해결을 설명합니다.  
     그래서 결과적으로 모델이 변하면 binder가 자동으로 view를변하게 해준는게 목표이다.   
         * [전 강의 observe -> call로 대체](https://happyjy.github.io/객체지향%20자바스크립트_2/#observe---call로-대체)  
-
-
 
 * 배울 keyword 
     - Strategy Pattern, Dependency Injection, 
@@ -937,3 +934,6 @@ requestAnimationFrame(f)
 
 </html>
 ```
+
+
+**강의 들으면 [보완]이라고 한 것들 찾아서 스터디해서 채워 넣기**
