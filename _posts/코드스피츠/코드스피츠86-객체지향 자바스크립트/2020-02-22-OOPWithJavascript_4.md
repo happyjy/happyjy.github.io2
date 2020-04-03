@@ -854,10 +854,11 @@ const Scanner = class {
                 process(vm, el, k, v, _0 = type(vm, ViewModel),
                                         _1 = type(el, HTMLElement),
                                         _2 = type(k, "string")) {
-                                        this._process(vm, el, k, v)}
-                    _process(vm, el, k, v) {
-                        throw 'override';
-                    }
+                    this._process(vm, el, k, v)
+                }
+                _process(vm, el, k, v) {
+                    throw 'override';
+                }
             }
 
             const Scanner = class {
