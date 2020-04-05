@@ -36,39 +36,39 @@ keywords:
 ## 1.1 옵저버 서브젝트 파일 리팩토링 하기
 * pdf4, 5, 6
 ```js
-#isUpdated = new Set; #listeners = new Set;
-addListener(v, _=type(v, ViewModelListener)){ 
-    this.#listeners.add(v);
-}
-removeListener(v, _=type(v, ViewModelListener)){
-    this.#listeners.delete(v); 
-}
-notify(){ 
-    this.#listeners.forEach(v=>v.viewmodelUpdated(this.#isUpdated));
-}
+    #isUpdated = new Set; #listeners = new Set;
+    addListener(v, _=type(v, ViewModelListener)){ 
+        this.#listeners.add(v);
+    }
+    removeListener(v, _=type(v, ViewModelListener)){
+        this.#listeners.delete(v); 
+    }
+    notify(){ 
+        this.#listeners.forEach(v=>v.viewmodelUpdated(this.#isUpdated));
+    }
 
-static #subjects = new Set; 
-static #inited = false; 
-static notify(vm){
-    this.#subjects.add(vm); 
-    if(this.#inited) return; 
-    this.#inited = true; 
-    const f =_=>{
-        this.#subjects.forEach(vm=>{ 
-            if(vm.#isUpdated.size){
-                vm.notify();
-                vm.#isUpdated.clear(); 
-            }
-        });
+    static #subjects = new Set; 
+    static #inited = false; 
+    static notify(vm){
+        this.#subjects.add(vm); 
+        if(this.#inited) return; 
+        this.#inited = true; 
+        const f =_=>{
+            this.#subjects.forEach(vm=>{ 
+                if(vm.#isUpdated.size){
+                    vm.notify();
+                    vm.#isUpdated.clear(); 
+                }
+            });
+            requestAnimationFrame(f);
+        };
         requestAnimationFrame(f);
-    };
-    requestAnimationFrame(f);
-}
+    }
 ```
-    - 뷰모델에는 어울리지 않다고 보인다 
-    - 옵저버패턴에 서브젝트 역할 -> 분리하자!
-        * 메소드 코드를 분리할때 변수도 같이 이동해야한다.
-        * 메소드 설계시 의존하고 있는 필드를 역할별로 필드를 같이 쓰지 않게 잘 설계해야 한다.  
+- 뷰모델에는 어울리지 않다고 보인다 
+- 옵저버패턴에 서브젝트 역할 -> 분리하자!
+    * 메소드 코드를 분리할때 변수도 같이 이동해야한다.
+    * 메소드 설계시 의존하고 있는 필드를 역할별로 필드를 같이 쓰지 않게 잘 설계해야 한다.  
 
 * SOLID 원칙을 보며 고민...
 ![Strategy](./4회/7.SOLID.png)
@@ -99,22 +99,23 @@ static notify(vm){
         }
     };
 ```
+
 * pdf8, 9
 ```js
-const ViewModelSubject = class extends ViewModelListener{ 
-    #info = new Set; #listeners = new Set;
-    add(v, _=type(v, ViewModelValue)){this.#info.add(v);} 
-    clear(){this.#info.clear();}
-    addListener(v, _=type(v, ViewModelListener)){ 
-        this.#listeners.add(v); 
-        ViewModelSubject.watch(this);
-    }
-    removeListener(v, _=type(v, ViewModelListener)){
-        this.#listeners.delete(v);
-        if(!this.#listeners.size) ViewModelSubject.unwatch(this); 
-    }
-    notify(){this.#listeners.forEach(v=>v.viewmodelUpdated(this.#info));}
-};
+    const ViewModelSubject = class extends ViewModelListener{ 
+        #info = new Set; #listeners = new Set;
+        add(v, _=type(v, ViewModelValue)){this.#info.add(v);} 
+        clear(){this.#info.clear();}
+        addListener(v, _=type(v, ViewModelListener)){ 
+            this.#listeners.add(v); 
+            ViewModelSubject.watch(this);
+        }
+        removeListener(v, _=type(v, ViewModelListener)){
+            this.#listeners.delete(v);
+            if(!this.#listeners.size) ViewModelSubject.unwatch(this); 
+        }
+        notify(){this.#listeners.forEach(v=>v.viewmodelUpdated(this.#info));}
+    };
 ```
 - 설명1 상속
     - 3강에서 ViewModel은 ViewModelListener을 상속는데 여기서 ViewModelSubject에 ViewModelListener을 상속 받는 이유는 뭘까? 
@@ -138,64 +139,63 @@ const ViewModelSubject = class extends ViewModelListener{
 ## 1.2 notify 리팩토링
 * pdf10
 ```js
-static #subjects = new Set; 
-static #inited = false; 
-static notify(vm){
-    this.#subjects.add(vm);
-    if(this.#inited) return;
-    this.#inited = true; 
-    const f =_=>{
-        this.#subjects.forEach(vm=>{ 
-            if(vm.#isUpdated.size){
-                vm.notify();
-                vm.#isUpdated.clear(); 
-            }
-        });
-        requestAnimationFrame(f);
-    };
-    requestAnimationFrame(f); 
-}
+    static #subjects = new Set; 
+    static #inited = false; 
+    static notify(vm){
+        this.#subjects.add(vm);
+        if(this.#inited) return;
+        this.#inited = true; 
+        const f =_=>{
+            this.#subjects.forEach(vm=>{ 
+                if(vm.#isUpdated.size){
+                    vm.notify();
+                    vm.#isUpdated.clear(); 
+                }
+            });
+            requestAnimationFrame(f);
+        };
+        requestAnimationFrame(f); 
+    }
 ```
-requestAnimationFrame에 의해서 subject돌면서 뷰모델에 notify해준다. 
+* requestAnimationFrame에 의해서 subject돌면서 뷰모델에 notify해준다. 
 
 
 * pdf11-12
 ```js
+    const ViewModelSubject = class extends ViewModelListener{ 
 
-const ViewModelSubject = class extends ViewModelListener{ 
+        //... 위 코드 참고
 
-    //... 위 코드 참고
-
-    static #subjects = new Set; static #inited = false; 
-    static notify(){
-        const f =_=>{ 
-            this.#subjects.forEach(v=>{
-                if(v.#info.size){ 
-                    v.notify();
-                    v.clear(); 
-                }
-            });
-            //설명1
-            if(this.#inited) requestAnimationFrame(f); 
-        };
-        requestAnimationFrame(f); 
-    }
-
-    //설명2
-    static watch(vm, _=type(vm, ViewModelListener)){
-        this.#subjects.add(vm); //set에 add해도 변화 x
-        if(!this.#inited){
-            this.#inited = true;
-            this.notify(); 
+        static #subjects = new Set; static #inited = false; 
+        static notify(){
+            const f =_=>{ 
+                this.#subjects.forEach(v=>{
+                    if(v.#info.size){ 
+                        v.notify();
+                        v.clear(); 
+                    }
+                });
+                //설명1
+                if(this.#inited) requestAnimationFrame(f); 
+            };
+            requestAnimationFrame(f); 
         }
-    }
 
-    //설명3
-    static unwatch(vm, _=type(vm, ViewModelListener)){
-        this.#subjects.delete(vm);
-        if(!this.#subjects.size) this.#inited = false; 
-    }
-}    
+        //설명2
+        static watch(vm, _=type(vm, ViewModelListener)){
+            this.#subjects.add(vm); //set에 add해도 변화 x
+            if(!this.#inited){
+                this.#inited = true;
+                this.notify(); 
+            }
+        }
+
+        //설명3
+        static unwatch(vm, _=type(vm, ViewModelListener)){
+            this.#subjects.delete(vm);
+            if(!this.#subjects.size) this.#inited = false; 
+        }
+    }    
 ```
 - notify가 무조건 돈다. 
 - 설명1 flag를 통한 Animation 제어
@@ -224,60 +224,60 @@ const ViewModelSubject = class extends ViewModelListener{
 
 * 아래 코드에 설명할 부분을 주석으로 6가지를 표시 했으며 아래 설명이 있습니다.
 ```js
-const ViewModel = class extends ViewModelSubject{
-    static get(data){return new ViewModel(data);}
-    styles = {}; attributes = {}; properties = {}; events = {}; 
-    
-    //설명1 readonly
-    #subKey = "";
-    get subKey(){return this.#subKey;}
-    #parent = null;
-    get parent(){return this.#parent;}
-    
-    //설명2 [설명6과 관련]Transaction 연산
-    setParent(parent, subKey){
-        this.#parent = type(parent, ViewModel);
-        this.#subKey = subKey;
-        this.addListener(parent);
-    }
-    
-    constructor(data, _=type(data, "object")){ 
-        super();
-        Object.entries(data).forEach(([cat, obj])=>{ 
-            if("styles,attributes,properties".includes(cat)) {
-                if (!obj || typeof obj != "object") throw `invalid object cat:${cat}, obj:${obj}`; 
-                this[cat] = Object.defineProperties({}, Object.entries(obj).reduce((r, [k, v])=>{
-                    r[k] = { 
-                        enumerable:true, get:_=>v, set:newV=>{
-                        v = newV;
-                        //설명3 update할 객체 세팅 방법 변경
-                        this.add(new ViewModelValue(this.#subKey, cat, k, v)); }
-                    };
-                    return r; 
-                }, {}));
-            }else{
-                Object.defineProperties(this, { 
-                    [cat]: {
-                        enumerable: true,
-                        get: _ => obj,
-                        set: newV => {
-                            obj = newV;
+    const ViewModel = class extends ViewModelSubject{
+        static get(data){return new ViewModel(data);}
+        styles = {}; attributes = {}; properties = {}; events = {}; 
+        
+        //설명1 readonly
+        #subKey = "";
+        get subKey(){return this.#subKey;}
+        #parent = null;
+        get parent(){return this.#parent;}
+        
+        //설명2 [설명6과 관련]Transaction 연산
+        setParent(parent, subKey){
+            this.#parent = type(parent, ViewModel);
+            this.#subKey = subKey;
+            this.addListener(parent);
+        }
+        
+        constructor(data, _=type(data, "object")){ 
+            super();
+            Object.entries(data).forEach(([cat, obj])=>{ 
+                if("styles,attributes,properties".includes(cat)) {
+                    if (!obj || typeof obj != "object") throw `invalid object cat:${cat}, obj:${obj}`; 
+                    this[cat] = Object.defineProperties({}, Object.entries(obj).reduce((r, [k, v])=>{
+                        r[k] = { 
+                            enumerable:true, get:_=>v, set:newV=>{
+                            v = newV;
                             //설명3 update할 객체 세팅 방법 변경
-                            this.add(new ViewModelValue(this.#subKey, "root", cat, obj)); 
-                        }
-                    } 
-                });
-                //설명6 [설명2와 관련]트렌젝션으로 setParent로 한번에 처리
-                if(obj instanceof ViewModel) obj.setParent(this, cat); 
-            }
-        });
-        //설명4 ViewModel.notify(this); 제거
-        //ViewModel.notify(this);
-        Object.seal(this); 
+                            this.add(new ViewModelValue(this.#subKey, cat, k, v)); }
+                        };
+                        return r; 
+                    }, {}));
+                }else{
+                    Object.defineProperties(this, { 
+                        [cat]: {
+                            enumerable: true,
+                            get: _ => obj,
+                            set: newV => {
+                                obj = newV;
+                                //설명3 update할 객체 세팅 방법 변경
+                                this.add(new ViewModelValue(this.#subKey, "root", cat, obj)); 
+                            }
+                        } 
+                    });
+                    //설명6 [설명2와 관련]트렌젝션으로 setParent로 한번에 처리
+                    if(obj instanceof ViewModel) obj.setParent(this, cat); 
+                }
+            });
+            //설명4 ViewModel.notify(this); 제거
+            //ViewModel.notify(this);
+            Object.seal(this); 
+        }
+        //설명5 viewModel
+        viewmodelUpdated(updated){updated.forEach(v=>this.add(v));}
     }
-    //설명5 viewModel
-    viewmodelUpdated(updated){updated.forEach(v=>this.add(v));}
-}
 ```
 
 * 설명1 readonly
@@ -331,29 +331,29 @@ const ViewModel = class extends ViewModelSubject{
 ## 리팩토링 전 Scanner 소스 설명
 
 ```js
-const Scanner = class{
-    scan(el, _ = type(el, HTMLElement)){
-        const binder = new Binder;
-        this.checkItem(binder, el);
-        
-        //설명2 Visitor 패턴 적용 대상
-        const stack = [el.firstElementChild]; 
-        let target;
-        while(target = stack.pop()){
-            this.checkItem(binder, target);
-            if(target.firstElementChild) stack.push(target.firstElementChild); 
-            if(target.nextElementSibling) stack.push(target.nextElementSibling);
-        }
-        //설명2-end
+    const Scanner = class{
+        scan(el, _ = type(el, HTMLElement)){
+            const binder = new Binder;
+            this.checkItem(binder, el);
+            
+            //설명2 Visitor 패턴 적용 대상
+            const stack = [el.firstElementChild]; 
+            let target;
+            while(target = stack.pop()){
+                this.checkItem(binder, target);
+                if(target.firstElementChild) stack.push(target.firstElementChild); 
+                if(target.nextElementSibling) stack.push(target.nextElementSibling);
+            }
+            //설명2-end
 
-        return binder;
-    }
-    checkItem(binder, el){
-        //설명1 스캐너 역할
-        const vm = el.getAttribute("data-viewmodel"); 
-        if(vm) binder.add(new BinderItem(el, vm));
-    } 
-};
+            return binder;
+        }
+        checkItem(binder, el){
+            //설명1 스캐너 역할
+            const vm = el.getAttribute("data-viewmodel"); 
+            if(vm) binder.add(new BinderItem(el, vm));
+        } 
+    };
 
 ```
 
@@ -374,42 +374,42 @@ const Scanner = class{
 
 ## 리팩토링 후 Scanner 소스 설명
 ```js
-const Visitor = class {
-    //설명1
-    visit(action, target, _0=type(action, "function")) {
-        throw "override" 
-    }
-};
-
-const DomVisitor = class extends Visitor{
-    //설명2 Generic
-    visit(action, target, _0=type(action, "function"), _1=type(target, HTMLElement)) {
-        const stack = [];
-        let curr = target.firstElementChild; 
-        do {
-            action(curr);
-            if (curr.firstElementChild) stack.push(curr.firstElementChild); 
-            if (curr.nextElementSibling) stack.push(curr.nextElementSibling);
-        } while (curr = stack.pop()); 
-    }
-};
-
-const Scanner = class {
-    #visitor
-    constructor (visitor, _ = type(visitor, DomVisitor)) {
-        this.#visitor = visitor;
-    }
-    scan (target, _ = type9target, HTMLElement) {
-        const binder = new Binder
-        const f = el => {
-            const vm = el.getAttribute('data-viewmodel')
-            if (vm) binder.add(new BinderItem(el, vm))
+    const Visitor = class {
+        //설명1
+        visit(action, target, _0=type(action, "function")) {
+            throw "override" 
         }
-        f(target)
-        this.#visitor.visit(f, target)
-        return binder;
+    };
+
+    const DomVisitor = class extends Visitor{
+        //설명2 Generic
+        visit(action, target, _0=type(action, "function"), _1=type(target, HTMLElement)) {
+            const stack = [];
+            let curr = target.firstElementChild; 
+            do {
+                action(curr);
+                if (curr.firstElementChild) stack.push(curr.firstElementChild); 
+                if (curr.nextElementSibling) stack.push(curr.nextElementSibling);
+            } while (curr = stack.pop()); 
+        }
+    };
+
+    const Scanner = class {
+        #visitor
+        constructor (visitor, _ = type(visitor, DomVisitor)) {
+            this.#visitor = visitor;
+        }
+        scan (target, _ = type9target, HTMLElement) {
+            const binder = new Binder
+            const f = el => {
+                const vm = el.getAttribute('data-viewmodel')
+                if (vm) binder.add(new BinderItem(el, vm))
+            }
+            f(target)
+            this.#visitor.visit(f, target)
+            return binder;
+        }
     }
-}
 
 ```
 
