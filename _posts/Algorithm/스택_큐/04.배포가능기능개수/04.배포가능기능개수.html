@@ -40,22 +40,23 @@
         */
 
         function solution(progresses, speeds) {
-            //STPE1. progresses, speeds를 이용해 각 progresses index의 인자가 몇일 뒤에 완료 되는지 days array에 넣는다.
-            //STEP2. 1에서 만든 array와 비교하면서 answer에 답을 채운다.
+            //STPE1.  progresses, speeds를 이용해 각 progresses index의 인자가 몇일 뒤에 완료 되는지 days array에 넣는다.            
+            //STEP2.1 leftDays 첫번째 남은 배포일을 기준보다 leftDays 배열을 순회 하면서 요소 값보다 크거나 같으면 같이 배포하는것이고 작으면 다음날 다로 배포하는 것
+
             let answer = [0];
             //STEP1
-            let days = progresses.map((progress, index) => Math.ceil((100 - progress) / speeds[index]))
-            let compareDayProgress = days[0];
+            let leftDays = progresses.map((progress, index) => Math.ceil((100 - progress) / speeds[index]))
+            let compareTargetLeftDays = leftDays[0];
 
             //STEP2
             //STEP2.1
-            for (let i = 0, j = 0; i < days.length; i++) {
-                if (days[i] <= compareDayProgress) {
+            for (let i = 0, j = 0; i < leftDays.length; i++) {
+                if (leftDays[i] <= compareTargetLeftDays) {
                     answer[j] += 1; //
                 } else {
                     answer[++j] = 1;
-                    // STEP2.2: 
-                    compareDayProgress = days[i]; 
+                    // STEP2.2 
+                    compareTargetLeftDays = leftDays[i]; 
                 }
             }
 
@@ -64,7 +65,7 @@
 
 
         //STEP1. 완료되는 날짜를 Math.ceil을 사용하지 않은 예
-        function solution1(progresses, speeds) {
+        function solution2(progresses, speeds) {
             var answer = [];
 
             var daysToNeed = [];
