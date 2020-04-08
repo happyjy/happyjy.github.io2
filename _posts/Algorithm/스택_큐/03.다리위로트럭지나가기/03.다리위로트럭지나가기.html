@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
+
 <body>
-    <script>
-        /*
+  <script>
+    /*
             ### 문제 설명
                 트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 
                 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 
@@ -41,105 +43,113 @@
                 100	            100	    [10]	                            101
                 100	            100	    [10,10,10,10,10,10,10,10,10,10]	    110
         */
+
+    /* 
+        위 예를 보면 
+        다리 길이 만큼 트럭이 다리 위에 있는다. 
+        결국 트럭길이는 다리길이 1만큼이다.  
+    */
+
+
+    //매 초마다 다리에 트럭 올라갈지 판단
+    //K-ush
+    function solution(bridge_length, weight, truck_weights) {
+      debugger;
+      var answer = 0;
+      var statusBridge = [];
+
+      while (true) {
+        answer++;
+
+        //1. filter: 다리에서 트럭움직인 거리가 다리 길이보다 작은 것
+        statusBridge = statusBridge.filter(o => o.dist < bridge_length);
+
+        //2. 다리위에 있는 트럭 무게 계산
+        let currentWeight = statusBridge.map(v => v.weight).reduce((p, c) => p + c, 0);
         
-        /* 
-            위 예를 보면 
-            다리 길이 만큼 트럭이 다리 위에 있는다. 
-            결국 트럭길이는 다리길이 1만큼이다.  
-        */
+        // let currentWeight = statusBridge.length === 0 ? 0 : statusBridge.reduce((p, c) => {
+        //   return p.weight + c.weight;
+        // }, {weight: 0});
 
+        // var currentWeight = 0;
+        // statusBridge.forEach(o => {
+        //     currentWeight += o.weight;
+        // });
 
-        //매 초마다 다리에 트럭 올라갈지 판단
-        //K-ush
-        function solution(bridge_length, weight, truck_weights) {
-            var answer = 0;
-            var statusBridge = [];
-
-            while(true) {
-                answer++;
-
-                //1. filter: 다리에서 트럭움직인 거리가 다리 길이보다 작은 것
-                statusBridge = statusBridge.filter(o => o.dist < bridge_length);
-
-                //2. 다리위에 있는 트럭 무게 계산
-                var currentWeight = 0;
-                statusBridge.forEach(o => {
-                    currentWeight += o.weight;
-                });
-
-                //3. 트럭을 하나 더 다리위로 올릴 수 있을지 판단
-                if(weight - currentWeight >= truck_weights[0]) {
-                    let truck = {
-                        weight: truck_weights.shift(),
-                        dist: 0
-                    }
-                    statusBridge.push(truck);
-                }
-
-                //4. 트럭을 1만큼 움직인다.
-                // statusBridge.map(o => ++o.dist);
-                statusBridge = statusBridge.map(o => (++o.dist, o));
-                // statusBridge.forEach(o => {
-                //     o.dist++;
-                // });
-
-                //5. 다리상태, 트럭을 담은 배열이 0이라면 while문을 벗어난다. 
-                if(!statusBridge.length && !truck_weights.length)
-                    break;
-            }
-
-            return answer;
+        //3. 트럭을 하나 더 다리위로 올릴 수 있을지 판단
+        if (weight - currentWeight >= truck_weights[0]) {
+          let truck = {
+            weight: truck_weights.shift(),
+            dist: 0
+          }
+          statusBridge.push(truck);
         }
 
-        console.log(solution(2,10,[7,4,5,6]));
+        //4. 트럭을 1만큼 움직인다.
+        // statusBridge.map(o => ++o.dist);
+        statusBridge = statusBridge.map(o => (++o.dist, o));
+        // statusBridge.forEach(o => {
+        //     o.dist++;
+        // });
+
+        //5. 다리상태, 트럭을 담은 배열이 0이라면 while문을 벗어난다. 
+        if (!statusBridge.length && !truck_weights.length)
+          break;
+      }
+
+      return answer;
+    }
+
+    console.log(solution(2, 10, [7, 4, 5, 6]));
 
 
-        /*
-            # dictionary object가 인자인 배열은 값을 변경할 수 있지만 
-                그냥 배열은 값이 변동 되지 않느다. 
+    /*
+        # dictionary object가 인자인 배열은 값을 변경할 수 있지만 
+            그냥 배열은 값이 변동 되지 않느다. 
 
-                * forEach에서 확인
-                    var a = [1,2,3];
-                    a.forEach(v => console.log(++v));
-                    //[1,2,3]
+            * forEach에서 확인
+                var a = [1,2,3];
+                a.forEach(v => console.log(++v));
+                //[1,2,3]
 
-                    var a = [{dist:1}, {dist:2}, {dist:3}];
-                    a.forEach(v => v.dist++);
-                    //0: {dist: 2} 1: {dist: 3} 2: {dist: 4}
-                * 
-                    
-                    
-                * map에서 확인
-                    var a = [1,2,3];
-                    var aa = a.map( v => ++v );
-                    
-                    //a  : [1,2,3]
-                    //aa : [2,3,4]
+                var a = [{dist:1}, {dist:2}, {dist:3}];
+                a.forEach(v => v.dist++);
+                //0: {dist: 2} 1: {dist: 3} 2: {dist: 4}
+            * 
+                
+                
+            * map에서 확인
+                var a = [1,2,3];
+                var aa = a.map( v => ++v );
+                
+                //a  : [1,2,3]
+                //aa : [2,3,4]
 
 
-                    var b = [{dist:1}, {dist:2}, {dist:3}];
-                    var bb = b.map( v => (++v.dist, v));
-                    //b  : [{dist:2}, {dist:3}, {dist:4}]   <- 확인!
-                    //bb : [{dist:2}, {dist:3}, {dist:4}]
-        */
+                var b = [{dist:1}, {dist:2}, {dist:3}];
+                var bb = b.map( v => (++v.dist, v));
+                //b  : [{dist:2}, {dist:3}, {dist:4}]   <- 확인!
+                //bb : [{dist:2}, {dist:3}, {dist:4}]
+    */
 
-        
 
-        /* 
-            ### Array.reduce();
-                const array1 = [1, 2, 3, 4];
-                const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-                // 1 + 2 + 3 + 4
-                console.log(array1.reduce(reducer));
-                // expected output: 10
+    /* 
+        ### Array.reduce();
+            const array1 = [1, 2, 3, 4];
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-                // 5 + 1 + 2 + 3 + 4
-                console.log(array1.reduce(reducer, 5));
-                // expected output: 15
+            // 1 + 2 + 3 + 4
+            console.log(array1.reduce(reducer));
+            // expected output: 10
 
-        */
-    </script>
-    
+            // 5 + 1 + 2 + 3 + 4
+            console.log(array1.reduce(reducer, 5));
+            // expected output: 15
+
+    */
+  </script>
+
 </body>
+
 </html>
