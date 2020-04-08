@@ -12,14 +12,15 @@ keywords:
 ---
 
 # 목표 
-객체지향 프로그램이란 처음에 이루고자하는 목표에서부터 덩어리진 것을 차근차근 분리하고 깍아내는 과정 
-어떻게 깍을지 기준정하는 방법은? "역할"
-덩어리진 코드를 클래스로 나누려고 할때 "역할, 기준"이 필요하다. 객체지향에서 "역할, 기준"은 역할, 책임 모델이라고 하는 것입니다.
+* 객체지향 프로그램이란 처음에 이루고자하는 목표에서부터 덩어리진 것을 차근차근 분리하고 깍아내는 과정입니다.  
+* 어떻게 깍을지 기준정하는 방법은? "역할" 
+* 덩어리진 코드를 클래스로 나누려고 할때 "역할, 기준"이 필요하다. 
+* 객체지향에서 "역할, 기준"은 역할, 책임 모델이라고 하는 것입니다.
 
-"역할, 책임"은 비슷해보이지만 동전의 양면을 가지고 있다. 
-책임을 가지고 있다는건? 그 책임에 대한 권한도 가지고 있다.
-권한이 있다는건? 권한에 대한 책임이 있다.
-그래서 역할을 정의하려면 어떤 권한을 주입 받고, 그 권한으로 부터 무슨 일을 수행하는 권한을 양도 받기위해서는 어떤 책임까지 가져야 하는지 한번에 정의해야 한다. 
+* "역할, 책임"은 비슷해보이지만 동전의 양면을 가지고 있다. 
+* 책임을 가지고 있다는건? 그 책임에 대한 권한도 가지고 있다.
+* 권한이 있다는건? 권한에 대한 책임이 있다.
+* 그래서 역할을 정의하려면 어떤 권한을 주입 받고, 그 권한으로 부터 무슨 일을 수행하는 권한을 양도 받기위해서는 어떤 책임까지 가져야 하는지 한번에 정의해야 한다. 
 
 # 1. ISP
 > SOLID 원칙 중 하나 
@@ -497,9 +498,13 @@ keywords:
 # 5. 설계 종합
 * UML diagram은 스팩이 너무 넓기 때문에 아래 캡쳐한것처럼 클래스 관계도를 그려서 설명합니다.
 
+
 ![](./4회/설계종합/설계종합1.png)
+
 ![](./4회/설계종합/설계종합2.png)
+
 ![](./4회/설계종합/설계종합3.png)
+
 ![](./4회/설계종합/설계종합4.png)
 
 1. ViewModel 
@@ -535,10 +540,15 @@ keywords:
     
 * 클래스 관계도를 그리고 코드를 수정할일이 생겼을때 무거운 코드 클래스인지 확인해자.
 
+
 ![](./4회/설계종합/설계종합5.png)
+
 ![](./4회/설계종합/설계종합6.png)
+
 ![](./4회/설계종합/설계종합7.png)
+
 ![](./4회/설계종합/설계종합8.png)
+
 5. Scanner, DomScanner  
 * DomScanner에 DomVisitor를 넣어줬긴 했지만
     - DomScanner가 DomVisitor에 의존적이다 물어보면?... 애매해 하지만 간접적으로 알고 있다. 
@@ -547,6 +557,7 @@ keywords:
     ```
     DomScanner -> Scanner -> Visitor <- DomVisitor
     ```
+
 ![](./4회/설계종합/설계종합9.png)
 6. Binder
 > 결국 Scanner는 Binder를 만들어 낸다. 
@@ -562,6 +573,7 @@ keywords:
 
 
 ![](./4회/설계종합/설계종합10.png)
+
 7. Binder의 의존성을 확인해보자 
     - 모두 단방향이다. Binder는 Scanner쪽을 모르고 ViewModelValue에서 Binder를 의존하지 않기 때문에 모두 단방향이다. 
     - 나가는 선이 많은(Binder) 같이 변화, 깨지기 쉬운 클래스  
@@ -572,22 +584,26 @@ keywords:
     Binder -> ViewModelListener
     ```
 ![](./4회/설계종합/설계종합11.png)
+
 8. BinderItem
 * element, viewmodel을 알고 있다. 
 * element가 들어가 있어서 문제가 된다. 
 * Binder -> BinderItem
 
 ![](./4회/설계종합/설계종합12.png)
+
 9. Processor
 * element, viewModel을 받아서 처리해주는 클래스 
 * Binder -> Processor
 
 ![](./4회/설계종합/설계종합13.png)
+
 10. ConcreateProcessor
 * Processsor는 method만 가지고 있는 것 구상 Processor가 실제적으로 Dom 지식을 가지고 있다. 
 * ConcreateProcessor -> Processor
 
 ![](./4회/설계종합/설계종합14.png)
+
 11. ConcreateProcessor, DomScanner, DomVisitor 클래스
 * 실제 Dom 정보를 가지고 있는 클래스는? 그리고 클라이언트에서 작성해야할 클래스는? 	
     - <u>위 클래스를 제외 하고 인메모리 객체를 가지고 있다.</u>
@@ -643,333 +659,337 @@ keywords:
 
 # 8.작업 코드
 ```html
-    <!DOCTYPE html>
-    <html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>MVVM 4회</title>
-    </head>
+  <head>
+      <meta charset="UTF-8">
+      <title>MVVM 4회</title>
+  </head>
 
-    <body>
-        <section id="target" data-viewmodel="wrapper">
-            <h2 data-viewmodel="title"></h2>
-            <section data-viewmodel="contents"></section>
-        </section>
-        <script>
-            const type = (target, type) => {
-                if (typeof type == "string") {
-                    if (typeof target != type) throw `invalid type ${target} : ${type}`
-                } else if (!(target instanceof type)) {
-                    throw `invalid type ${target} : ${type}`
-                }
-                return target;
-            }
+  <body>
+      <section id="target" data-viewmodel="wrapper">
+          <h2 data-viewmodel="title"></h2>
+          <section data-viewmodel="contents"></section>
+      </section>
 
-            const ViewModelListener = class {
-                viewmodelUpdated(updated) {
-                    throw 'override';
-                }
-            }
+      <script>
+      </script>
+  </body>
 
-            const ViewModelSubject = class extends ViewModelListener {
-                static# subjects = new Set;
-                static# inited = false;
-                static notify() {
-                    const f = () => {
-                        this.#subjects.forEach(v => {
-                            if (v.#info.size) {
-                                v.notify();
-                                v.clear();
-                            }
-                        })
-                        if (this.#inited) requestAnimationFrame(f);
-                    }
-                    requestAnimationFrame(f)
-                }
-                static watch(vm, _ = type(vm, ViewModelListener)) {
-                    this.#subjects.add(vm);
-                    if (!this.#inited) {
-                        this.#inited = true;
-                        this.notify();
-                    }
-                }
-                static unwatch(vm, _ = type(vm, ViewModelListener)) {
-                    this.#subjects.delete(vm);
-                    if (!this.#subjects.size) this.#inited = false;
-                }#
-                info = new Set; #listeners = new Set;
-                add(v, _ = type(v, ViewModelValue)) {
-                    this.#info.add(v);
-                }
-                clear() {
-                    this.#info.clear();
-                }
-                addListener(v, _ = type(v, ViewModelListener)) {
-                    this.#listeners.add(v);
-                    ViewModelSubject.watch(this);
-                }
-                removeListener(v, _ = type(v, ViewModelListener)) {
-                    this.#listeners.delete(v);
-                    if (!this.#listeners.size) ViewModelSubject.unwatch(this);
-                }
-                notify() {
-                    this.#listeners.forEach(v => v.viewmodelUpdated(this.#info))
-                }
-            }
+  </html>
+```
+
+``` js
+  const type = (target, type) => {
+      if (typeof type == "string") {
+          if (typeof target != type) throw `invalid type ${target} : ${type}`
+      } else if (!(target instanceof type)) {
+          throw `invalid type ${target} : ${type}`
+      }
+      return target;
+  }
+
+  const ViewModelListener = class {
+      viewmodelUpdated(updated) {
+          throw 'override';
+      }
+  }
+
+  const ViewModelSubject = class extends ViewModelListener {
+      static# subjects = new Set;
+      static# inited = false;
+      static notify() {
+          const f = () => {
+              this.#subjects.forEach(v => {
+                  if (v.#info.size) {
+                      v.notify();
+                      v.clear();
+                  }
+              })
+              if (this.#inited) requestAnimationFrame(f);
+          }
+          requestAnimationFrame(f)
+      }
+      static watch(vm, _ = type(vm, ViewModelListener)) {
+          this.#subjects.add(vm);
+          if (!this.#inited) {
+              this.#inited = true;
+              this.notify();
+          }
+      }
+      static unwatch(vm, _ = type(vm, ViewModelListener)) {
+          this.#subjects.delete(vm);
+          if (!this.#subjects.size) this.#inited = false;
+      }#
+      info = new Set; #listeners = new Set;
+      add(v, _ = type(v, ViewModelValue)) {
+          this.#info.add(v);
+      }
+      clear() {
+          this.#info.clear();
+      }
+      addListener(v, _ = type(v, ViewModelListener)) {
+          this.#listeners.add(v);
+          ViewModelSubject.watch(this);
+      }
+      removeListener(v, _ = type(v, ViewModelListener)) {
+          this.#listeners.delete(v);
+          if (!this.#listeners.size) ViewModelSubject.unwatch(this);
+      }
+      notify() {
+          this.#listeners.forEach(v => v.viewmodelUpdated(this.#info))
+      }
+  }
 
 
-            const ViewModel = class extends ViewModelSubject {
-                static get(data) {
-                    return new ViewModel(data);
-                }
-                styles = {};
-                attributes = {};
-                properties = {};
-                events = {};
-                #subKey = '';
-                #parent = null;
-                
-                get subKey() {
-                    return this.#subKey;
-                } 
-                // read only
-                get parent() {
-                    return this.#parent;
-                }
-                setParent(parent, subKey) {
-                    this.#parent = type(parent, ViewModel);
-                    this.#subKey = subKey;
-                    this.addListener(parent);
-                }
+  const ViewModel = class extends ViewModelSubject {
+      static get(data) {
+          return new ViewModel(data);
+      }
+      styles = {};
+      attributes = {};
+      properties = {};
+      events = {};
+      #subKey = '';
+      #parent = null;
+      
+      get subKey() {
+          return this.#subKey;
+      } 
+      // read only
+      get parent() {
+          return this.#parent;
+      }
+      setParent(parent, subKey) {
+          this.#parent = type(parent, ViewModel);
+          this.#subKey = subKey;
+          this.addListener(parent);
+      }
 
-                static descriptor = (vm, category, k, v) => ({
-                    enumerable: true,
-                    get: () => v,
-                    set(newV) {
-                        v = newV;
-                        vm.add(new ViewModelValue(vm.subKey, category, k, v));
-                    }
-                })
-                static define = (vm, category, obj) => (
-                    Object.defineProperties(
-                        obj,
-                        Object.entries(obj)
-                        .reduce((r, [k, v]) => (r[k] = ViewModel.descriptor(vm, category, k, v), r), {});
-                    )
-                )
-                constructor(data, _ = type(data, 'object')) {
-                    super();
-                    Object.entries(data).forEach(([k, v]) => {
-                        if ('styles,attributes,properties'.includes(k)) {
-                            if (!v || typeof v != 'object') throw `invalid object k: ${k}, v:${v}`;
-                            this[k] = ViewModel.define(this, k, v);
-                        } else {
-                            Object.defineProperty(this, k, ViewModel.descriptor(this, '', k, v))
-                            if (v instanceof ViewModel) {
-                                v.setParent(this, k);
-                            }
-                        }
-                    })
-                    Object.seal(this);
-                }
-                viewmodelUpdated(updated) {
-                    updated.forEach(v => this.add(v));
-                }
-            }
+      static descriptor = (vm, category, k, v) => ({
+          enumerable: true,
+          get: () => v,
+          set(newV) {
+              v = newV;
+              vm.add(new ViewModelValue(vm.subKey, category, k, v));
+          }
+      })
+      static define = (vm, category, obj) => (
+          Object.defineProperties(
+              obj,
+              Object.entries(obj)
+              .reduce((r, [k, v]) => (r[k] = ViewModel.descriptor(vm, category, k, v), r), {});
+          )
+      )
+      constructor(data, _ = type(data, 'object')) {
+          super();
+          Object.entries(data).forEach(([k, v]) => {
+              if ('styles,attributes,properties'.includes(k)) {
+                  if (!v || typeof v != 'object') throw `invalid object k: ${k}, v:${v}`;
+                  this[k] = ViewModel.define(this, k, v);
+              } else {
+                  Object.defineProperty(this, k, ViewModel.descriptor(this, '', k, v))
+                  if (v instanceof ViewModel) {
+                      v.setParent(this, k);
+                  }
+              }
+          })
+          Object.seal(this);
+      }
+      viewmodelUpdated(updated) {
+          updated.forEach(v => this.add(v));
+      }
+  }
 
-            const ViewModelValue = class {
-                subKey;
-                category;
-                k;
-                v;
-                constructor(subKey, category, k, v) {
-                    Object.assign(this, {
-                        subKey,
-                        category,
-                        k,
-                        v
-                    })
-                    Object.freeze(this);
-                }
-            }
+  const ViewModelValue = class {
+      subKey;
+      category;
+      k;
+      v;
+      constructor(subKey, category, k, v) {
+          Object.assign(this, {
+              subKey,
+              category,
+              k,
+              v
+          })
+          Object.freeze(this);
+      }
+  }
 
-            const BinderItem = class {
-                el;
-                vmName;
-                constructor(el, vmName, _0 = type(el, HTMLElement), _1 = type(vmName, 'string')) {
-                    this.el = el;
-                    this.vmName = vmName;
-                    Object.freeze(this);
-                }
-            }
+  const BinderItem = class {
+      el;
+      vmName;
+      constructor(el, vmName, _0 = type(el, HTMLElement), _1 = type(vmName, 'string')) {
+          this.el = el;
+          this.vmName = vmName;
+          Object.freeze(this);
+      }
+  }
 
-            const Binder = class extends ViewModelListener {
-                #items = new Set;
-                #processors = {};
-                add(v, _ = type(v, BinderItem)) {
-                    this.#items.add(v);
-                }
-                addProcessor(v, _ = type(v, Processor)) {
-                    this.#processors[v.category] = v;
-                }
-                render(viewmodel, _ = type(viewmodel, ViewModel)) {
-                    const processores = Object.entries(this.#processors);
-                    this.#items.forEach(({vmName,el}) => {
-                        const vm = type(viewmodel[vmName], ViewModel);
-                        processores.forEach(([pk, processor]) => {
-                            Object.entries(vm[pk]).forEach(([k, v]) => {
-                                processor.process(vm, el, k, v);
-                            })
-                        })
-                    })
-                }
+  const Binder = class extends ViewModelListener {
+      #items = new Set;
+      #processors = {};
+      add(v, _ = type(v, BinderItem)) {
+          this.#items.add(v);
+      }
+      addProcessor(v, _ = type(v, Processor)) {
+          this.#processors[v.category] = v;
+      }
+      render(viewmodel, _ = type(viewmodel, ViewModel)) {
+          const processores = Object.entries(this.#processors);
+          this.#items.forEach(({vmName,el}) => {
+              const vm = type(viewmodel[vmName], ViewModel);
+              processores.forEach(([pk, processor]) => {
+                  Object.entries(vm[pk]).forEach(([k, v]) => {
+                      processor.process(vm, el, k, v);
+                  })
+              })
+          })
+      }
 
-                watch(viewmodel, _ = type(viewmodel, ViewModel)) {
-                    viewmodel.addListener(this);
-                    this.render(viewmodel);
-                }
+      watch(viewmodel, _ = type(viewmodel, ViewModel)) {
+          viewmodel.addListener(this);
+          this.render(viewmodel);
+      }
 
-                unwatch(viewmodel, _ = type(viewmodel, ViewModel)) {
-                    viewmodel.removeListener(this);
-                }
+      unwatch(viewmodel, _ = type(viewmodel, ViewModel)) {
+          viewmodel.removeListener(this);
+      }
 
-                viewmodelUpdated(updated) {
-                    const items = {};
-                    this.#items.forEach(({vmName,el}) => {
-                        items[vmName] = [type(rootViewModel[vmName], ViewModel), el];
-                    })
-                    updated.forEach(({subKey,category,k,v}) => {
-                        if (!items[subKey]) return;
-                        const [vm, el] = items[subKey], processor = this.#processors[category];
-                        if (!el || !processor) return;
-                        processor.process(vm, el, k, v);
-                    })
-                }
-            }
+      viewmodelUpdated(updated) {
+          const items = {};
+          this.#items.forEach(({vmName,el}) => {
+              items[vmName] = [type(rootViewModel[vmName], ViewModel), el];
+          })
+          updated.forEach(({subKey,category,k,v}) => {
+              if (!items[subKey]) return;
+              const [vm, el] = items[subKey], processor = this.#processors[category];
+              if (!el || !processor) return;
+              processor.process(vm, el, k, v);
+          })
+      }
+  }
 
-            const Processor = class {
-                category;
-                constructor(category) {
-                    this.category = category;
-                    Object.freeze(this);
-                }
-                process(vm, el, k, v, _0 = type(vm, ViewModel),
-                                        _1 = type(el, HTMLElement),
-                                        _2 = type(k, "string")) {
-                    this._process(vm, el, k, v)
-                }
-                _process(vm, el, k, v) {
-                    throw 'override';
-                }
-            }
+  const Processor = class {
+      category;
+      constructor(category) {
+          this.category = category;
+          Object.freeze(this);
+      }
+      process(vm, el, k, v, _0 = type(vm, ViewModel),
+                              _1 = type(el, HTMLElement),
+                              _2 = type(k, "string")) {
+          this._process(vm, el, k, v)
+      }
+      _process(vm, el, k, v) {
+          throw 'override';
+      }
+  }
 
-            const Scanner = class {
-                #visitor
-                
-                constructor(visitor, _ = type(visitor, Visitor)) {
-                    this.#visitor = visitor;
-                }
-                visit(f, target) {
-                    this.#visitor.visit(f, target);
-                }
-                scan(target) {
-                    throw `override`;
-                }
-            }
+  const Scanner = class {
+      #visitor
+      
+      constructor(visitor, _ = type(visitor, Visitor)) {
+          this.#visitor = visitor;
+      }
+      visit(f, target) {
+          this.#visitor.visit(f, target);
+      }
+      scan(target) {
+          throw `override`;
+      }
+  }
 
-            const DomScanner = class extends Scanner {
-                constructor(visitor, _ = type(visitor, DomVisitor)) {
-                    super(visitor);
-                }
-                scan(target, _ = type(target, HTMLElement)) {
-                    const binder = new Binder;
-                    const f = el => {
-                        const vm = el.getAttribute('data-viewmodel');
-                        if (vm) binder.add(new BinderItem(el, vm));
-                    }
-                    f(target);
-                    this.visit(f, target);
-                    return binder;
-                }
-            }
+  const DomScanner = class extends Scanner {
+      constructor(visitor, _ = type(visitor, DomVisitor)) {
+          super(visitor);
+      }
+      scan(target, _ = type(target, HTMLElement)) {
+          const binder = new Binder;
+          const f = el => {
+              const vm = el.getAttribute('data-viewmodel');
+              if (vm) binder.add(new BinderItem(el, vm));
+          }
+          f(target);
+          this.visit(f, target);
+          return binder;
+      }
+  }
 
-            const Visitor = class {
-                visit(action, target, _ = type(action, 'function')) {
-                    throw 'override';
-                }
-            }
-            const DomVisitor = class extends Visitor {
-                visit(action, target, _0 = type(action, 'function'), _1 = type(target, HTMLElement)) {
-                    const stack = [];
-                    let curr = target.firstElementChild;
-                    do {
-                        action(curr);
-                        if (curr.firstElementChild) stack.push(curr.firstElementChild);
-                        if (curr.nextElementSibling) stack.push(curr.nextElementSibling);
-                    } while (curr = stack.pop())
-                }
-            }
+  const Visitor = class {
+      visit(action, target, _ = type(action, 'function')) {
+          throw 'override';
+      }
+  }
+  const DomVisitor = class extends Visitor {
+      visit(action, target, _0 = type(action, 'function'), _1 = type(target, HTMLElement)) {
+          const stack = [];
+          let curr = target.firstElementChild;
+          do {
+              action(curr);
+              if (curr.firstElementChild) stack.push(curr.firstElementChild);
+              if (curr.nextElementSibling) stack.push(curr.nextElementSibling);
+          } while (curr = stack.pop())
+      }
+  }
 
-            const scanner = new DomScanner(new DomVisitor);
-            const binder = scanner.scan(document.querySelector('#target'))
-            binder.addProcessor(new class extends Processor {
-                _process(vm, el, k, v) { el.style[k] = v; }
-            }('styles'))
-            binder.addProcessor(new class extends Processor {
-                _process(vm, el, k, v) { el.setAttribute(k, v); }
-            }('attributes'))
-            binder.addProcessor(new class extends Processor {
-                _process(vm, el, k, v) { el[k] = v; }
-            }('properties'))
-            binder.addProcessor(new class extends Processor {
-                _process(vm, el, k, v) { el[`on${k}`] = e => v.call(el, e, vm); }
-            }('events'))
+  const scanner = new DomScanner(new DomVisitor);
+  const binder = scanner.scan(document.querySelector('#target'))
+  binder.addProcessor(new class extends Processor {
+      _process(vm, el, k, v) { el.style[k] = v; }
+  }('styles'))
+  binder.addProcessor(new class extends Processor {
+      _process(vm, el, k, v) { el.setAttribute(k, v); }
+  }('attributes'))
+  binder.addProcessor(new class extends Processor {
+      _process(vm, el, k, v) { el[k] = v; }
+  }('properties'))
+  binder.addProcessor(new class extends Processor {
+      _process(vm, el, k, v) { el[`on${k}`] = e => v.call(el, e, vm); }
+  }('events'))
 
-            const getRandom = () => parseInt(Math.random() * 150) + 100;
-            const wrapper = ViewModel.get({
-                styles: {
-                    width: '50%',
-                    background: '#ffa',
-                    cursor: 'pointer'
-                },
-                events: {
-                    click(e, vm) {
-                        vm.parent.isStop = true
-                    }
-                }
-            })
-            const title = ViewModel.get({
-                properties: {
-                    innerHTML: 'Title'
-                }
-            })
-            const contents = ViewModel.get({
-                properties: {
-                    innerHTML: 'Contents'
-                }
-            })
-            const rootViewModel = ViewModel.get({
-                isStop: false,
-                changeContents() {
-                    this.wrapper.styles.background = `rgb(${getRandom()},${getRandom()},${getRandom()})`
-                    this.contents.properties.innerHTML = Math.random().toString(16).replace('.', '')
-                },
-                wrapper,
-                title,
-                contents
-            })
-            
-            binder.watch(rootViewModel)
-            const f = () => {
-                rootViewModel.changeContents()
-                if (!rootViewModel.isStop) requestAnimationFrame(f)
-            }
-            requestAnimationFrame(f)
-        </script>
-    </body>
-
-    </html>
+  const getRandom = () => parseInt(Math.random() * 150) + 100;
+  const wrapper = ViewModel.get({
+      styles: {
+          width: '50%',
+          background: '#ffa',
+          cursor: 'pointer'
+      },
+      events: {
+          click(e, vm) {
+              vm.parent.isStop = true
+          }
+      }
+  })
+  const title = ViewModel.get({
+      properties: {
+          innerHTML: 'Title'
+      }
+  })
+  const contents = ViewModel.get({
+      properties: {
+          innerHTML: 'Contents'
+      }
+  })
+  const rootViewModel = ViewModel.get({
+      isStop: false,
+      changeContents() {
+          this.wrapper.styles.background = `rgb(${getRandom()},${getRandom()},${getRandom()})`
+          this.contents.properties.innerHTML = Math.random().toString(16).replace('.', '')
+      },
+      wrapper,
+      title,
+      contents
+  })
+  
+  binder.watch(rootViewModel)
+  const f = () => {
+      rootViewModel.changeContents()
+      if (!rootViewModel.isStop) requestAnimationFrame(f)
+  }
+  requestAnimationFrame(f)
 ```
 
 태그: [대기]
