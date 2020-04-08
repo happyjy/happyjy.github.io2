@@ -520,13 +520,16 @@
 <li><a href="/OOPWithJavascript_4/#7%EC%9E%91%EC%97%85-%ED%81%B4%EB%9E%98%EC%8A%A4">7.작업 클래스</a></li>
 <li><a href="/OOPWithJavascript_4/#8%EC%9E%91%EC%97%85-%EC%BD%94%EB%93%9C">8.작업 코드</a></li>
 </ul></div></div><div class="series"><div class="series-head"><span class="head">Post Series</span><div class="icon-wrap"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="layer-group" class="svg-inline--fa fa-layer-group fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M12.41 148.02l232.94 105.67c6.8 3.09 14.49 3.09 21.29 0l232.94-105.67c16.55-7.51 16.55-32.52 0-40.03L266.65 2.31a25.607 25.607 0 0 0-21.29 0L12.41 107.98c-16.55 7.51-16.55 32.53 0 40.04zm487.18 88.28l-58.09-26.33-161.64 73.27c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.51 209.97l-58.1 26.33c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 276.3c16.55-7.5 16.55-32.5 0-40zm0 127.8l-57.87-26.23-161.86 73.37c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.29 337.87 12.41 364.1c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 404.1c16.55-7.5 16.55-32.5 0-40z"></path></svg></div></div><ul class="series-list"><li class="series-item "><a href="/OOPWithJavascript_1/"><span>객체지향 자바스크립트 1회차(객체지향이란? with design Pattern)</span><div class="icon-wrap"></div></a></li><li class="series-item "><a href="/OOPWithJavascript_2/"><span>객체지향 자바스크립트 2회차(MVVM 구현)</span><div class="icon-wrap"></div></a></li><li class="series-item "><a href="/OOPWithJavascript_3/"><span>객체지향 자바스크립트 3회차(MVVM pattern 개선)</span><div class="icon-wrap"></div></a></li><li class="series-item current-series"><a aria-current="page" class="" href="/OOPWithJavascript_4/"><span>객체지향 자바스크립트 4회차(MVVM pattern 개선2)</span><div class="icon-wrap"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa fa-angle-left fa-w-8 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg></div></a></li><li class="series-item "><a href="/OOPWithJavascript_5/"><span>객체지향 자바스크립트 5회차(MVVM pattern 개선2)</span><div class="icon-wrap"></div></a></li></ul></div><div class="blog-post-content"><h1 id="목표" style="position:relative;"><a href="#%EB%AA%A9%ED%91%9C" aria-label="목표 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>목표</h1>
-<p>객체지향 프로그램이란 처음에 이루고자하는 목표에서부터 덩어리진 것을 차근차근 분리하고 깍아내는 과정
-어떻게 깍을지 기준정하는 방법은? "역할"
-덩어리진 코드를 클래스로 나누려고 할때 "역할, 기준"이 필요하다. 객체지향에서 "역할, 기준"은 역할, 책임 모델이라고 하는 것입니다.</p>
-<p>"역할, 책임"은 비슷해보이지만 동전의 양면을 가지고 있다.
-책임을 가지고 있다는건? 그 책임에 대한 권한도 가지고 있다.
-권한이 있다는건? 권한에 대한 책임이 있다.
-그래서 역할을 정의하려면 어떤 권한을 주입 받고, 그 권한으로 부터 무슨 일을 수행하는 권한을 양도 받기위해서는 어떤 책임까지 가져야 하는지 한번에 정의해야 한다. </p>
+<ul>
+<li>객체지향 프로그램이란 처음에 이루고자하는 목표에서부터 덩어리진 것을 차근차근 분리하고 깍아내는 과정입니다.  </li>
+<li>어떻게 깍을지 기준정하는 방법은? "역할" </li>
+<li>덩어리진 코드를 클래스로 나누려고 할때 "역할, 기준"이 필요하다. </li>
+<li>객체지향에서 "역할, 기준"은 역할, 책임 모델이라고 하는 것입니다.</li>
+<li>"역할, 책임"은 비슷해보이지만 동전의 양면을 가지고 있다. </li>
+<li>책임을 가지고 있다는건? 그 책임에 대한 권한도 가지고 있다.</li>
+<li>권한이 있다는건? 권한에 대한 책임이 있다.</li>
+<li>그래서 역할을 정의하려면 어떤 권한을 주입 받고, 그 권한으로 부터 무슨 일을 수행하는 권한을 양도 받기위해서는 어떤 책임까지 가져야 하는지 한번에 정의해야 한다. </li>
+</ul>
 <h1 id="1-isp" style="position:relative;"><a href="#1-isp" aria-label="1 isp permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. ISP</h1>
 <blockquote>
 <p>SOLID 원칙 중 하나
