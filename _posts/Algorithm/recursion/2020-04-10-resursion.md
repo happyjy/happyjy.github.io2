@@ -34,6 +34,7 @@ keywords:
 * 매개변수의 명시화: 최대값 찾기 - Recursion
 * 최대값 찾기: 다른 버전 - Recursion
 * Binary Search
+  - https://www.geeksforgeeks.org/binary-search-in-javascript/
 
 
 # Recursion 응용1: findMaze
