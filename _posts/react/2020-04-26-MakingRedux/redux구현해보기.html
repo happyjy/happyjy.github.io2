@@ -90,18 +90,17 @@
       }
 
       // #주석4
+      // stateObj.state 호출
       const getState = () => {
         return stateObj.state;
       }
 
       // #주석5
+      // stateObj.state에 세팅할때 subscribe으로 설정한것 notify 구현
       const setState = (state) => {
         stateObj.state = state;
         return stateObj.state;
       }
-
-
-
 
 
       // Object.defineProperties 을 한번 사용해보고 싶어서 
