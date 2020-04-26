@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url> <loc>https://happyjy.github.io/Redux/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://happyjy.github.io/MakingRedux/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/resursion/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/배포가능기능개수/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/다리위로트럭지나가기/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://happyjy.github.io/우선순위알고리즘프린터/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/송수신탑/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://happyjy.github.io/우선순위알고리즘프린터/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/BinaryGap/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/동적프로그래밍/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/재귀/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -19,20 +21,20 @@
 <url> <loc>https://happyjy.github.io/JavascriptRoadMap/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/let,Const/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/OOPWithJavascript_2/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://happyjy.github.io/배열 자르고 K번째 수/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/Hindex/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://happyjy.github.io/배열 자르고 K번째 수/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/배열로 만들수 있는 수중 가장 큰수/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/instagram clone coding/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/instagram clone coding_2/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/숫자야구/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://happyjy.github.io/모든숫자조합 구해서 소수찾기/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/모의고사/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://happyjy.github.io/모든숫자조합 구해서 소수찾기/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/OOPWithJavascript_1/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/eventLoop/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://happyjy.github.io/2_Promise/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/1_callback/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://happyjy.github.io/4_AsyncAwait/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://happyjy.github.io/2_Promise/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/3_Promise chaning/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://happyjy.github.io/4_AsyncAwait/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/개발자로 어떻게 살 것 인가/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/class/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/prototype/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -41,7 +43,6 @@
 <url> <loc>https://happyjy.github.io/callback/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/this/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/Moving the mouse(mouseover_mouseout)/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://happyjy.github.io/Redux/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/Excute Context/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/ES6배열중복제거/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://happyjy.github.io/코어자바스크립트후기/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
