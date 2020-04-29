@@ -18,18 +18,18 @@ keywords:
   - 컴포넌트 props로 state를 전달받아 넘기는 기능을 합니다. 
 * mapDispatchToProps
   - 컴로넌트 props로 dispatch기능을 넘기는 기능을 합니다.
+```js
+        index.js 
+        : <Provider store={store}></Provider>
+          ㄴApp.js
+          : <Router>, <Route>
+              ㄴHome.js
+              : connect(mapStateToProps, mapDispatchToProps)(Home);
+                ㄴToDo.js
+                : connect(null, mapDispatchToProps)(ToDo);
+                ㄴDetail.js
+                : connect(mapStateToProps)(Detail);
 ```
-index.js 
-: <Provider store={store}></Provider>
-  ㄴ App.js
-  : <Router>, <Route>
-      ㄴHome.js
-      : connect(mapStateToProps, mapDispatchToProps)(Home);
-        ㄴ ToDo.js
-        : connect(null, mapDispatchToProps)(ToDo);
-      ㄴDetail.js
-      : connect(mapStateToProps)(Detail);
-  ```
 
 # Provivder 설정
 * Provider(react-redux)에 생성한 "store"를 설정함으로 store가 변경될때 App에서 store를 사용할 수 있다. 
@@ -168,19 +168,19 @@ index.js
     export default connect(mapStateToProps, mapDispatchToProps)(Home);
   ```
  
-## 3.3 connect 정리 ! 
-   * component에서 comnnect를 사용해서 store.js에 있는 store에 대해서 dispatch, action Creators를 처리 할 필요가 없다.
-   * connect에 두개의 function으로 state와 dispatch 객체들을 컴포넌트 props로 넘겨 사용할 수 있게 됐다.
+## 3.3 connect 정리
+* component에서 comnnect를 사용해서 store.js에 있는 store에 대해서 dispatch, action Creators를 처리 할 필요가 없다.
+* connect에 두개의 function으로 state와 dispatch 객체들을 컴포넌트 props로 넘겨 사용할 수 있게 됐다.
   
 # 4. delete 구현!
-  * ToDo component에 del btn이 있다!  
-    - 이 버튼에 delete dispatch하는데 필요한 정보 3가지(아래 참고)를 활용해 
-    - mapDispatchToProps를 만들어 button click event에서 사용하도록 한다. 
-  * dispatch하는데 필요한 정보 3가지
-    - store, 
-    - actionCreator, 
-    - redux dispatch  
-    : (connect의 두번째 파라미터 function의 첫번째 파라미터 dispatch === mapDispatchToProps function의 첫번째 파라미터)을 사용해
+* ToDo component에 del btn이 있다!  
+  - 이 버튼에 delete dispatch하는데 필요한 정보 3가지(아래 참고)를 활용해 
+  - mapDispatchToProps를 만들어 button click event에서 사용하도록 한다. 
+* dispatch하는데 필요한 정보 3가지
+  - store, 
+  - actionCreator, 
+  - redux dispatch  
+  : (connect의 두번째 파라미터 function의 첫번째 파라미터 dispatch === mapDispatchToProps function의 첫번째 파라미터)을 사용해
 
   ```js
     import React from "react";
@@ -214,7 +214,7 @@ index.js
 # 5. Detail Page
   * Home에서 todo list를 작성하고 Link를 통해서 Detail로 넘어길 때 
     - Detail component 화면로드 시 mapStateToProps에서 state는 현재 입력한 toDos 배열이다.
-    - mapStateToProps 첫, 두번째 파람 정보 
+    - mapStateToProps 첫번째, 두번째 파라미터 정보 
       *  state = store.getState();
       *  ownProps - Link(react-router-dome)의 정보( { history, location, match, staticContext }) 
 
@@ -250,12 +250,12 @@ index.js
 
 
 # react-redux, redux 비교
-  * react-redux에서 사용하는 다음 두가지는(mapStateToProps, mapDispatchToProps) vanilla redux에서는 아래와 같은 역할을 합니다.
-    - mapStateToProps: store.getState()
-    - mapDispatchToProps: store. dispatch()
+* react-redux에서 사용하는 다음 두가지는(mapStateToProps, mapDispatchToProps) vanilla redux에서는 아래와 같은 역할을 합니다.
+  - mapStateToProps: store.getState()
+  - mapDispatchToProps: store. dispatch()
 
 
 
 # 참고 
-- nomadCoders
-  https://academy.nomadcoders.co/p/build-a-timer-app-with-react-native-and-redux
+* nomadCoders
+    - https://academy.nomadcoders.co/p/build-a-timer-app-with-react-native-and-redux

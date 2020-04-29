@@ -7,7 +7,7 @@ keywords:
   - redux
 ---
 
-redux 스터디후 정리하다 보니 구현 해볼 수 있을 것 같아 구현해봤다.
+redux 스터디 후 정리하다 보니 구현 해볼 수 있을 것 같아 구현해봤다.
 
 # 구현 코드
 
@@ -39,7 +39,6 @@ class Observable {
 }
 
 function createStore(reducerFunction) {
-  debugger;
   const reducer = reducerFunction;
   const headingsObserver = new Observable();
 
