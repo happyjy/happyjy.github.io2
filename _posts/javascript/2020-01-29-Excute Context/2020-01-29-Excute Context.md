@@ -9,6 +9,20 @@ keywords:
 
 개발을 하다보면 this의 범위가 함수, function, bind, call, apply별로 달라지는 걸볼 수 있는데 왜 이런지에 대해서 다뤄보려고 한다.
 
+```js
+	1 실행 컨텍스트란? 
+	2 VariableEnvironment
+	3 LexicalEnvironment
+		3-1 environmentRecord와 hoisting
+            호이스팅 규칙  
+            함수 선언문과 함수 표현식
+      
+		3-2 scope, scope chain, outerEnvironmentReference
+            스코프 체인
+            전역변수와 지역변수
+	4 this
+```
+
 
 # 1 실행 컨텍스트란? 
 > * 실행컨텍스트(execution context)는 실행할 코드에 제공할 환경 정보들을 모아놓은 객체  
