@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .inline-flex {
+        display: inline-flex;
+        border: 1px solid black;
+    }
+
+    /* 블럭 성질을 갖고 있다. */
+    .flex {
+        display: flex;
+        border: 1px solid blue;
+    }
+
+    .flex>* {
+        /* flex: 1; */
+        /* 글자길이만큼 el 줄어듬 */
+        flex: 0 1 auto;
+        font-size: 50px;
+        border: 1px solid yellowgreen;
+        margin: 10px;
+    }
+
+    p {
+        color: red;
+    }
+</style>
+
+<body>
+    <p>Display Inline Flex</p>
+    <div class="inline-flex">
+        <header>header</header>
+        <nav>nav</nav>
+        <aside>aside</aside>
+        <main>main</main>
+        <footer>footer</footer>
+    </div>
+
+    <div class="inline-flex">
+        <header>header</header>
+        <nav>nav</nav>
+        <aside>aside</aside>
+        <main>main</main>
+        <footer>footer</footer>
+    </div>
+
+    <p>Display Flex</p>
+    <div class="flex">
+        <header>header</header>
+        <nav>nav</nav>
+        <aside>aside</aside>
+        <main>main</main>
+        <footer>footer</footer>
+    </div>
+
+    <div class="flex">
+        <header>header</header>
+        <nav>nav</nav>
+        <aside>aside</aside>
+        <main>main</main>
+        <footer>footer</footer>
+    </div>
+</body>
+
+</html>
